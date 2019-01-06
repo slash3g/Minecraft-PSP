@@ -225,7 +225,7 @@ namespace noisepp
             ElementID addToPipeline (Pipeline1D *pipe) const
             {
                 //NoiseThrowNotImplementedException;
-                return NULL;
+                return 0;
             }
             /// @copydoc noisepp::Module::addToPipeline()
             ElementID addToPipeline (Pipeline2D *pipe) const

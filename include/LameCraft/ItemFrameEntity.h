@@ -23,7 +23,7 @@ public:
 
     void SetItem(unsigned int new_itemID);
     void ResetItem();
-    unsigned int GetItem();
+    int GetItem();
 
     void SetAmount(int new_amount);
     int GetAmount();
@@ -32,7 +32,7 @@ public:
 
 private:
     unsigned int facing;
-    unsigned int itemID;
+    int itemID;
 
     int itemAmount;
 

@@ -239,8 +239,6 @@ namespace Aurora
             char buff[512];
 
             bool faceLoad = false;
-            bool uvFace = false;
-            bool normal = false;
 
             while(!feof(fp))
             {
@@ -255,7 +253,7 @@ namespace Aurora
                         char materialName[100];
 
                         //read material info
-                        fscanf(fp,"%s %s", &text, &materialName);
+                        fscanf(fp,"%s %s", text, materialName);
 
                         std::string pathmat(FileName);
                         size_t found = pathmat.find_last_of("/");
@@ -282,7 +280,7 @@ namespace Aurora
                     char name2[50];
 
                     //read material name
-                    fscanf(fp,"%s %s", &name, &name2);
+                    fscanf(fp,"%s %s", name, name2);
 
                     newMesh->mMaterial = 0;
 
@@ -329,8 +327,6 @@ namespace Aurora
                                     newMesh = new ObjMesh();
 
                                     faceLoad = false;
-                                    uvFace = false;
-                                    normal = false;
                                 }
 
                                 //new vertex position
@@ -348,7 +344,6 @@ namespace Aurora
 
                         case 't': //texture info
                             {
-                                uvFace = true;
 
                                 //new uv map
                                 ObjUV nObjUV;
@@ -365,7 +360,6 @@ namespace Aurora
 
                         case 'n': //normal info
                             {
-                                normal = true;
 
                                 //new normal position
                                 Vector3 nNormal;
@@ -410,15 +404,12 @@ namespace Aurora
 
                             //push
                             newMesh->mNormalFace.push_back(nNorm);
-                            uvFace = true;
-                            normal = true;
                         }else
                         if (sscanf(buff,"%d/%d %d/%d %d/%d",&nFace.x,&nUVFace.x,&nFace.y,&nUVFace.y,&nFace.z,&nUVFace.z) == 6)
                         {
                             //push UV face to mesh
                             nUVFace.x -=1;nUVFace.y -=1;nUVFace.z -=1;
                             newMesh->mUVFace.push_back(nUVFace);
-                            uvFace = true;
                         }else
                         {
                             sscanf(buff,"%d %d %d",&nFace.x,&nFace.y,&nFace.z);

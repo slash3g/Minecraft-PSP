@@ -21,7 +21,6 @@ namespace Aurora
         void  SkyLight::UpdateLightSource(float sun_angle)
         {
             float r = 670.0f;
-            float shift = 325;
             //float textureScale = 1.0f / stepScale;
 
             int i = 0;

@@ -1,10 +1,11 @@
 #include <Aurora/Utils/Logger.h>
 
 #include <pspkernel.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdarg.h>
+#include <cstring>
+#include <cstdio>
+#include <cstdarg>
 
+extern "C" int vsnprintf( char* buffer, std::size_t buf_size, const char* format, va_list vlist );
 namespace Aurora
 {
     namespace Utils
@@ -19,9 +20,6 @@ namespace Aurora
             vsnprintf(cbuffer, 1024, message, argList);
             va_end(argList);
 
-            // Written Bytes
-            int written = 0;
-
             // Open File for Appending
             SceUID file = sceIoOpen("Log.txt", PSP_O_APPEND | PSP_O_CREAT | PSP_O_WRONLY, 0777);
 
@@ -29,7 +27,7 @@ namespace Aurora
             if(file >= 0)
             {
                 // Write Buffer
-                written = sceIoWrite(file, cbuffer, strlen(cbuffer));
+                sceIoWrite(file, cbuffer, strlen(cbuffer));
 
                 // Close File
                 sceIoClose(file);

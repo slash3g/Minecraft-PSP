@@ -1,7 +1,6 @@
 #include "LameCraft/Sheep2.h"
 #include <Aurora/Graphics/TextureManager.h>
 
-#define PI 3.14159f
 #define DEG_TO_RAD (PI / 180.0f)
 #define PIXEL 1.0f / 16.0f
 #define GRAVITY -6.8f
@@ -110,7 +109,7 @@ int Sheep::GetFurColor()
 
 void Sheep::BoxCollision()
 {
-    for(int x = 0; x < world->mSheeps.size(); x++)
+    for(unsigned x = 0; x < world->mSheeps.size(); x++)
     {
         Sheep *TestSheep2 = world->mSheeps[x];
         if(TestSheep2->number != number && (TestSheep2->position.x != position.x || TestSheep2->position.z != position.z || TestSheep2->position.y != position.y))

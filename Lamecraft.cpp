@@ -28,26 +28,34 @@ int main()
 
     scePowerSetClockFrequency(333, 333, 166);
 
+    Logger *logger = Logger::Instance();
+    logger->LogMessage("Initialize render manager...\n");
+
     //initialize render manager
     RenderManager::InstancePtr()->Init();
     RenderManager::InstancePtr()->CollectPerformance(true);
     RenderManager::InstancePtr()->InitDebugFont();
 
+    logger->LogMessage("Set perspective...\n");
     //set perspectives
     RenderManager::InstancePtr()->SetOrtho(0,0,0,0,0,0);
 
-    //init and load sounds
+    logger->LogMessage("Init and load textures...\n");
     TextureHelper::Instance()->Init();
+    logger->LogMessage("Init and load sounds...\n");
     SoundManager::Instance()->Init();
 
+    logger->LogMessage("Init RNG...\n");
     srand(time(NULL));
 
+    logger->LogMessage("Create state manager...\n");
     //new state manager
     StateManager stateManager;
     stateManager.Init();
 
     RenderManager::InstancePtr()->SetClearColour(0xFF000000);
 
+    logger->LogMessage("Show splash screen...\n");
     //splash screens
     SplashScreen *screen = new SplashScreen(TextureHelper::Instance()->GetTexture(TextureHelper::Genesis),0,0,480,272,3);
     screen->ShowSplash();
@@ -55,11 +63,13 @@ int main()
 
     RenderManager::InstancePtr()->SetClearColour(0xFFFFFFFF);
 
+    logger->LogMessage("New active state...\n");
     //new active state
     StateMenu *statePlay = new StateMenu();
     statePlay->Init();
     stateManager.ChangeState(statePlay);
 
+    logger->LogMessage("RUN!\n");
     //trun
     while ( stateManager.Running() )
     {

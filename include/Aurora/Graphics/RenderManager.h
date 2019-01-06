@@ -1,8 +1,6 @@
 #ifndef AURORA_GURENDERMANAGER_H
 #define AURORA_GURENDERMANAGER_H
 
-#include <stdarg.h>
-
 #include <Aurora/Graphics/vram.h>
 #include <Aurora/Graphics/vram.h>
 #include <Aurora/Graphics/common.h>
@@ -26,9 +24,9 @@
 #include <pspge.h>
 #include <psputils.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <malloc.h>
+#include <cstdarg>
+#include <cstdio>
+#include <cstdlib>
 
 #define BUF_WIDTH (512)
 #define SCR_WIDTH (480)
@@ -150,7 +148,8 @@ namespace Aurora
             void* _zbp;
             void* _frameBuffer;
 
-            char list[0x20000] __attribute__((aligned(64)));//__attribute__((aligned(16))) list[262144]
+            //char list[0x20000] __attribute__((aligned(64)));//__attribute__((aligned(16))) list[262144]
+            unsigned int __attribute__((aligned(16))) list[262144];
             int listNum;
 
             bool mVerticalSync;

@@ -605,7 +605,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                             loadSaveMax = loadSaveEnd;
                         }
                     }
-                    if(loadSavePos >= saveFilesList.size())
+                    if((unsigned)loadSavePos >= saveFilesList.size())
                     {
                         loadSavePos = 0;
                         loadSaveStart = 0;
@@ -928,7 +928,6 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 errorType = 0;
                 if(schematicExists)
                 {
-                    char buffer[40];
                     char empty;
                     gzFile saveFile;
 
@@ -1002,7 +1001,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                     m_Array1 = new block_t[252 * 112 * 252];
                     memset(m_Array1, 0, sizeof(unsigned char) * 252 * 252 * 112);
 
-                    char need[6];
+                    char need[7];
                     bool again = false;
                     for(int i = 0; i < 100000000; i++)
                     {
@@ -1047,7 +1046,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                         memset(m_Array1, 0, sizeof(unsigned char) * 252 * 252 * 112);
                         for(int j = 0; j <= 6; j++)
                         {
-                            need[j] = '/0';
+                            need[j] = '\0';
                         }
 
                         for(int i = 0; i < 100000000; i++)
@@ -1227,7 +1226,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                                 int put_adress = x+y*252+z*252*112;
                                 int put_id = 0;
 
-                                if(take_id < id_map.size())
+                                if((unsigned)take_id < id_map.size())
                                 {
                                     put_id = id_map[take_id];
                                 }
@@ -1302,7 +1301,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
                     for(int j = 0; j <= 6; j++)
                     {
-                        need[j] = '/0';
+                        need[j] = '\0';
                     }
 
                     //data
@@ -1351,7 +1350,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                         memset(m_Array1, 0, sizeof(unsigned char) * 252 * 252 * 112);
                         for(int j = 0; j <= 6; j++)
                         {
-                            need[j] = '/0';
+                            need[j] = '\0';
                         }
 
                         for(int i = 0; i < 100000000; i++)
@@ -1579,7 +1578,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                                     }
                                     if(data == 10)
                                     {
-                                        block == VioletWoolBlock::getID();
+                                        block = VioletWoolBlock::getID();
                                     }
                                     if(data == 11)
                                     {
@@ -1859,7 +1858,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
         if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
         {
             char worldNameTemp[50];
-            for(char i = 0; i <= 49; i++)
+            for(unsigned i = 0; i <= 49; i++)
             {
                 worldNameTemp[i] = saveFilesList[loadSavePos].worldName[i];
             }
@@ -1960,7 +1959,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                     tpMax = tpEnd;
                 }
             }
-            if(tpPos >= texturePackList.size())
+            if((unsigned)tpPos >= texturePackList.size())
             {
                 tpPos = 0;
                 tpStart = 0;
@@ -2851,7 +2850,7 @@ void StateMenu::Draw(StateManager* sManager)
 
         for(int i = tpStart; i < tpMax; i++)
         {
-            if(i < texturePackList.size())
+            if((unsigned)i < texturePackList.size())
             {
                 sceGuEnable(GU_BLEND);
 
@@ -3042,7 +3041,7 @@ void StateMenu::ScanTexturePacks(const char* dirName)
     if(texturePackList.empty() != false)
     {
         TextureHelper::Instance()->RemoveConstTextures();
-        for(int j = 0; j < texturePackList.size(); j++)
+        for(unsigned j = 0; j < texturePackList.size(); j++)
         {
             if (texturePackList[j].packSprite != NULL)
             {
@@ -3091,7 +3090,7 @@ void StateMenu::ScanTexturePacks(const char* dirName)
 
     closedir(dir);
 
-    for(int j = 0; j < texturePackList.size(); j++)
+    for(unsigned j = 0; j < texturePackList.size(); j++)
     {
         std::string packPath = "Assets/Textures/"+texturePackList[j].name+"/pack.png";
 

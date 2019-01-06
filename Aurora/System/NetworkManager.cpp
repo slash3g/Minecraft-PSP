@@ -148,13 +148,14 @@ namespace Aurora
             int templ, connection, request, ret, status, dataend, fd, byteswritten;
             SceULong64 contentsize;
             unsigned char readbuffer[8192];
+            char user_agent[] = "xxx-agent/0.0.1 libhttp/1.0.0";
 
             ret = sceHttpInit(20000);
 
             if(ret < 0)
                 return false;
 
-            templ = sceHttpCreateTemplate("xxx-agent/0.0.1 libhttp/1.0.0", 1, 1);
+            templ = sceHttpCreateTemplate(user_agent, 1, 1);
 
             if(templ < 0)
                 return false;

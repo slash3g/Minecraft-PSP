@@ -1,5 +1,6 @@
 #include <Aurora/Graphics/RenderManager.h>
 
+extern "C" int vsnprintf( char* buffer, std::size_t buf_size, const char* format, va_list vlist );
 namespace Aurora
 {
     namespace Graphics
@@ -87,7 +88,6 @@ namespace Aurora
             sceGuInit();
 
             sceGuStart(GU_DIRECT,list);
-
 
             sceGuDrawBuffer( GU_PSM_8888, SCEGU_VRAM_BP32_0, BUF_WIDTH );
             sceGuDispBuffer( SCR_WIDTH, SCR_HEIGHT, SCEGU_VRAM_BP32_1, BUF_WIDTH);

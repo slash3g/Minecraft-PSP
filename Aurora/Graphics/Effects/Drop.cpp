@@ -44,7 +44,7 @@ void Drop::CheckOtherDrops()
 {
     if(onGround == true && checkForOtherDrops == false)
     {
-        for(int i = 0; i < myCrft->mDrops.size(); i++)
+        for(unsigned i = 0; i < myCrft->mDrops.size(); i++)
         {
             Drop *TestDrop = myCrft->mDrops[i];
             if(num != TestDrop->num)

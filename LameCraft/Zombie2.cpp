@@ -1,7 +1,6 @@
 #include "LameCraft/Zombie2.h"
 #include <Aurora/Graphics/TextureManager.h>
 
-#define PI 3.14159f
 #define DEG_TO_RAD (PI / 180.0f)
 #define PIXEL 1.0f / 16.0f
 #define GRAVITY -6.8f
@@ -161,7 +160,7 @@ Zombie::~Zombie()
 
 void Zombie::BoxCollision()
 {
-    for(int x = 0; x < world->mZombies.size(); x++)
+    for(unsigned x = 0; x < world->mZombies.size(); x++)
     {
         Zombie *TestZombie2 = world->mZombies[x];
         if(TestZombie2->number != number && (TestZombie2->position.x != position.x || TestZombie2->position.z != position.z || TestZombie2->position.y != position.y))

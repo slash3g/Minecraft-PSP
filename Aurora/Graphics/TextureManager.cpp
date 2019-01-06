@@ -59,7 +59,7 @@ namespace Aurora
         void TextureManager::RemoveTexture(int number)
         {
             //name
-            if(number < Images.size())
+            if((unsigned)number < Images.size())
             {
                 Names.erase(Names.begin() + number);
                 //image
@@ -72,7 +72,7 @@ namespace Aurora
         {
             if(ConstImages.empty() == false)
             {
-                for(int i = 0; i < ConstImages.size(); i++)
+                for(unsigned i = 0; i < ConstImages.size(); i++)
                 {
                     if(ConstImages[i]->ImageData != NULL)
                     {
@@ -88,7 +88,7 @@ namespace Aurora
 
         void TextureManager::RemoveTextures()
         {
-            for(int i = 0; i < Images.size(); i++)
+            for(unsigned i = 0; i < Images.size(); i++)
             {
                 if(Images[i]->ImageData != NULL)
                 {
@@ -301,11 +301,9 @@ namespace Aurora
             /// strip number = 4096
             /// box number  = 64
 
-            float box_x = x / box_width;
-            floorf(box_x);
+            float box_x = floorf(x / box_width);
             box_x = (int)box_x;
-            float box_y = y / box_height;
-            floorf(box_y);
+            float box_y = floorf(y / box_height);
             box_y = (int)box_y;
 
             int box_number = box_x + (box_y * box_num);
@@ -334,11 +332,9 @@ namespace Aurora
             /// strip number = 4096
             /// box number  = 64
 
-            float box_x = x / box_width;
-            floorf(box_x);
+            float box_x = floorf(x / box_width);
             box_x = (int)box_x;
-            float box_y = y / box_height;
-            floorf(box_y);
+            float box_y = floorf(y / box_height);
             box_y = (int)box_y;
 
             int box_number = box_x + (box_y * box_num);
@@ -367,11 +363,9 @@ namespace Aurora
             /// strip number = 4096
             /// box number  = 64
 
-            float box_x = x / box_width;
-            floorf(box_x);
+            float box_x = floorf(x / box_width);
             box_x = (int)box_x;
-            float box_y = y / box_height;
-            floorf(box_y);
+            float box_y = floorf(y / box_height);
             box_y = (int)box_y;
 
             int box_number = box_x + (box_y * box_num);
@@ -400,11 +394,9 @@ namespace Aurora
             /// strip number = 4096
             /// box number  = 64
 
-            float box_x = x / box_width;
-            floorf(box_x);
+            float box_x = floorf(x / box_width);
             box_x = (int)box_x;
-            float box_y = y / box_height;
-            floorf(box_y);
+            float box_y = floorf(y / box_height);
             box_y = (int)box_y;
 
             int box_number = box_x + (box_y * box_num);
@@ -433,11 +425,9 @@ namespace Aurora
             /// strip number = 4096
             /// box number  = 64
 
-            float box_x = x / box_width;
-            floorf(box_x);
+            float box_x = floorf(x / box_width);
             box_x = (int)box_x;
-            float box_y = y / box_height;
-            floorf(box_y);
+            float box_y = floorf(y / box_height);
             box_y = (int)box_y;
 
             int box_number = box_x + (box_y * box_num);

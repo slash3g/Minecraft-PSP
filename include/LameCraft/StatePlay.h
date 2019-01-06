@@ -207,8 +207,8 @@ private:
     bool furnaceEn;
 
     char barPosition;
-    char invXPosition;
-    char invYPosition;
+    unsigned invXPosition;
+    unsigned invYPosition;
     float invSteveAngle;
 
     int ram1;

@@ -1,7 +1,6 @@
 #include "LameCraft/Creeper2.h"
 #include <Aurora/Graphics/TextureManager.h>
 
-#define PI 3.14159f
 #define DEG_TO_RAD (PI / 180.0f)
 #define PIXEL 1.0f / 16.0f
 #define GRAVITY -6.8f
@@ -75,7 +74,7 @@ Creeper::~Creeper()
 
 void Creeper::BoxCollision()
 {
-    for(int x = 0; x < world->mCreepers.size(); x++)
+    for(unsigned x = 0; x < world->mCreepers.size(); x++)
     {
         Creeper *TestCreeper2 = world->mCreepers[x];
         if(TestCreeper2->number != number && (TestCreeper2->position.x != position.x || TestCreeper2->position.z != position.z || TestCreeper2->position.y != position.y))
@@ -697,7 +696,10 @@ void Creeper::Render(Frustum &camFrustum, float dt)
             ScePspFVector3 loc22 = {position.x,position.y,position.z};
             sceGumTranslate(&loc22);
 
-            ScePspFVector3 sca = {1.0+blowingScale*2,1.0+blowingScale,1.0+blowingScale};
+            ScePspFVector3 sca = {
+                float(1.0+blowingScale*2),
+                float(1.0+blowingScale),
+                float(1.0+blowingScale)};
             sceGumScale(&sca);
 
 

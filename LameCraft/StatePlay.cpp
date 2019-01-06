@@ -4,7 +4,6 @@
 #include "LameCraft/WorldGenerator.h"
 #include "LameCraft/LoadingScreen.h"
 
-#define PI 3.14159265f
 #define DEG_TO_RAD (PI / 180.0f)
 #define TEXTURE_CHUNKS 8
 #define SKY_MOVE 0.003f
@@ -220,8 +219,6 @@ void StatePlay::Init()
 
     playerPosition = newPlayerPos = oldPlayerPos = Vector3(64.0f,mWorld->groundHeight(64,64)+1.65,64.0f);
 
-    int	curchunkTarget = mWorld->getChunkId(playerPosition);
-
     dt = mTimer.GetDeltaTime();
 
     bobCycle = 3.14/2;
@@ -264,8 +261,6 @@ void StatePlay::InitParametric(bool makeTrees,bool makeWater,bool makeCaves,unsi
     mWorld->buildMap();
 
     playerPosition = newPlayerPos = oldPlayerPos = mWorld->playerSpawnPointPosition;
-
-    int	curchunkTarget = mWorld->getChunkId(playerPosition);
 
     dt = mTimer.GetDeltaTime();
 
@@ -346,7 +341,6 @@ void StatePlay::LoadMap(std::string fileName,bool compressed)
     mWorld->initWorldBlocksLight();
     mWorld->buildMap();
 
-    int	curchunkTarget = mWorld->getChunkId(playerPosition);
     dt = mTimer.GetDeltaTime();
     // load textures
     LoadTextures();
@@ -3409,7 +3403,7 @@ void StatePlay::CraftItem3x3()
         break;
 
         case 75: //pumpkin to pumpkin seeds
-            if(craftSlotId3[0] == 75 || craftSlotId3[1] == 75 || craftSlotId3[2] == 75 && craftSlotId3[3] == 75 || craftSlotId3[4] == 75 || craftSlotId3[5] == 75 || craftSlotId3[6] == 75 || craftSlotId3[7] == 75 || craftSlotId3[8] == 75)
+            if((craftSlotId3[0] == 75 || craftSlotId3[1] == 75 || craftSlotId3[2] == 75) && (craftSlotId3[3] == 75 || craftSlotId3[4] == 75 || craftSlotId3[5] == 75 || craftSlotId3[6] == 75 || craftSlotId3[7] == 75 || craftSlotId3[8] == 75))
             {
                 craftItemId3 = PumpkinSeeds::getID();
                 craftItemSt3 = 1;
@@ -3947,7 +3941,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                         for(float i = 0; i < 5.25f; i+=0.1f)
                         {
                             testPos = fppCam->m_vPosition + (rayDir * i);
-                            for(int f = 0; f < mWorld->mSheeps.size(); f++)
+                            for(unsigned f = 0; f < mWorld->mSheeps.size(); f++)
                             {
                                 Sheep *TestSheep = mWorld->mSheeps[f];
                                 if(TestSheep->DistanceToPlayer() < 2.85 && TestSheep->kicked == false && TestSheep->damaged == false)
@@ -4862,7 +4856,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                             }
                             if(mWorld->mZombies.empty() == false)
                             {
-                                for(int f = 0; f < mWorld->mZombies.size(); f++)
+                                for(unsigned f = 0; f < mWorld->mZombies.size(); f++)
                                 {
                                     Zombie *TestZombie = mWorld->mZombies[f];
                                     if(abs(playerPosition.x-TestZombie->position.x) <= 7 && abs(playerPosition.z-TestZombie->position.z) <= 7 && abs(playerPosition.y-TestZombie->position.y) <= 4)
@@ -6050,7 +6044,6 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
                                             if(mWorld->invId[27+barPosition] == 291) // if it is water busket
                                             {
-                                                int chunkTarget = mWorld->getChunkId(testPos2);
                                                 mWorld->GetBlock(testPos2.x,testPos2.y,testPos2.z) = 4;
                                                 mWorld->invId[27+barPosition] = 290;
 
@@ -6288,7 +6281,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     bool kick = false;
                     if(mWorld->mZombies.empty() == false)
                     {
-                        for(int f = 0; f < mWorld->mZombies.size(); f++)
+                        for(unsigned f = 0; f < mWorld->mZombies.size(); f++)
                         {
                             Zombie *TestZombie = mWorld->mZombies[f];
                             if(TestZombie->DistanceToPlayer() < 3.16f && TestZombie->kicked == false && TestZombie->damaged == false)
@@ -6335,7 +6328,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
                     if(mWorld->mCows.empty() == false)
                     {
-                        for(int f = 0; f < mWorld->mCows.size(); f++)
+                        for(unsigned f = 0; f < mWorld->mCows.size(); f++)
                         {
                             Cow *TestCow = mWorld->mCows[f];
                             if(TestCow->DistanceToPlayer() < 2.75 && TestCow->kicked == false && TestCow->damaged == false)
@@ -6379,7 +6372,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
                     if(mWorld->mSheeps.empty() == false)
                     {
-                        for(int f = 0; f < mWorld->mSheeps.size(); f++)
+                        for(unsigned f = 0; f < mWorld->mSheeps.size(); f++)
                         {
                             Sheep *TestSheep = mWorld->mSheeps[f];
                             if(TestSheep->DistanceToPlayer() < 2.75 && TestSheep->kicked == false && TestSheep->damaged == false)
@@ -6423,7 +6416,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
                     if(mWorld->mCreepers.empty() == false)
                     {
-                        for(int f = 0; f < mWorld->mCreepers.size(); f++)
+                        for(unsigned f = 0; f < mWorld->mCreepers.size(); f++)
                         {
                             Creeper *TestCreeper = mWorld->mCreepers[f];
                             if(mWorld->FastDistance2d(abs(TestCreeper->position.x-playerPosition.x)*10,abs(TestCreeper->position.z-playerPosition.z)*10)/10.0f + abs(TestCreeper->position.y-(playerPosition.y-0.7))/2.0f < 2.18 && TestCreeper->kicked == false && TestCreeper->damaged == false)
@@ -6470,7 +6463,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     {
                         if(mWorld->GetBlock(testPos2.x,testPos2.y,testPos2.z) == NoteBlock::getID())
                         {
-                            unsigned int noteBlockId = mWorld->FindNoteBlockID(testPos2);
+                            int noteBlockId = mWorld->FindNoteBlockID(testPos2);
 
                             if(noteBlockId != -1)
                             {
@@ -6782,7 +6775,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                             {
                                 // drop all items in chest
                                 Chest* TestChest = mWorld->mChests[chestId];
-                                for(int i = 0; i <= 27; i++)
+                                for(int i = 0; i < 27; i++)
                                 {
                                     if(TestChest->chestSlotId[i] > 0)
                                     {
@@ -7243,7 +7236,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                         }
                         else
                         {
-                            if(oldBlock >= 0 && oldBlock < mWorld->blockTypes.size())
+                            if(oldBlock >= 0 && (unsigned)oldBlock < mWorld->blockTypes.size())
                             {
                                 mSoundMgr->PlayEndDigSound(mWorld->blockTypes[oldBlock].soundType);
                             }
@@ -7851,7 +7844,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                         {
                             if (mWorld->mId == -1)
                             {
-                                if (mWorld->armorId[invYPosition*2 + invXPosition] != 324+invYPosition*2+invXPosition) // 324+invYPosition*2+invXPosition is an id of sample armor item
+                                if ((unsigned)mWorld->armorId[invYPosition*2 + invXPosition] != 324+invYPosition*2+invXPosition) // 324+invYPosition*2+invXPosition is an id of sample armor item
                                 {
                                     mWorld->mId = mWorld->armorId[invYPosition*2 + invXPosition];
                                     mWorld->mAm = mWorld->armorAm[invYPosition*2 + invXPosition];
@@ -7863,14 +7856,14 @@ void StatePlay::HandleEvents(StateManager* sManager)
                             }
                             else
                             {
-                                if (mWorld->armorId[invYPosition*2 + invXPosition] == 324+invYPosition*2+invXPosition)
+                                if ((unsigned)mWorld->armorId[invYPosition*2 + invXPosition] == 324+invYPosition*2+invXPosition)
                                 {
-                                    if(mWorld->mId == 324+invYPosition*2+invXPosition+4 || /* all leather armor */
-                                       mWorld->mId == 324+invYPosition*2+invXPosition+8 || /* all chain armor */
-                                       mWorld->mId == 324+invYPosition*2+invXPosition+12|| /* all iron armor */
-                                       mWorld->mId == 324+invYPosition*2+invXPosition+16|| /* all diamond armor */
-                                       mWorld->mId == 324+invYPosition*2+invXPosition+20|| /* all golde armor */
-                                       (invXPosition == 0 && invYPosition == 0 && mWorld->mId == Pumpkin3::getID()) /** it is pumpkin and cursor on helmet slot **/
+                                    if((unsigned)mWorld->mId == 324+invYPosition*2+invXPosition+4 || /* all leather armor */
+                                       (unsigned)mWorld->mId == 324+invYPosition*2+invXPosition+8 || /* all chain armor */
+                                       (unsigned)mWorld->mId == 324+invYPosition*2+invXPosition+12|| /* all iron armor */
+                                       (unsigned)mWorld->mId == 324+invYPosition*2+invXPosition+16|| /* all diamond armor */
+                                       (unsigned)mWorld->mId == 324+invYPosition*2+invXPosition+20|| /* all golde armor */
+                                       (invXPosition == 0 && invYPosition == 0 && (unsigned)mWorld->mId == Pumpkin3::getID()) /** it is pumpkin and cursor on helmet slot **/
                                       ) // crazy code monkey skill
                                     {
                                         mWorld->armorId[invYPosition*2 + invXPosition]=mWorld->mId;
@@ -9114,7 +9107,7 @@ void StatePlay::Update(StateManager* sManager)
                         {
                             if(mWorld->mZombies.empty() == false)
                             {
-                                for(int i = 0; i < mWorld->mZombies.size(); i++)
+                                for(unsigned i = 0; i < mWorld->mZombies.size(); i++)
                                 {
                                     if(nearbyEntityAmount == 4)
                                     {
@@ -9137,8 +9130,6 @@ void StatePlay::Update(StateManager* sManager)
                                     float spawn_z = (*it)->GetZ()-2+(rand()%2)*4;
                                     spawn_x += 0.5f;
                                     spawn_z += 0.5f;
-
-                                    float spawn_y = mWorld->groundHeight(spawn_x+0.5f,(*it)->GetY()+1,spawn_z+0.5f)+1.2f;
 
                                     mWorld->SpawnZombie((*it)->GetX()-1+rand()%3,(*it)->GetY()+1,(*it)->GetZ()-1+rand()%3);
                                 }
@@ -10193,7 +10184,7 @@ void StatePlay::Draw(StateManager* sManager)
     /// DROP
     if(mWorld->mDrops.empty() == false)
     {
-        for(int d = 0; d < mWorld->mDrops.size(); d++)
+        for(unsigned d = 0; d < mWorld->mDrops.size(); d++)
         {
             if(d < mWorld->mDrops.size() && mWorld->mDrops.empty() == false)
             {
@@ -10324,7 +10315,7 @@ void StatePlay::Draw(StateManager* sManager)
     /// ZOMBIE
     if(mWorld->mZombies.empty() == false)
     {
-        for(int d = 0; d < mWorld->mZombies.size(); d++)
+        for(unsigned d = 0; d < mWorld->mZombies.size(); d++)
         {
             if(d < mWorld->mZombies.size() && mWorld->mZombies.empty() == false)
             {
@@ -10429,7 +10420,7 @@ void StatePlay::Draw(StateManager* sManager)
     /// COWS
     if(mWorld->mCows.empty() == false)
     {
-        for(int d = 0; d < mWorld->mCows.size(); d++)
+        for(unsigned d = 0; d < mWorld->mCows.size(); d++)
         {
             if(d < mWorld->mCows.size() && mWorld->mCows.empty() == false)
             {
@@ -10479,7 +10470,7 @@ void StatePlay::Draw(StateManager* sManager)
     /// SHEEP
     if(mWorld->mSheeps.empty() == false)
     {
-        for(int d = 0; d < mWorld->mSheeps.size(); d++)
+        for(unsigned d = 0; d < mWorld->mSheeps.size(); d++)
         {
             if(d < mWorld->mSheeps.size() && mWorld->mSheeps.empty() == false)
             {
@@ -10528,7 +10519,7 @@ void StatePlay::Draw(StateManager* sManager)
     /// CREEPER
     if(mWorld->mCreepers.empty() == false)
     {
-        for(int d = 0; d < mWorld->mCreepers.size(); d++)
+        for(unsigned d = 0; d < mWorld->mCreepers.size(); d++)
         {
             if(d < mWorld->mCreepers.size() && mWorld->mCreepers.empty() == false)
             {
@@ -10811,7 +10802,10 @@ void StatePlay::Draw(StateManager* sManager)
                 sceGumMatrixMode(GU_VIEW);
                 sceGumLoadIdentity();
                 //translate
-                ScePspFVector3 move = {0.53f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/200.0f+sinf(animDest)*-0.35,-0.42f+shift_y+cubeBob2+changeY,-0.5f+(mWorld->mainOptions.fov-70)/130.0f}; //446
+                ScePspFVector3 move = {
+                    float(0.53f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/200.0f+sinf(animDest)*-0.35),
+                    float(-0.42f+shift_y+cubeBob2+changeY),
+                    float(-0.5f+(mWorld->mainOptions.fov-70)/130.0f)}; //446
                 sceGumTranslate(&move);
                 //rotate
                 sceGumRotateX(-0.72f+sinf(animDest)*-1.5);//0.1
@@ -10840,7 +10834,10 @@ void StatePlay::Draw(StateManager* sManager)
                 sceGumMatrixMode(GU_VIEW);
                 sceGumLoadIdentity();
                 //translate
-                ScePspFVector3 move = {0.62f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/200.0f+sinf(animDest)*-0.35,-0.35f+shift_y+cubeBob2+changeY+sinf(animDest)*-0.1,-0.7f+(mWorld->mainOptions.fov-70)/130.0f}; //446
+                ScePspFVector3 move = {
+                    float(0.62f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/200.0f+sinf(animDest)*-0.35),
+                    float(-0.35f+shift_y+cubeBob2+changeY+sinf(animDest)*-0.1),
+                    float(-0.7f+(mWorld->mainOptions.fov-70)/130.0f)}; //446
                 sceGumTranslate(&move);
                 //rotate
                 sceGumRotateX(0.169+sinf(animDest)*-1.5);
@@ -10869,7 +10866,11 @@ void StatePlay::Draw(StateManager* sManager)
                 sceGumLoadIdentity();
 
                 //translate
-                ScePspFVector3 move = {0.523f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/250.0f+sinf(animDest)*-0.25,-0.24f+cubeBob2+shift_y+changeY,-0.6f+(mWorld->mainOptions.fov-70)/180.0f};//-0.17
+                ScePspFVector3 move = {
+                    float(0.523f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/250.0f+sinf(animDest)*-0.25),
+                    float(-0.24f+cubeBob2+shift_y+changeY),
+                    float(-0.6f+(mWorld->mainOptions.fov-70)/180.0f)
+                };//-0.17
                 sceGumTranslate(&move); //-0.22
                 //rotate
                 sceGumRotateX(-0.33f);
@@ -11827,7 +11828,7 @@ void StatePlay::Draw(StateManager* sManager)
     {
         if(UseFurnace->furnaceSlotId[0] >= 250 && mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[0]) != -1) // it is item and it have durability points
         {
-            if(UseFurnace->furnaceSlotAm[0] != mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[0]) != -1)
+            if((UseFurnace->furnaceSlotAm[0] != -1) && (mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[0]) != -1))
             {
                 unsigned int toolPointStd = roundf((float)(UseFurnace->furnaceSlotAm[0]) / (float)(mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[0])) * 13);
 
@@ -11838,7 +11839,7 @@ void StatePlay::Draw(StateManager* sManager)
 
         if(UseFurnace->furnaceSlotId[1] >= 250 && mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[1]) != -1) // it is item and it have durability points
         {
-            if(UseFurnace->furnaceSlotAm[1] != mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[1]) != -1)
+            if((UseFurnace->furnaceSlotAm[1] != -1) && (mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[1]) != -1))
             {
                 unsigned int toolPointStd = roundf((float)(UseFurnace->furnaceSlotAm[1]) / (float)(mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[1])) * 13);
 
@@ -12312,7 +12313,7 @@ void StatePlay::Draw(StateManager* sManager)
         inputDiskNameTimer -= dt;
         if(inputDiskNameTimer > 0.0f)
         {
-            float red, blue, green, alpha;
+            float red = 0.0f, blue = 0.0f, green = 0.0f, alpha = 0.0f;
             if(inputDiskNameTimer > 1.8f && inputDiskNameTimer <= 2.4f)
             {
                 red = 1.0f;
@@ -12898,7 +12899,7 @@ void StatePlay::Draw(StateManager* sManager)
             if(tick_fps > dt/500.0f) // each 2 ms
             {
                 pre_fps += (1.0f/dt);
-                tick_fps - dt/500.0f;
+                tick_fps -= dt/500.0f;
                 ticks ++;
             }
 

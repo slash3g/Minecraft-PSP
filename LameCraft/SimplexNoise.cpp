@@ -238,11 +238,6 @@ float SimplexNoise::sdnoise2( float x, float y, float *dnoise_dx, float *dnoise_
     float t20, t40;
     if( t0 < 0.0f ) t40 = t20 = t0 = n0 = gx0 = gy0 = 0.0f; /* No influence */
     else {
-        if(ii < 0 || jj < 0)
-        {
-            int aa = 1;
-        }
-
       grad2( perm[ii + perm[jj]], &gx0, &gy0 );
       t20 = t0 * t0;
       t40 = t20 * t20;

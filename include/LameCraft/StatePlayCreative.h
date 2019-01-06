@@ -196,8 +196,8 @@ private:
     int slotId;
 
     char barPosition;
-    char invXPosition;
-    char invYPosition;
+    unsigned invXPosition;
+    unsigned invYPosition;
 
     char tempXFurnace;
     char tempYFurnace;

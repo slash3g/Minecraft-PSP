@@ -6,7 +6,6 @@
 
 #include <string.h>
 #include <zlib.h>
-#define PI 3.14159f
 
 #define ENGLISH 1
 #define RUSSIAN 2
@@ -1177,7 +1176,7 @@ void CraftWorld::initWorldBlocksLight() // Тень под блоками
                             GetBlock(x,y,z) = GrassBlock::getID();
                         }
                     }
-                    if(GetBlock(x,y,z) != 0 && BlockRefraction(x,y,z) != 0 && BlockRefraction(x,y,z) != 2 || GetBlock(x,y,z) == WaterBlock::getID())
+                    if(GetBlock(x,y,z) != 0 && BlockRefraction(x,y,z) != 0 && (BlockRefraction(x,y,z) != 2 || GetBlock(x,y,z) == WaterBlock::getID()))
                     {
                         level += 1;
                     }
@@ -1508,7 +1507,7 @@ void CraftWorld::initPutBlocksLight(const int xx, const int zz) // Тень по
         if(level < 15)
         {
             int block = GetBlockNoCheck(x,y,z);
-            if(block != 0 && BlockRefraction(x,y,z) != 0 && BlockRefraction(x,y,z) != 2 || block == WaterBlock::getID())
+            if(block != 0 && BlockRefraction(x,y,z) != 0 && (BlockRefraction(x,y,z) != 2 || block == WaterBlock::getID()))
             {
                 level += 1;
             }
@@ -1565,7 +1564,7 @@ void CraftWorld::initPutBlocksLight(const int xx, const int yy, const int zz) //
         SetShadowLevel(x,y,z,level);
         if(level < 15)
         {
-            if(GetBlockNoCheck(x,y,z) != 0 && BlockRefraction(x,y,z) != 0 && BlockRefraction(x,y,z) != 2 || GetBlockNoCheck(x,y,z) == WaterBlock::getID())
+            if(GetBlockNoCheck(x,y,z) != 0 && BlockRefraction(x,y,z) != 0 && (BlockRefraction(x,y,z) != 2 || GetBlockNoCheck(x,y,z) == WaterBlock::getID()))
             {
                 level += 1;
             }
@@ -3286,7 +3285,7 @@ void CraftWorld::DropThisNoAlign(int id, int am, bool st, Vector3 position, Vect
 
 void CraftWorld::DestroyDrop(int id)
 {
-    if(id < mDrops.size() && id >= 0)
+    if((unsigned)id < mDrops.size() && id >= 0)
     {
         delete mDrops[id];
         mDrops.erase(mDrops.begin()+id);
@@ -3306,7 +3305,7 @@ void CraftWorld::SpawnZombie(float xx, float yy, float zz)
 
 void CraftWorld::DestroyZombie(int id)
 {
-    if(id < mZombies.size() && id >= 0)
+    if((unsigned)id < mZombies.size() && id >= 0)
     {
         delete mZombies[id];
         mZombies.erase(mZombies.begin()+id);
@@ -3315,7 +3314,8 @@ void CraftWorld::DestroyZombie(int id)
 
 void CraftWorld::DestroyAllZombies()
 {
-    for(int ii = 0; ii < mZombies.size(); ii++)
+    unsigned n_zombies = mZombies.size();
+    for(unsigned ii = 0; ii < n_zombies; ii++)
     {
         delete mZombies[0];
         mZombies.erase(mZombies.begin());
@@ -3347,7 +3347,7 @@ void CraftWorld::SpawnCreeper(float xx, float yy, float zz, float freezedTimerMa
 
 void CraftWorld::DestroyCreeper(int id)
 {
-    if(id < mCreepers.size() && id >= 0)
+    if((unsigned)id < mCreepers.size() && id >= 0)
     {
         delete mCreepers[id];
         mCreepers.erase(mCreepers.begin()+id);
@@ -3356,7 +3356,8 @@ void CraftWorld::DestroyCreeper(int id)
 
 void CraftWorld::DestroyAllCreepers()
 {
-    for(int ii = 0; ii < mCreepers.size(); ii++)
+    unsigned n_creepers = mCreepers.size();
+    for(unsigned ii = 0; ii < n_creepers; ii++)
     {
         delete mCreepers[0];
         mCreepers.erase(mCreepers.begin());
@@ -3375,7 +3376,7 @@ void CraftWorld::SpawnCow(float xx, float yy, float zz)
 
 void CraftWorld::DestroyCow(int id)
 {
-    if(id < mCows.size() && id >= 0)
+    if((unsigned)id < mCows.size() && id >= 0)
     {
         delete mCows[id];
         mCows.erase(mCows.begin()+id);
@@ -3393,7 +3394,7 @@ void CraftWorld::SpawnSheep(float xx, float yy, float zz)
 
 void CraftWorld::DestroySheep(int id)
 {
-    if(id < mSheeps.size() && id >= 0)
+    if((unsigned)id < mSheeps.size() && id >= 0)
     {
         delete mSheeps[id];
         mSheeps.erase(mSheeps.begin()+id);
@@ -3449,7 +3450,7 @@ void CraftWorld::SpawnTNTentity(float xx, float yy, float zz, float time)
 
 void CraftWorld::DestroyTNTentity(int id)
 {
-    if(id < mTNTs.size() && id >= 0)
+    if((unsigned)id < mTNTs.size() && id >= 0)
     {
         mTNTs.erase(mTNTs.begin()+id);
     }
@@ -3801,7 +3802,7 @@ bool CraftWorld::CheckForTorchSupport(const int x, const int y, const int z,int 
                         else
                         {
                             bool alreadyHave = false;
-                            for(int i = 0; i < toRebuild.size(); i++)
+                            for(unsigned i = 0; i < toRebuild.size(); i++)
                             {
                                 if(toRebuild[i] == id)
                                 {
@@ -3822,7 +3823,7 @@ bool CraftWorld::CheckForTorchSupport(const int x, const int y, const int z,int 
     if(haveTorch)
     {
         UpdateLightAreaIn(Vector3(x,y,z));
-        for(int i = 0; i < toRebuild.size(); i++)
+        for(unsigned i = 0; i < toRebuild.size(); i++)
         {
             RebuildTransparentMeshChunk(toRebuild[i]);
         }
@@ -3878,7 +3879,7 @@ bool CraftWorld::CheckForLadderSupport(const int x, const int y, const int z)
                 else
                 {
                     bool alreadyHave = false;
-                    for(int i = 0; i < toRebuild.size(); i++)
+                    for(unsigned i = 0; i < toRebuild.size(); i++)
                     {
                         if(toRebuild[i] == id)
                         {
@@ -3895,7 +3896,7 @@ bool CraftWorld::CheckForLadderSupport(const int x, const int y, const int z)
     }
     if(haveLadder)
     {
-        for(int i = 0; i < toRebuild.size(); i++)
+        for(unsigned i = 0; i < toRebuild.size(); i++)
         {
             RebuildTransparentMeshChunk(toRebuild[i]);
         }
@@ -3929,7 +3930,7 @@ bool CraftWorld::DestroyAroundTrapdoors(const int x, const int y, const int z)
             else
             {
                 bool alreadyHave = false;
-                for(int i = 0; i < toRebuild.size(); i++)
+                for(unsigned i = 0; i < toRebuild.size(); i++)
                 {
                     if(toRebuild[i] == id)
                     {
@@ -3960,7 +3961,7 @@ bool CraftWorld::DestroyAroundTrapdoors(const int x, const int y, const int z)
             else
             {
                 bool alreadyHave = false;
-                for(int i = 0; i < toRebuild.size(); i++)
+                for(unsigned i = 0; i < toRebuild.size(); i++)
                 {
                     if(toRebuild[i] == id)
                     {
@@ -3991,7 +3992,7 @@ bool CraftWorld::DestroyAroundTrapdoors(const int x, const int y, const int z)
             else
             {
                 bool alreadyHave = false;
-                for(int i = 0; i < toRebuild.size(); i++)
+                for(unsigned i = 0; i < toRebuild.size(); i++)
                 {
                     if(toRebuild[i] == id)
                     {
@@ -4022,7 +4023,7 @@ bool CraftWorld::DestroyAroundTrapdoors(const int x, const int y, const int z)
             else
             {
                 bool alreadyHave = false;
-                for(int i = 0; i < toRebuild.size(); i++)
+                for(unsigned i = 0; i < toRebuild.size(); i++)
                 {
                     if(toRebuild[i] == id)
                     {
@@ -4039,12 +4040,13 @@ bool CraftWorld::DestroyAroundTrapdoors(const int x, const int y, const int z)
 
     if(toRebuild.empty() == false)
     {
-        for(int i = 0; i < toRebuild.size(); i++)
+        for(unsigned i = 0; i < toRebuild.size(); i++)
         {
             RebuildTransparentMeshChunk(toRebuild[i]);
         }
     }
     //RebuildTransparentMeshChunk(getChunkId(Vector3(x,y,z)));
+    return !toRebuild.empty();
 }
 
 bool CraftWorld::DestroyAroundItemFrames(const int x, const int y, const int z)
@@ -4072,7 +4074,7 @@ bool CraftWorld::DestroyAroundItemFrames(const int x, const int y, const int z)
             else
             {
                 bool alreadyHave = false;
-                for(int i = 0; i < toRebuild.size(); i++)
+                for(unsigned i = 0; i < toRebuild.size(); i++)
                 {
                     if(toRebuild[i] == id)
                     {
@@ -4103,7 +4105,7 @@ bool CraftWorld::DestroyAroundItemFrames(const int x, const int y, const int z)
             else
             {
                 bool alreadyHave = false;
-                for(int i = 0; i < toRebuild.size(); i++)
+                for(unsigned i = 0; i < toRebuild.size(); i++)
                 {
                     if(toRebuild[i] == id)
                     {
@@ -4134,7 +4136,7 @@ bool CraftWorld::DestroyAroundItemFrames(const int x, const int y, const int z)
             else
             {
                 bool alreadyHave = false;
-                for(int i = 0; i < toRebuild.size(); i++)
+                for(unsigned i = 0; i < toRebuild.size(); i++)
                 {
                     if(toRebuild[i] == id)
                     {
@@ -4165,7 +4167,7 @@ bool CraftWorld::DestroyAroundItemFrames(const int x, const int y, const int z)
             else
             {
                 bool alreadyHave = false;
-                for(int i = 0; i < toRebuild.size(); i++)
+                for(unsigned i = 0; i < toRebuild.size(); i++)
                 {
                     if(toRebuild[i] == id)
                     {
@@ -4182,12 +4184,13 @@ bool CraftWorld::DestroyAroundItemFrames(const int x, const int y, const int z)
 
     if(toRebuild.empty() == false)
     {
-        for(int i = 0; i < toRebuild.size(); i++)
+        for(unsigned i = 0; i < toRebuild.size(); i++)
         {
             RebuildTransparentMeshChunk(toRebuild[i]);
         }
     }
     //RebuildTransparentMeshChunk(getChunkId(Vector3(x,y,z)));
+    return !toRebuild.empty();
 }
 
 
@@ -4310,8 +4313,8 @@ bool CraftWorld::BlockTransparentOrLightSource(const int x, const int y, const i
         if(blockTypes[m_Blocks[x + y * WORLD_SIZE + z * WORLD_SIZE * WORLD_HEIGHT]].transparent || blockTypes[m_Blocks[x + y * WORLD_SIZE + z * WORLD_SIZE * WORLD_HEIGHT]].lightSource || blockTypes[m_Blocks[x + y * WORLD_SIZE + z * WORLD_SIZE * WORLD_HEIGHT]].refraction == 2)
             return true;
 
-        return false;
     }
+    return false;
 }
 
 bool CraftWorld::BlockTransparentOrLightSourceNoCheck(const int x, const int y, const int z)
@@ -4330,6 +4333,7 @@ bool CraftWorld::BlockTransparent(const int x, const int y, const int z)
     {
         return blockTypes[m_Blocks[x + y * WORLD_SIZE + z * WORLD_SIZE * WORLD_HEIGHT]].transparent;
     }
+    return false;
 }
 
 bool CraftWorld::BlockTransparentNoCheck(const int x, const int y, const int z)
@@ -4343,6 +4347,7 @@ bool CraftWorld::BlockAnimated(const int x, const int y, const int z)
     {
         return blockTypes[m_Blocks[x + y * WORLD_SIZE + z * WORLD_SIZE * WORLD_HEIGHT]].animated;
     }
+    return false;
 }
 
 char CraftWorld::BlockSpecial(const int x, const int y, const int z)
@@ -4351,6 +4356,7 @@ char CraftWorld::BlockSpecial(const int x, const int y, const int z)
     {
         return blockTypes[m_Blocks[x + y * WORLD_SIZE + z * WORLD_SIZE * WORLD_HEIGHT]].blockModel;
     }
+    return false;
 }
 
 char CraftWorld::BlockSpecialNoCheck(const int x, const int y, const int z)
@@ -4364,6 +4370,7 @@ bool CraftWorld::BlockUpdate2(const int x, const int y, const int z)
     {
         return blockTypes[m_Blocks[x + y * WORLD_SIZE + z * WORLD_SIZE * WORLD_HEIGHT]].update;
     }
+    return false;
 }
 
 bool CraftWorld::BlockSolid(const int x, const int y, const int z)
@@ -4372,6 +4379,7 @@ bool CraftWorld::BlockSolid(const int x, const int y, const int z)
     {
         return blockTypes[m_Blocks[x + y * WORLD_SIZE + z * WORLD_SIZE * WORLD_HEIGHT]].solid;
     }
+    return false;
 }
 
 short CraftWorld::BlockLoot(const int x, const int y, const int z)
@@ -4380,6 +4388,7 @@ short CraftWorld::BlockLoot(const int x, const int y, const int z)
     {
         return blockTypes[m_Blocks[x + y * WORLD_SIZE + z * WORLD_SIZE * WORLD_HEIGHT]].loot;
     }
+    return false;
 }
 
 short CraftWorld::BlockMaterial(const int x, const int y, const int z)
@@ -4388,6 +4397,7 @@ short CraftWorld::BlockMaterial(const int x, const int y, const int z)
     {
         return blockTypes[m_Blocks[x + y * WORLD_SIZE + z * WORLD_SIZE * WORLD_HEIGHT]].material;
     }
+    return false;
 }
 
 bool CraftWorld::BlockEditable(const int x, const int y, const int z)
@@ -4512,7 +4522,7 @@ string CraftWorld::NameBlock(int id)
 {
     if(id < 250)
     {
-        if(id >= 0 && id < blockTypes.size())
+        if(id >= 0 && (unsigned)id < blockTypes.size())
         {
             return blockTypes[id].name;
         }
@@ -4520,7 +4530,7 @@ string CraftWorld::NameBlock(int id)
     else
     {
         id -= 250;
-        if(id >= 0 && id < itemTypes.size())
+        if(id >= 0 && (unsigned)id < itemTypes.size())
         {
             return itemTypes[id].name;
         }
@@ -4530,7 +4540,7 @@ string CraftWorld::NameBlock(int id)
 
 bool CraftWorld::LightSourceBlock(int id)
 {
-    if(id < blockTypes.size() && id >= 0)
+    if((unsigned)id < blockTypes.size() && id >= 0)
     {
         return blockTypes[id].lightSource;
     }
@@ -4544,7 +4554,7 @@ bool CraftWorld::LightSourceBlock(int id)
 
 int CraftWorld::LootBlock(int id)
 {
-    if(id < blockTypes.size() && id >= 0)
+    if((unsigned)id < blockTypes.size() && id >= 0)
     {
         return blockTypes[id].loot;
     }
@@ -4558,7 +4568,7 @@ int CraftWorld::LootBlock(int id)
 int CraftWorld::DurabilityPointsItem(int id)
 {
     id -= 250; // it is item
-    if(id < itemTypes.size() && id >= 0)
+    if((unsigned)id < itemTypes.size() && id >= 0)
     {
         return itemTypes[id].durabilityPoints;
     }
@@ -4568,7 +4578,7 @@ int CraftWorld::DurabilityPointsItem(int id)
 bool CraftWorld::StackableItem(int id)
 {
     id -= 250; // it is item
-    if(id < itemTypes.size() && id >= 0)
+    if((unsigned)id < itemTypes.size() && id >= 0)
     {
         return itemTypes[id].stackable;
     }
@@ -4579,7 +4589,7 @@ bool CraftWorld::StackableItem(int id)
 bool CraftWorld::ItemHaveTerrainTexture(int id)
 {
     id -= 250; // it is item
-    if(id < itemTypes.size() && id >= 0)
+    if((unsigned)id < itemTypes.size() && id >= 0)
     {
         return itemTypes[id].terrainTexture;
     }
@@ -4589,7 +4599,7 @@ bool CraftWorld::ItemHaveTerrainTexture(int id)
 char CraftWorld::ItemType(int id)
 {
     id -= 250; // it is item
-    if(id < itemTypes.size() && id >= 0)
+    if((unsigned)id < itemTypes.size() && id >= 0)
     {
         return itemTypes[id].itemType;
     }
@@ -5194,8 +5204,6 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
     int startPixelsY = 256 - ((itemType->textureRow + 1)*16);
 
     iVertex = 0;
-    //light
-    float BlockLight  = 1.0f;  //For the two x faces
 
     mPosition.push_back(new Vector3(x,   y,   z+1));
     mtextures.push_back(new Vector2(left, down));
@@ -9393,7 +9401,7 @@ void CraftWorld::CreateFullMeshChunk(const int StartX, const int StartY, const i
 
 void CraftWorld::RebuildFullMeshChunk(int id)
 {
-    if(id < 0 || id >= mChunks.size())
+    if(id < 0 || (unsigned)id >= mChunks.size())
     {
         return;
     }
@@ -9470,7 +9478,7 @@ void CraftWorld::RebuildFullMeshChunk(int id)
 
 void CraftWorld::RebuildOpaqueMeshChunk(int id)
 {
-    if(id < 0 || id >= mChunks.size())
+    if(id < 0 || (unsigned)id >= mChunks.size())
     {
         return;
     }
@@ -9513,7 +9521,7 @@ void CraftWorld::RebuildOpaqueMeshChunk(int id)
 
 void CraftWorld::RebuildTransparentMeshChunk(int id)
 {
-    if(id < 0 || id >= mChunks.size())
+    if(id < 0 || (unsigned)id >= mChunks.size())
     {
         return;
     }
@@ -9563,15 +9571,11 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
     texturePixel = (float)1/256.0f;
 
     bool canCreate = false;
-    bool DefaultBlock = false;
-    bool transparentBlock = false;
 
     float up = 0.0f;
     float down = 0.0f;
     float left = 0.0f;
     float right = 0.0f;
-
-    char Block1;
 
     Vector3 light1, light2, light3, light4;
     Vector3 BlockColorx1, BlockColorx2, BlockColory1, BlockColory2, BlockColorz1, BlockColorz2;
@@ -10211,7 +10215,6 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
             float right = left + texturePixel*4;
 
             //standing torch
-            block_t Block1 = GetBlock(x,y-1,z);
             pixel = 1.0f/16.0f;
 
             if(BlockSolid(x,y-1,z)) /////
@@ -10836,7 +10839,6 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
         left = blockType->leftPlane_x*percent;
         right = left+percent;
 
-        transparentBlock = DefaultBlock;
         canCreate = true;
 
         if (canCreate)
@@ -10860,7 +10862,6 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
         }
 
         //x+1
-        transparentBlock = DefaultBlock;
         canCreate = true;
 
         if (canCreate)
@@ -10883,7 +10884,6 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
             iVertex += 4;
         }
 
-        transparentBlock = DefaultBlock;
         canCreate = true;
 
         if (canCreate)
@@ -10906,7 +10906,6 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
             iVertex += 4;
         }
 
-        transparentBlock = DefaultBlock;
         canCreate = true;
 
         if (canCreate)
@@ -10936,7 +10935,6 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
     if(blockType->blockModel == 4)
     {
         //x-1
-        transparentBlock = DefaultBlock;
         canCreate = true;
 
         BlockColorx2 = Vector3(BlockFinalLight(x,y,z),BlockFinalLight(x,y,z),BlockFinalLight(x,y,z));
@@ -11317,17 +11315,10 @@ void CraftWorld::GetNormalBlock(int x,int y, int z, int &iVertex, SimpleMeshChun
     Block = _GetBlockNoCheck(x,y,z);
     BaseBlock *blockType = &blockTypes[Block];
 
-    int xx = x;
-    int yy = y;
-    int zz = z;
-
-    bool anotherLight = false;
     char side = -1;
 
     if(Block == FurnaceOff::getID() || Block == FurnaceOn::getID())
     {
-        int o;
-        o = -1;
         for(unsigned int i = 0; i < mFurnaces.size(); i++)
         {
             Furnace* NewFurnace = mFurnaces[i];
@@ -11340,7 +11331,6 @@ void CraftWorld::GetNormalBlock(int x,int y, int z, int &iVertex, SimpleMeshChun
     }
 
     bool canCreate = false;
-    bool DefaultBlock = false;
     bool transparentBlock = false;
     char specialBlock = 0;
 
@@ -12575,8 +12565,6 @@ void CraftWorld::UpdateLightAreaIn(Vector3 pos)
     int y = pos.y;
     int z = pos.z;
 
-    int current = 0;
-
     int z_start, z_end, x_start, x_end, y_start, y_end;
     z-9 >= 0 ? z_start = z-9 : z_start = 0;
     z+9 < WORLD_SIZE ? z_end = z+9 : z_end = WORLD_SIZE-1;
@@ -12624,7 +12612,7 @@ void CraftWorld::UpdateLightAreaIn(Vector3 pos)
 
 void CraftWorld::AddChunkToUpdate(int id)
 {
-    if(id > 0 && id < mChunks.size())
+    if(id > 0 && (unsigned)id < mChunks.size())
     {
         bool push = true;
         if(toUpdate.empty() == false)
@@ -12647,7 +12635,7 @@ void CraftWorld::AddChunkToUpdate(int id)
 
 void CraftWorld::AddChunkToFastUpdate(int id)
 {
-    if(id >= 0 && id < mChunks.size())
+    if(id >= 0 && (unsigned)id < mChunks.size())
     {
         bool push = true;
         if(toFastUpdate.empty() == false)
@@ -12672,7 +12660,6 @@ void CraftWorld::AddChunkToFastUpdate(int id)
 
 void CraftWorld::rebuildNearestChunksForLight(int id,Vector3 pos)
 {
-    Vector3 test = mChunks[id]->bBox.onBorder(pos);
     Vector3 temp = pos;
     Vector3 posInChunk = pos-Vector3(mChunks[id]->chunkStartX,mChunks[id]->chunkStartY,mChunks[id]->chunkStartZ);
 
@@ -13102,7 +13089,6 @@ void CraftWorld::UpdateChunkBlocks(int id)
                     }
                 }
 
-                int upperBlock = GetBlock(x,y+1,z);
                 if(block == Soil::getID())
                 {
                     if(BlockTransparent(x,y+1,z) == false)
@@ -13339,7 +13325,6 @@ void CraftWorld::UpdateChunkGrowingBlocks(int id, int vectorId)
                         continue;
                     }
 
-                    int upperBlock = GetBlock(x,y+1,z);
                     if(block == Soil::getID())
                     {
                         if(BlockTransparent(x,y+1,z) == false)
@@ -14809,7 +14794,7 @@ void CraftWorld::AddToFloodPos(Vector3 pos) // not used
 
 void CraftWorld::AddChunkToFloodUpdate(int id)
 {
-    if(id > 0 && id < mChunks.size())
+    if(id > 0 && (unsigned)id < mChunks.size())
     {
         bool push = true;
         if(floodChunks.empty() == false)
@@ -17587,8 +17572,6 @@ void CraftWorld::BuildWorldBlockPlaneNoCheck(BaseBlock *blockType, int x,int y, 
     float left = 0.0f;
     float right = 0.0f;
 
-    char Block1 = 0;
-
     float light[20];
     for(int o = 0; o <= 19; o++)
     {
@@ -18615,7 +18598,6 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
     texturePixel = (float)1/256.0f;
 
     bool canCreate = false;
-    bool DefaultBlock = false;
     bool transparentBlock = false;
     bool specialBlock;
 
@@ -18645,8 +18627,6 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
     {
         leavesBlock = true;
     }
-
-    BaseBlock *blockType1;
 
     if(side == 1)
     {
@@ -21213,7 +21193,7 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
 
     char Block1;
 
-    int plane_x, plane_y;
+    int plane_x = 0, plane_y = 0;
     switch(texturePlane)
     {
         case 0 : plane_x = blockType->leftPlane_x; plane_y = blockType->leftPlane_y;
@@ -22521,7 +22501,7 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
 
     char Block1;
 
-    int plane_x, plane_y;
+    int plane_x = 0, plane_y = 0;
     switch(texturePlane)
     {
         case 0 : plane_x = blockType->leftPlane_x; plane_y = blockType->leftPlane_y;

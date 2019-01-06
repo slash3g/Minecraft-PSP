@@ -106,16 +106,13 @@ namespace Aurora
 
         Frustum::PlaneIntersectionType Frustum::BoxInFrustum(BoundingBox &box)
         {
-            int flag = 0;
             for (int i = 0; i < 6; ++i)
             {
                 switch(box.intersect(planes[i]))
                 {
                     case BoundingBox::Front:
                     case BoundingBox::Intersecting:
-                    {
-                        flag = 1;
-                    }break;
+                    break;
 
                     case BoundingBox::Back:
                     return Outside;

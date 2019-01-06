@@ -47,8 +47,6 @@ namespace Aurora
         void Destroyer::Update(float stad, CraftWorld* crft, int blockId)
         {
             int i = 0;
-            float block = 1/16.0f;
-            float block1 = 15.0f / 16.0f;
             float pixel = 1.0f/16.0f;
 
             BoundingBox modelBox = crft->blockTypes[blockId].collideBox;

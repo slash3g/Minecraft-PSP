@@ -4,7 +4,6 @@
 #include "LameCraft/WorldGenerator.h"
 #include "LameCraft/LoadingScreen.h"
 
-#define PI 3.14159265f
 #define DEG_TO_RAD (PI / 180.0f)
 #define TEXTURE_CHUNKS 8
 #define SKY_MOVE 0.003f
@@ -248,8 +247,6 @@ void StatePlayCreative::Init()
 
     playerPosition = newPlayerPos = oldPlayerPos = Vector3(64.0f,mWorld->groundHeight(64,64)+1.65,64.0f);
 
-    int	curchunkTarget = mWorld->getChunkId(playerPosition);
-
     dt = mTimer.GetDeltaTime();
 
     bobCycle = PI/2;
@@ -289,8 +286,6 @@ void StatePlayCreative::InitParametric(bool makeTrees, bool makeWater,bool makeC
     mWorld->buildMap();
 
     playerPosition = newPlayerPos = oldPlayerPos = mWorld->playerSpawnPointPosition;
-
-    int	curchunkTarget = mWorld->getChunkId(playerPosition);
 
     dt = mTimer.GetDeltaTime();
 
@@ -369,7 +364,6 @@ void StatePlayCreative::LoadMap(std::string fileName,bool compressed)
     mWorld->initWorldBlocksLight();
     mWorld->buildMap();
 
-    int	curchunkTarget = mWorld->getChunkId(playerPosition);
     dt = mTimer.GetDeltaTime();
 
     // load textures
@@ -3510,7 +3504,7 @@ void StatePlayCreative::CraftItem3x3()
         break;
 
         case 75: //pumpkin to pumpkin seeds
-            if(craftSlotId3[0] == 75 || craftSlotId3[1] == 75 || craftSlotId3[2] == 75 && craftSlotId3[3] == 75 || craftSlotId3[4] == 75 || craftSlotId3[5] == 75 || craftSlotId3[6] == 75 || craftSlotId3[7] == 75 || craftSlotId3[8] == 75)
+            if((craftSlotId3[0] == 75 || craftSlotId3[1] == 75 || craftSlotId3[2] == 75) && (craftSlotId3[3] == 75 || craftSlotId3[4] == 75 || craftSlotId3[5] == 75 || craftSlotId3[6] == 75 || craftSlotId3[7] == 75 || craftSlotId3[8] == 75))
             {
                 craftItemId3 = PumpkinSeeds::getID();
                 craftItemSt3 = 1;
@@ -4900,7 +4894,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                             }
                             if(mWorld->mZombies.empty() == false)
                             {
-                                for(int f = 0; f < mWorld->mZombies.size(); f++)
+                                for(unsigned f = 0; f < mWorld->mZombies.size(); f++)
                                 {
                                     Zombie *TestZombie = mWorld->mZombies[f];
                                     if(abs(playerPosition.x-TestZombie->position.x) <= 7 && abs(playerPosition.z-TestZombie->position.z) <= 7 && abs(playerPosition.y-TestZombie->position.y) <= 4)
@@ -5945,7 +5939,6 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
 
                                             if(mWorld->invId[27+barPosition] == 291) // if it is water busket
                                             {
-                                                int chunkTarget = mWorld->getChunkId(testPos2);
                                                 mWorld->GetBlock(testPos2.x,testPos2.y,testPos2.z) = 4;
                                                 mWorld->invId[27+barPosition] = 290;
 
@@ -6063,7 +6056,6 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
             if(keyPressed(InputHelper::Instance()->getButtonToAction(13))) //remove cube
             {
                 mWorld->GetBlock(testPos1.x,testPos1.y,testPos1.z) = 0;
-                int chunkTarget = mWorld->getChunkId(testPos1);
 
                 Vector3 rayDir = fppCam->m_vView - fppCam->m_vPosition;
                 rayDir.normalize();
@@ -6107,7 +6099,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                             {
                                 // drop all items in chest
                                 Chest* TestChest = mWorld->mChests[chestId];
-                                for(int i = 0; i <= 27; i++)
+                                for(int i = 0; i < 27; i++)
                                 {
                                     if(TestChest->chestSlotId[i] > 0)
                                     {
@@ -8655,9 +8647,6 @@ void StatePlayCreative::Update(StateManager* sManager)
                 }
             }
 
-            float bobSine = sinf(bobCycle/2.0f -PI/2.0f);
-            float bobCose = cosf(bobCycle - (PI/2.0f) + PI)/3.0f;
-
             //fppCam->m_vOffset = Vector3(0.0f,0.06f*bobSine+0.03f,0.0f);
         }
         else
@@ -8975,7 +8964,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
     /// Drop rendering
     if(mWorld->mDrops.empty() == false)
     {
-        for(int d = 0; d < mWorld->mDrops.size(); d++)
+        for(unsigned d = 0; d < mWorld->mDrops.size(); d++)
         {
             if(d < mWorld->mDrops.size())
             {
@@ -9401,7 +9390,10 @@ void StatePlayCreative::Draw(StateManager* sManager)
                 sceGumMatrixMode(GU_VIEW);
                 sceGumLoadIdentity();
                 //translate
-                ScePspFVector3 move = {0.53f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/200.0f+sinf(animDest)*-0.35,-0.42f+shift_y+cubeBob2+changeY,-0.5f+(mWorld->mainOptions.fov-70)/130.0f}; //446
+                ScePspFVector3 move = {
+                    float(0.53f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/200.0f+sinf(animDest)*-0.35),
+                    float(-0.42f+shift_y+cubeBob2+changeY),
+                    float(-0.5f+(mWorld->mainOptions.fov-70)/130.0f)}; //446
                 sceGumTranslate(&move);
                 //rotate
                 sceGumRotateX(-0.72f+sinf(animDest)*-1.5);//0.1
@@ -9430,7 +9422,10 @@ void StatePlayCreative::Draw(StateManager* sManager)
                 sceGumMatrixMode(GU_VIEW);
                 sceGumLoadIdentity();
                 //translate
-                ScePspFVector3 move = {0.62f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/200.0f+sinf(animDest)*-0.35,-0.35f+shift_y+cubeBob2+changeY+sinf(animDest)*-0.1,-0.7f+(mWorld->mainOptions.fov-70)/130.0f}; //446
+                ScePspFVector3 move = {
+                    float(0.62f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/200.0f+sinf(animDest)*-0.35),
+                    float(-0.35f+shift_y+cubeBob2+changeY+sinf(animDest)*-0.1),
+                    float(-0.7f+(mWorld->mainOptions.fov-70)/130.0f)}; //446
                 sceGumTranslate(&move);
                 //rotate
                 sceGumRotateX(0.169+sinf(animDest)*-1.5);
@@ -9459,7 +9454,10 @@ void StatePlayCreative::Draw(StateManager* sManager)
                 sceGumLoadIdentity();
 
                 //translate
-                ScePspFVector3 move = {0.523f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/250.0f+sinf(animDest)*-0.25,-0.24f+cubeBob2+shift_y+changeY,-0.6f+(mWorld->mainOptions.fov-70)/180.0f};//-0.17
+                ScePspFVector3 move = {
+                    float(0.523f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/250.0f+sinf(animDest)*-0.25),
+                    float(-0.24f+cubeBob2+shift_y+changeY),
+                    float(-0.6f+(mWorld->mainOptions.fov-70)/180.0f)};//-0.17
                 sceGumTranslate(&move); //-0.22
                 //rotate
                 sceGumRotateX(-0.33f);
@@ -9706,13 +9704,13 @@ void StatePlayCreative::Draw(StateManager* sManager)
         {
             for(int j = 0; j <= 8; j++)
             {
-                if(creativePage*27 + i*9 + j < inventoryItems.size())
+                if(unsigned(creativePage*27 + i*9 + j) < inventoryItems.size())
                 {
                     if(inventoryItems[creativePage*27 + i*9 + j] != -1)
                     {
                         sceGumPushMatrix();
 
-                        ScePspFVector3 loc = {80+j*36,28+i*36,0.0f};
+                        ScePspFVector3 loc = {float(80+j*36),float(28+i*36),float(0.0f)};
                         sceGumTranslate(&loc);
 
                         if(inventoryItems[creativePage*27 + i*9 + j] < 250)
@@ -9906,12 +9904,12 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
                 if(invEn == true)
                 {
-                    ScePspFVector3 loc = {80+k*36,244,0.0f};
+                    ScePspFVector3 loc = {float(80+k*36),float(244),float(0.0f)};
                     sceGumTranslate(&loc);
                 }
                 else
                 {
-                    ScePspFVector3 loc = {96+k*36,244,0.0f};
+                    ScePspFVector3 loc = {float(96+k*36),float(244),float(0.0f)};
                     sceGumTranslate(&loc);
                 }
 
@@ -9944,7 +9942,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
                     {
                         sceGumPushMatrix();
 
-                        ScePspFVector3 loc = {96+j*36,138+i*36,0.0f};
+                        ScePspFVector3 loc = {float(96+j*36),float(138+i*36),float(0.0f)};
                         sceGumTranslate(&loc);
 
                         if(mWorld->invId[i*9+j] < 250)
@@ -9991,7 +9989,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
                 }
                 if (furnaceEn == 1)
                 {
-                    ScePspFVector3 loc = {204,18+(invYPosition * 72),0.0f};
+                    ScePspFVector3 loc = {float(204),float(18+(invYPosition * 72)),float(0.0f)};
                     sceGumTranslate(&loc);
                 }
             }
@@ -9999,19 +9997,19 @@ void StatePlayCreative::Draw(StateManager* sManager)
             {
                 if(invEn == false)
                 {
-                    ScePspFVector3 loc = {96 + (invXPosition * 36),130+(invYPosition*36),0.0f};
+                    ScePspFVector3 loc = {float(96 + (invXPosition * 36)),float(130+(invYPosition*36)),float(0.0f)};
                     sceGumTranslate(&loc);
                 }
                 else
                 {
                     if(onDestroySlot)
                     {
-                        ScePspFVector3 loc = {82 + (9 * 36),20+(6*36),0.0f};
+                        ScePspFVector3 loc = {float(82 + (9 * 36)),float(20+(6*36)),float(0.0f)};
                         sceGumTranslate(&loc);
                     }
                     else
                     {
-                        ScePspFVector3 loc = {80 + (invXPosition * 36),20+(invYPosition*36),0.0f};
+                        ScePspFVector3 loc = {float(80 + (invXPosition * 36)),float(20+(invYPosition*36)),float(0.0f)};
                         sceGumTranslate(&loc);
                     }
                 }
@@ -10103,7 +10101,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
     {
         if(UseFurnace->furnaceSlotId[0] >= 250 && mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[0]) != -1) // it is item and it have durability points
         {
-            if(UseFurnace->furnaceSlotAm[0] != mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[0]) != -1)
+            if((UseFurnace->furnaceSlotAm[0] != -1) && (mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[0]) != -1))
             {
                 unsigned int toolPointStd = roundf((float)(UseFurnace->furnaceSlotAm[0]) / (float)(mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[0])) * 13);
 
@@ -10114,7 +10112,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
         if(UseFurnace->furnaceSlotId[1] >= 250 && mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[1]) != -1) // it is item and it have durability points
         {
-            if(UseFurnace->furnaceSlotAm[1] != mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[1]) != -1)
+            if((UseFurnace->furnaceSlotAm[1] != -1) && (mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[1]) != -1))
             {
                 unsigned int toolPointStd = roundf((float)(UseFurnace->furnaceSlotAm[1]) / (float)(mWorld->DurabilityPointsItem(UseFurnace->furnaceSlotId[1])) * 13);
 
@@ -10550,7 +10548,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
         inputDiskNameTimer -= dt;
         if(inputDiskNameTimer > 0.0f)
         {
-            float red, blue, green, alpha;
+            float red = 0.0f, blue = 0.0f, green = 0.0f, alpha = 0.0f;
             if(inputDiskNameTimer > 1.8f && inputDiskNameTimer <= 2.4f)
             {
                 red = 1.0f;
@@ -11117,7 +11115,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
             if(tick_fps > dt/500.0f) // each 2 ms
             {
                 pre_fps += (1.0f/dt);
-                tick_fps - dt/500.0f;
+                tick_fps -= dt/500.0f;
                 ticks ++;
             }
 

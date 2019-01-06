@@ -1,7 +1,6 @@
 #include "LameCraft/Cow2.h"
 #include <Aurora/Graphics/TextureManager.h>
 
-#define PI 3.14159f
 #define DEG_TO_RAD (PI / 180.0f)
 #define PIXEL 1.0f / 16.0f
 #define GRAVITY -6.8f
@@ -51,7 +50,7 @@ Cow::~Cow()
 
 void Cow::BoxCollision()
 {
-    for(int x = 0; x < world->mCows.size(); x++)
+    for(unsigned x = 0; x < world->mCows.size(); x++)
     {
         Cow *TestCow2 = world->mCows[x];
         if(TestCow2->number != number && (TestCow2->position.x != position.x || TestCow2->position.z != position.z || TestCow2->position.y != position.y))

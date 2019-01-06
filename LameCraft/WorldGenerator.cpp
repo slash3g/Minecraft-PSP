@@ -20,8 +20,6 @@ void WorldGenerator::initRandompMap(int worldSize, int worldHeight, int chunkSiz
 
     //inicjuj mape
     int WORLD_SIZE = worldSize;
-    int CHUNK_SIZE = chunkSize;
-    int WORLD_HEIGHT = 98;
 
     if (seedII == 0)
     {
@@ -33,19 +31,12 @@ void WorldGenerator::initRandompMap(int worldSize, int worldHeight, int chunkSiz
     world->worldSeed = seed;
     SetSeed(seed);
 
-    int grass_;
+    int grass_ = 0;
     bool genGrass = true;
 
     if(worldType == DEFAULT)
     {
-        int octave_count = 6;
         int waterLevel = 62;
-        int middleHeight = 68;
-
-        Real persistence = 0.05;
-        Real frequency = 1.4;
-        Real scale = 2.12;
-        Real lacunarity = 2.0;
 
         {
             std::string path = "Terrain/options.txt";
@@ -834,7 +825,7 @@ void WorldGenerator::initRandompMap(int worldSize, int worldHeight, int chunkSiz
                 u32 color = 0;
                 u8 r = 0, g = 0, b = 0;
 
-                //* color picking
+                /// color picking
                 if(block == GrassBlock::getID())
                 {
                     r = 87;
@@ -939,7 +930,7 @@ void WorldGenerator::initRandompMap(int worldSize, int worldHeight, int chunkSiz
                     b = 32;
                 }
 
-                //* relief
+                /// relief
                 bool shade = false;
                 if(world->GetBlock(x,y,z-1) != 0 && world->GetBlock(x,y,z+1) == 0)
                 {
@@ -984,7 +975,7 @@ void WorldGenerator::initRandompMap(int worldSize, int worldHeight, int chunkSiz
                         waterDepth = 6;
                     }
 
-                   /* r *= (1.0f-(float)waterDepth/16.0f);
+                    r *= (1.0f-(float)waterDepth/16.0f);
                     g *= (1.0f-(float)waterDepth/16.0f);
                     b *= (1.0f-(float)waterDepth/16.0f);
 
@@ -996,7 +987,7 @@ void WorldGenerator::initRandompMap(int worldSize, int worldHeight, int chunkSiz
                     }
                 }
 
-                //* filling .png buffer with colors
+                /// filling .png buffer with colors
                 line[i++] = r;
                 line[i++] = g;
                 line[i++] = b;
@@ -1536,7 +1527,6 @@ void WorldGenerator::initBiome(int WORLD_SIZE, CraftWorld *world, PerlinModule* 
     bool snowBiomeIncluded = true;
     bool snowBiomeSuperLarge = false;
     bool desertBiomeIncluded = true;
-    bool desertBiomeSuperLarge = false;
 
     if(rand() % 15 == 0)
     {
@@ -1549,10 +1539,6 @@ void WorldGenerator::initBiome(int WORLD_SIZE, CraftWorld *world, PerlinModule* 
     if(rand() % 15 == 0)
     {
         snowBiomeSuperLarge = true;
-    }
-    if(rand() % 100 == 0)
-    {
-        desertBiomeSuperLarge = true;
     }
 
     /// SNOW BIOME
@@ -1570,7 +1556,7 @@ void WorldGenerator::initBiome(int WORLD_SIZE, CraftWorld *world, PerlinModule* 
         {
             for (int x = biomeCenterX-biomeRadius; x <= biomeCenterX+biomeRadius; x++)
             {
-                if(world->FastDistance2d(abs(x-biomeCenterX),abs(z-biomeCenterZ)) < biomeRadius+5)
+                if((int)world->FastDistance2d(abs(x-biomeCenterX),abs(z-biomeCenterZ)) < biomeRadius+5)
                 {
                     if(x == biomeCenterX-biomeRadius || x == biomeCenterX+biomeRadius || z == biomeCenterZ-biomeRadius || z == biomeCenterZ+biomeRadius)
                     {
@@ -1621,7 +1607,7 @@ void WorldGenerator::initBiome(int WORLD_SIZE, CraftWorld *world, PerlinModule* 
         {
             for (int x = biomeCenterX-biomeRadius; x <= biomeCenterX+biomeRadius; x++)
             {
-                if(world->FastDistance2d(abs(x-biomeCenterX),abs(z-biomeCenterZ)) < biomeRadius+5)
+                if((int)world->FastDistance2d(abs(x-biomeCenterX),abs(z-biomeCenterZ)) < biomeRadius+5)
                 {
                     if(x == biomeCenterX-biomeRadius || x == biomeCenterX+biomeRadius || z == biomeCenterZ-biomeRadius || z == biomeCenterZ+biomeRadius)
                     {
@@ -2353,9 +2339,6 @@ void WorldGenerator::initTrees(int WORLD_SIZE, CraftWorld *world, PerlinModule* 
     builderTrees.build ();
 
     float perlinHeight;
-    char woodBlock;
-    char leavesBlock;
-    bool snowTree = false;
 
     int treesNum = 1700;
 

@@ -149,7 +149,6 @@ void LameMob::TryToMove(Vector3 movePosition1, float speed)
 
     if (!world->SolidAtPointForEntity(movePosition,colliderD) && !world->SolidAtPointForEntity(movePositionHead,colliderU) && !world->SolidAtPointForEntity(movePositionFoot,colliderD))
     {
-        Vector3 collisionPosition = position + Vector3(sinf(mainAngle)*(speed+0.25),0.0f,cosf(mainAngle)*(speed+0.25));
         position += Vector3(movePosition1.x*speed,0.0f,movePosition1.z*speed);
 
         moving = true;
@@ -210,7 +209,6 @@ void LameMob::TryToMoveWithoutJump(Vector3 movePosition1, float speed)
 
     if (!world->SolidAtPointForEntity(movePosition,colliderD) && !world->SolidAtPointForEntity(movePositionHead,colliderU) && !world->SolidAtPointForEntity(movePositionFoot,colliderD))
     {
-        Vector3 collisionPosition = position + Vector3(sinf(mainAngle)*(speed+0.25),0.0f,cosf(mainAngle)*(speed+0.25));
         position += Vector3(movePosition1.x*speed,0.0f,movePosition1.z*speed);
 
         moving = true;

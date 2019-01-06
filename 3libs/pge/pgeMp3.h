@@ -48,7 +48,7 @@ typedef struct
     int    pictureoffset;
     int    picturelength;
     int    length;
-	
+    
 } pgeMp3Info;
 
 /**

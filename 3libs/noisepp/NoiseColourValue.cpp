@@ -36,18 +36,18 @@ ColourValue::ColourValue(float r, float g, float b) : r(r), g(g), b(b)
 
 void ColourValue::writeRGB (unsigned char *& buffer)
 {
-	*buffer++ = toUChar (r);
-	*buffer++ = toUChar (g);
-	*buffer++ = toUChar (b);
+    *buffer++ = toUChar (r);
+    *buffer++ = toUChar (g);
+    *buffer++ = toUChar (b);
 }
 
 unsigned char ColourValue::toUChar (float f)
 {
-	if (f < 0.0f)
-		f = 0.0f;
-	if (f > 1.0f)
-		f = 1.0f;
-	return (unsigned char)(f * 255.0f);
+    if (f < 0.0f)
+        f = 0.0f;
+    if (f > 1.0f)
+        f = 1.0f;
+    return (unsigned char)(f * 255.0f);
 }
 
 };

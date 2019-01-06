@@ -12,36 +12,36 @@ class TextureHelper
 {
 private:
 
-	std::string defaulPatch;
-	std::string fileName;
+    std::string defaulPatch;
+    std::string fileName;
 
 public:
 
-	enum Textures
-	{
+    enum Textures
+    {
          Genesis,
-		 Logo,
-		 Utils,
-		 Dirt,
-		 Terrain1,
-		 Terrain2,
-		 WaterAnimation,
-		 LavaAnimation,
+         Logo,
+         Utils,
+         Dirt,
+         Terrain1,
+         Terrain2,
+         WaterAnimation,
+         LavaAnimation,
          Items1,
-		 Blue,
-		 Sun,
+         Blue,
+         Sun,
          Moon,
          Stars,
          SnowBall3,
          zombieTexture,
          Steve,
-		 lameCraft,
-		 Buttons,
-		 Rectangles,
-		 Load,
-		 Red,
-		 Black,
-		 PumpkinMask,
+         lameCraft,
+         Buttons,
+         Rectangles,
+         Load,
+         Red,
+         Black,
+         PumpkinMask,
          clouds1,
          inv,
          invCreative,
@@ -79,23 +79,23 @@ public:
          sheepTexture,
          sheepFurTexture,
          background,
-	};
+    };
     std::string texturePatch;
     std::string defaultFolder;
 
-	static TextureHelper m_TextureHelper;
-	static TextureHelper* Instance();
+    static TextureHelper m_TextureHelper;
+    static TextureHelper* Instance();
 
 
-	TextureHelper();
-	~TextureHelper();
+    TextureHelper();
+    ~TextureHelper();
 
-	int GetTexture(Textures texture);
+    int GetTexture(Textures texture);
     void Init();
     void FastRemoveTexture(std::string name);
     void FastLoadTexture(std::string name);
-	void SetTextureFolderName(std::string name);
-	void SetTexturePack(std::string name);
+    void SetTextureFolderName(std::string name);
+    void SetTexturePack(std::string name);
 
     void RemoveConstTextures();
 

@@ -33,18 +33,18 @@
 
 namespace noisepp
 {
-	#if NOISEPP_DOUBLE_PRECISION
-	typedef double Real;
-	#else
-	typedef float Real;
-	#endif
+    #if NOISEPP_DOUBLE_PRECISION
+    typedef double Real;
+    #else
+    typedef float Real;
+    #endif
 
-	typedef size_t ElementID;
-	const ElementID ELEMENTID_INVALID = (std::numeric_limits<ElementID>::max)();
+    typedef size_t ElementID;
+    const ElementID ELEMENTID_INVALID = (std::numeric_limits<ElementID>::max)();
 
-	class PipelineElement1D;
-	class PipelineElement2D;
-	class PipelineElement3D;
+    class PipelineElement1D;
+    class PipelineElement2D;
+    class PipelineElement3D;
 };
 
 #endif

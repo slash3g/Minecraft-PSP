@@ -66,1164 +66,1164 @@ typedef struct
     unsigned long disknumstart;
     unsigned long internalfileattr;
     unsigned long externalfileattr;
-	
+    
 } zipFileInfo;
 
 typedef struct
 {
-	unsigned long currentfileoffset;
-	
+    unsigned long currentfileoffset;
+    
 } zipFileInternalInfo;
 
 typedef struct
 {
-	char *buffer;
-	z_stream stream;
-	unsigned long posinzip;
-	unsigned long streaminitialised;
-	unsigned long localextrafieldoffset;
-	unsigned int  localextrafieldsize;
-	unsigned long localextrafieldpos;
-	unsigned long crc32;
-	unsigned long crc32wait;
-	unsigned long restreadcompressed;
-	unsigned long restreaduncompressed;
-	FILE* file;
-	unsigned long compressionmethod;
-	unsigned long bytebeforezip;
-	
+    char *buffer;
+    z_stream stream;
+    unsigned long posinzip;
+    unsigned long streaminitialised;
+    unsigned long localextrafieldoffset;
+    unsigned int  localextrafieldsize;
+    unsigned long localextrafieldpos;
+    unsigned long crc32;
+    unsigned long crc32wait;
+    unsigned long restreadcompressed;
+    unsigned long restreaduncompressed;
+    FILE* file;
+    unsigned long compressionmethod;
+    unsigned long bytebeforezip;
+    
 } zipFileInfoInternal;
 
 typedef struct
 {
-	unsigned long countentries;
-	unsigned long commentsize;
-	
+    unsigned long countentries;
+    unsigned long commentsize;
+    
 } zipGlobalInfo;
 
 typedef struct
 {
-	FILE* file;
-	zipGlobalInfo gi;
-	unsigned long bytebeforezip;
-	unsigned long numfile;
-	unsigned long posincentraldir;
-	unsigned long currentfileok;
-	unsigned long centralpos;
-	unsigned long centraldirsize;
-	unsigned long centraldiroffset;
-	zipFileInfo currentfileinfo;
-	zipFileInternalInfo currentfileinfointernal;
-	zipFileInfoInternal* currentzipfileinfo;
-	int encrypted;
-	unsigned long keys[3];
-	const unsigned long* crc32tab;
-	
+    FILE* file;
+    zipGlobalInfo gi;
+    unsigned long bytebeforezip;
+    unsigned long numfile;
+    unsigned long posincentraldir;
+    unsigned long currentfileok;
+    unsigned long centralpos;
+    unsigned long centraldirsize;
+    unsigned long centraldiroffset;
+    zipFileInfo currentfileinfo;
+    zipFileInternalInfo currentfileinfointernal;
+    zipFileInfoInternal* currentzipfileinfo;
+    int encrypted;
+    unsigned long keys[3];
+    const unsigned long* crc32tab;
+    
 } _zip;
 
 static int pgeZipGetByte(FILE *file, int *pi)
 {
-	unsigned char c;
+    unsigned char c;
 
-	int err = fread(&c, 1, 1, file);
-	
-	if(err == 1)
-	{
-		*pi = (int)c;
-		return PGE_ZIP_OK;
-	}
-	else
-	{
-		if(ferror(file))
-			return PGE_ZIP_ERRNO;
-		else
-			return PGE_ZIP_EOF;
-	}
+    int err = fread(&c, 1, 1, file);
+    
+    if(err == 1)
+    {
+        *pi = (int)c;
+        return PGE_ZIP_OK;
+    }
+    else
+    {
+        if(ferror(file))
+            return PGE_ZIP_ERRNO;
+        else
+            return PGE_ZIP_EOF;
+    }
 }
 
 static int pgeZipGetShort(FILE *file, unsigned long *px)
 {
-	unsigned long x;
-	int i = 0;
-	int err;
-	
-	err = pgeZipGetByte(file, &i);
-	x = (unsigned long)i;
-	
-	if(err == PGE_ZIP_OK)
-		err = pgeZipGetByte(file, &i);
-		
-	x += ((unsigned long)i)<<8;
+    unsigned long x;
+    int i = 0;
+    int err;
+    
+    err = pgeZipGetByte(file, &i);
+    x = (unsigned long)i;
+    
+    if(err == PGE_ZIP_OK)
+        err = pgeZipGetByte(file, &i);
+        
+    x += ((unsigned long)i)<<8;
 
-	if(err == PGE_ZIP_OK)
-		*px = x;
-	else
-		*px = 0;
+    if(err == PGE_ZIP_OK)
+        *px = x;
+    else
+        *px = 0;
 
-	return err;
+    return err;
 }
 
 static int pgeZipGetLong(FILE *file, unsigned long *px)
 {
-	unsigned long x;
-	int i = 0;
-	int err;
-	
-	err = pgeZipGetByte(file, &i);
-	x = (unsigned long)i;
+    unsigned long x;
+    int i = 0;
+    int err;
     
-	if(err == PGE_ZIP_OK)
-		err = pgeZipGetByte(file, &i);
+    err = pgeZipGetByte(file, &i);
+    x = (unsigned long)i;
+    
+    if(err == PGE_ZIP_OK)
+        err = pgeZipGetByte(file, &i);
 
-	x += ((unsigned long)i)<<8;
+    x += ((unsigned long)i)<<8;
 
-	if(err == PGE_ZIP_OK)
-		err = pgeZipGetByte(file,&i);
-		
-	x += ((unsigned long)i)<<16;
+    if(err == PGE_ZIP_OK)
+        err = pgeZipGetByte(file,&i);
+        
+    x += ((unsigned long)i)<<16;
 
-	if(err == PGE_ZIP_OK)
-		err = pgeZipGetByte(file,&i);
-		
-	x += ((unsigned long)i)<<24;
-	
-	if(err == PGE_ZIP_OK)
-		*px = x;
-	else
-		*px = 0;
-	
-	return err;
+    if(err == PGE_ZIP_OK)
+        err = pgeZipGetByte(file,&i);
+        
+    x += ((unsigned long)i)<<24;
+    
+    if(err == PGE_ZIP_OK)
+        *px = x;
+    else
+        *px = 0;
+    
+    return err;
 }
 
 static int pgeZipDecryptByte(unsigned long* pkeys, const unsigned long* crc32tab)
 {
-	(void)crc32tab;
-	
-	unsigned temp;
+    (void)crc32tab;
+    
+    unsigned temp;
 
-	temp = ((unsigned)(*(pkeys + 2)) & 0xffff) | 2;
-	
-	return (int)(((temp * (temp ^ 1)) >> 8) & 0xff);
+    temp = ((unsigned)(*(pkeys + 2)) & 0xffff) | 2;
+    
+    return (int)(((temp * (temp ^ 1)) >> 8) & 0xff);
 }
 
 static int pgeZipUpdateKeys(unsigned long* pkeys, const unsigned long* crc32tab, int c)
 {
-	(*(pkeys + 0)) = CRC32((*(pkeys + 0)), c);
-	(*(pkeys + 1)) += (*(pkeys + 0)) & 0xff;
-	(*(pkeys + 1)) = (*(pkeys + 1)) * 134775813L + 1;
-	
-	{
-		register int keyshift = (int)((*(pkeys + 1)) >> 24);
-		(*(pkeys + 2)) = CRC32((*(pkeys + 2)), keyshift);
-	}
-	
-	return c;
+    (*(pkeys + 0)) = CRC32((*(pkeys + 0)), c);
+    (*(pkeys + 1)) += (*(pkeys + 0)) & 0xff;
+    (*(pkeys + 1)) = (*(pkeys + 1)) * 134775813L + 1;
+    
+    {
+        register int keyshift = (int)((*(pkeys + 1)) >> 24);
+        (*(pkeys + 2)) = CRC32((*(pkeys + 2)), keyshift);
+    }
+    
+    return c;
 }
 
 static void pgeZipInitKeys(const char* passwd, unsigned long* pkeys, const unsigned long* crc32tab)
 {
-	*(pkeys + 0) = 305419896L;
-	*(pkeys + 1) = 591751049L;
-	*(pkeys + 2) = 878082192L;
-	
-	while(*passwd != '\0')
-	{
-		pgeZipUpdateKeys(pkeys, crc32tab, (int)*passwd);
-		passwd++;
-	}
+    *(pkeys + 0) = 305419896L;
+    *(pkeys + 1) = 591751049L;
+    *(pkeys + 2) = 878082192L;
+    
+    while(*passwd != '\0')
+    {
+        pgeZipUpdateKeys(pkeys, crc32tab, (int)*passwd);
+        passwd++;
+    }
 }
 
 static unsigned long pgeZipLocateCentralDir(FILE *file)
 {
-	unsigned char* buf;
-	unsigned long usizefile;
-	unsigned long ubackread;
-	unsigned long umaxback = 0xffff;
-	unsigned long uposfound = 0;
-	
-	if(fseek(file, 0, SEEK_END) != 0)
-		return 0;
+    unsigned char* buf;
+    unsigned long usizefile;
+    unsigned long ubackread;
+    unsigned long umaxback = 0xffff;
+    unsigned long uposfound = 0;
+    
+    if(fseek(file, 0, SEEK_END) != 0)
+        return 0;
 
-	usizefile = ftell(file);
+    usizefile = ftell(file);
 
-	if(umaxback > usizefile)
-		umaxback = usizefile;
+    if(umaxback > usizefile)
+        umaxback = usizefile;
 
-	buf = (unsigned char*)malloc(PGE_ZIP_BUF_READ_COMMENT + 4);
+    buf = (unsigned char*)malloc(PGE_ZIP_BUF_READ_COMMENT + 4);
 
-	if(buf == NULL)
-		return 0;
+    if(buf == NULL)
+        return 0;
 
-	ubackread = 4;
+    ubackread = 4;
 
-	while(ubackread < umaxback)
-	{
-		unsigned long ureadsize, ureadpos;
-		int i;
+    while(ubackread < umaxback)
+    {
+        unsigned long ureadsize, ureadpos;
+        int i;
 
-		if(ubackread + PGE_ZIP_BUF_READ_COMMENT > umaxback)
-			ubackread = umaxback;
-		else
-			ubackread += PGE_ZIP_BUF_READ_COMMENT;
+        if(ubackread + PGE_ZIP_BUF_READ_COMMENT > umaxback)
+            ubackread = umaxback;
+        else
+            ubackread += PGE_ZIP_BUF_READ_COMMENT;
 
-		ureadpos = usizefile - ubackread;
-		
-		ureadsize = ((PGE_ZIP_BUF_READ_COMMENT + 4) < (usizefile - ureadpos)) ? (PGE_ZIP_BUF_READ_COMMENT+  4) : (usizefile - ureadpos);
+        ureadpos = usizefile - ubackread;
+        
+        ureadsize = ((PGE_ZIP_BUF_READ_COMMENT + 4) < (usizefile - ureadpos)) ? (PGE_ZIP_BUF_READ_COMMENT+  4) : (usizefile - ureadpos);
 
-		if(fseek(file, ureadpos, SEEK_SET) != 0)
-			break;
+        if(fseek(file, ureadpos, SEEK_SET) != 0)
+            break;
 
-		if(fread(buf, (unsigned int)ureadsize, 1, file) != 1)
-			break;
+        if(fread(buf, (unsigned int)ureadsize, 1, file) != 1)
+            break;
 
-		for(i = (int)ureadsize - 3; (i--) > 0;)
-		
-		if(((*(buf + i)) == 0x50) && ((*(buf + i + 1)) == 0x4b) && ((*(buf + i + 2)) == 0x05) && ((*(buf + i + 3)) == 0x06))
-		{
-			uposfound = ureadpos + i;
-			break;
-		}
+        for(i = (int)ureadsize - 3; (i--) > 0;)
+        
+        if(((*(buf + i)) == 0x50) && ((*(buf + i + 1)) == 0x4b) && ((*(buf + i + 2)) == 0x05) && ((*(buf + i + 3)) == 0x06))
+        {
+            uposfound = ureadpos + i;
+            break;
+        }
 
-		if (uposfound != 0)
-			break;
-	}
+        if (uposfound != 0)
+            break;
+    }
 
-	free(buf);
+    free(buf);
 
-	return uposfound;
+    return uposfound;
 }
 
 static int pgeZipGetZipFileInfoInternal(pgeZip* file, zipFileInfo *pfileinfo, zipFileInternalInfo *pfileinfointernal, char *filename, unsigned long filenamebuffersize, void *extrafield, unsigned long extrafieldbuffersize, char *comment, unsigned long commentbuffersize)
 {
-	_zip* s;
-	zipFileInfo fileinfo;
-	zipFileInternalInfo fileinfointernal;
-	int err = PGE_ZIP_OK;
-	unsigned long umagic;
-	long lseek = 0;
+    _zip* s;
+    zipFileInfo fileinfo;
+    zipFileInternalInfo fileinfointernal;
+    int err = PGE_ZIP_OK;
+    unsigned long umagic;
+    long lseek = 0;
 
-	if(file == NULL)
-		return PGE_ZIP_PARAM_ERROR;
+    if(file == NULL)
+        return PGE_ZIP_PARAM_ERROR;
 
-	s = (_zip*)file;
+    s = (_zip*)file;
 
-	if(fseek(s->file, s->posincentraldir + s->bytebeforezip, SEEK_SET) != 0)
-		err = PGE_ZIP_ERRNO;
+    if(fseek(s->file, s->posincentraldir + s->bytebeforezip, SEEK_SET) != 0)
+        err = PGE_ZIP_ERRNO;
 
-	if(err == PGE_ZIP_OK)
-	{
-		if(pgeZipGetLong(s->file, &umagic) != PGE_ZIP_OK)
-			err = PGE_ZIP_ERRNO;
-		else if(umagic != 0x02014b50)
-			err = PGE_ZIP_BAD_FILE;
-	}
+    if(err == PGE_ZIP_OK)
+    {
+        if(pgeZipGetLong(s->file, &umagic) != PGE_ZIP_OK)
+            err = PGE_ZIP_ERRNO;
+        else if(umagic != 0x02014b50)
+            err = PGE_ZIP_BAD_FILE;
+    }
 
-	if (pgeZipGetShort(s->file, &fileinfo.version) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetShort(s->file, &fileinfo.version) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetShort(s->file, &fileinfo.versionneeded) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetShort(s->file, &fileinfo.versionneeded) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetShort(s->file, &fileinfo.flag) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetShort(s->file, &fileinfo.flag) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetShort(s->file, &fileinfo.compressionmethod) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetShort(s->file, &fileinfo.compressionmethod) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetLong(s->file, &fileinfo.dosdate) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetLong(s->file, &fileinfo.dosdate) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetLong(s->file, &fileinfo.crc) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetLong(s->file, &fileinfo.crc) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetLong(s->file, &fileinfo.compressedsize) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetLong(s->file, &fileinfo.compressedsize) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetLong(s->file, &fileinfo.uncompressedsize) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetLong(s->file, &fileinfo.uncompressedsize) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetShort(s->file, &fileinfo.filenamesize) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetShort(s->file, &fileinfo.filenamesize) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetShort(s->file, &fileinfo.fileextrasize) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetShort(s->file, &fileinfo.fileextrasize) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetShort(s->file, &fileinfo.filecommentsize) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetShort(s->file, &fileinfo.filecommentsize) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetShort(s->file, &fileinfo.disknumstart) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetShort(s->file, &fileinfo.disknumstart) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetShort(s->file, &fileinfo.internalfileattr) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetShort(s->file, &fileinfo.internalfileattr) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetLong(s->file, &fileinfo.externalfileattr) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetLong(s->file, &fileinfo.externalfileattr) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if (pgeZipGetLong(s->file, &fileinfointernal.currentfileoffset) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if (pgeZipGetLong(s->file, &fileinfointernal.currentfileoffset) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	lseek += fileinfo.filenamesize;
+    lseek += fileinfo.filenamesize;
 
-	if((err == PGE_ZIP_OK) && (filename != NULL))
-	{
-		unsigned long usizeread;
+    if((err == PGE_ZIP_OK) && (filename != NULL))
+    {
+        unsigned long usizeread;
 
-		if(fileinfo.filenamesize < filenamebuffersize)
-		{
-			*(filename + fileinfo.filenamesize) = '\0';
-			usizeread = fileinfo.filenamesize;
-		}
-		else
-			usizeread = filenamebuffersize;
+        if(fileinfo.filenamesize < filenamebuffersize)
+        {
+            *(filename + fileinfo.filenamesize) = '\0';
+            usizeread = fileinfo.filenamesize;
+        }
+        else
+            usizeread = filenamebuffersize;
 
-		if((fileinfo.filenamesize > 0) && (filenamebuffersize > 0))
-		{
-			if(fread(filename, (unsigned int)usizeread, 1, s->file) != 1)
-				err = PGE_ZIP_ERRNO;
-		}
-		
-		lseek -= usizeread;
-	}
+        if((fileinfo.filenamesize > 0) && (filenamebuffersize > 0))
+        {
+            if(fread(filename, (unsigned int)usizeread, 1, s->file) != 1)
+                err = PGE_ZIP_ERRNO;
+        }
+        
+        lseek -= usizeread;
+    }
 
-	if((err == PGE_ZIP_OK) && (extrafield != NULL))
-	{
-		unsigned long usizeread;
+    if((err == PGE_ZIP_OK) && (extrafield != NULL))
+    {
+        unsigned long usizeread;
 
-		if (fileinfo.fileextrasize < extrafieldbuffersize)
-			usizeread = fileinfo.fileextrasize;
-		else
-			usizeread = extrafieldbuffersize;
+        if (fileinfo.fileextrasize < extrafieldbuffersize)
+            usizeread = fileinfo.fileextrasize;
+        else
+            usizeread = extrafieldbuffersize;
 
-		if(lseek != 0)
-		{
-			if(fseek(s->file, lseek, SEEK_CUR) == 0)
-				lseek = 0;
-			else
-				err = PGE_ZIP_ERRNO;
-		}
+        if(lseek != 0)
+        {
+            if(fseek(s->file, lseek, SEEK_CUR) == 0)
+                lseek = 0;
+            else
+                err = PGE_ZIP_ERRNO;
+        }
 
-		if((fileinfo.fileextrasize > 0) && (extrafieldbuffersize > 0))
-		{
-			if(fread(extrafield, (unsigned int)usizeread, 1, s->file) != 1)
-				err = PGE_ZIP_ERRNO;
-		}
-		
-		lseek += fileinfo.fileextrasize - usizeread;
-	}
-	else
-		lseek += fileinfo.fileextrasize;
-	
-	if((err == PGE_ZIP_OK) && (comment != NULL))
-	{
-		unsigned long usizeread;
+        if((fileinfo.fileextrasize > 0) && (extrafieldbuffersize > 0))
+        {
+            if(fread(extrafield, (unsigned int)usizeread, 1, s->file) != 1)
+                err = PGE_ZIP_ERRNO;
+        }
+        
+        lseek += fileinfo.fileextrasize - usizeread;
+    }
+    else
+        lseek += fileinfo.fileextrasize;
+    
+    if((err == PGE_ZIP_OK) && (comment != NULL))
+    {
+        unsigned long usizeread;
 
-		if(fileinfo.filecommentsize < commentbuffersize)
-		{
-			*(comment + fileinfo.filecommentsize) = '\0';
-			usizeread = fileinfo.filecommentsize;
-		}
-		else
-			usizeread = commentbuffersize;
+        if(fileinfo.filecommentsize < commentbuffersize)
+        {
+            *(comment + fileinfo.filecommentsize) = '\0';
+            usizeread = fileinfo.filecommentsize;
+        }
+        else
+            usizeread = commentbuffersize;
 
-		if(lseek != 0)
-		{
-			if(fseek(s->file, lseek, SEEK_CUR) == 0)
-				lseek = 0;
-			else
-				err = PGE_ZIP_ERRNO;
-		}
+        if(lseek != 0)
+        {
+            if(fseek(s->file, lseek, SEEK_CUR) == 0)
+                lseek = 0;
+            else
+                err = PGE_ZIP_ERRNO;
+        }
 
-		if((fileinfo.filecommentsize > 0) && (commentbuffersize > 0))
-		{
-			if(fread(comment, (unsigned int)usizeread, 1, s->file) != 1)
-				err = PGE_ZIP_ERRNO;
-		}
-		
-		lseek += fileinfo.filecommentsize - usizeread;
-	}
-	else
-		lseek += fileinfo.filecommentsize;
+        if((fileinfo.filecommentsize > 0) && (commentbuffersize > 0))
+        {
+            if(fread(comment, (unsigned int)usizeread, 1, s->file) != 1)
+                err = PGE_ZIP_ERRNO;
+        }
+        
+        lseek += fileinfo.filecommentsize - usizeread;
+    }
+    else
+        lseek += fileinfo.filecommentsize;
 
-	if((err == PGE_ZIP_OK) && (pfileinfo != NULL))
-		*pfileinfo = fileinfo;
+    if((err == PGE_ZIP_OK) && (pfileinfo != NULL))
+        *pfileinfo = fileinfo;
 
-	if((err == PGE_ZIP_OK) && (pfileinfointernal != NULL))
-		*pfileinfointernal = fileinfointernal;
+    if((err == PGE_ZIP_OK) && (pfileinfointernal != NULL))
+        *pfileinfointernal = fileinfointernal;
 
-	return err;
+    return err;
 }
 
 static int pgeZipGetGlobalInfo(pgeZip* file, zipGlobalInfo *zipinfo)
 {
     _zip* s;
-	
+    
     if(file == NULL)
         return PGE_ZIP_PARAM_ERROR;
-		
+        
     s = (_zip*)file;
-	
+    
     *zipinfo = s->gi;
-	
+    
     return PGE_ZIP_OK;
 }
 
 static int pgeZipGotoFirstFile(pgeZip* file)
 {
-	int err = PGE_ZIP_OK;
+    int err = PGE_ZIP_OK;
 
-	_zip* s;
+    _zip* s;
 
-	if(file == NULL)
-		return PGE_ZIP_PARAM_ERROR;
+    if(file == NULL)
+        return PGE_ZIP_PARAM_ERROR;
 
-	s = (_zip*)file;
-	s->posincentraldir = s->centraldiroffset;
-	s->numfile = 0;
-	err = pgeZipGetZipFileInfoInternal(file, &s->currentfileinfo, &s->currentfileinfointernal, NULL, 0, NULL, 0, NULL, 0);
-	s->currentfileok = (err == PGE_ZIP_OK);
-	
-	return err;
+    s = (_zip*)file;
+    s->posincentraldir = s->centraldiroffset;
+    s->numfile = 0;
+    err = pgeZipGetZipFileInfoInternal(file, &s->currentfileinfo, &s->currentfileinfointernal, NULL, 0, NULL, 0, NULL, 0);
+    s->currentfileok = (err == PGE_ZIP_OK);
+    
+    return err;
 }
 
 static int pgeZipCloseCurrentFile(pgeZip* file)
 {
-	int err = PGE_ZIP_OK;
+    int err = PGE_ZIP_OK;
 
-	_zip* s;
-	zipFileInfoInternal *pfileinzipreadinfo;
+    _zip* s;
+    zipFileInfoInternal *pfileinzipreadinfo;
 
-	if(file == NULL)
-		return PGE_ZIP_PARAM_ERROR;
+    if(file == NULL)
+        return PGE_ZIP_PARAM_ERROR;
 
-	s = (_zip*)file;
-	pfileinzipreadinfo = s->currentzipfileinfo;
+    s = (_zip*)file;
+    pfileinzipreadinfo = s->currentzipfileinfo;
 
-	if(pfileinzipreadinfo == NULL)
-		return PGE_ZIP_PARAM_ERROR;
+    if(pfileinzipreadinfo == NULL)
+        return PGE_ZIP_PARAM_ERROR;
 
-	if(pfileinzipreadinfo->restreaduncompressed == 0)
-	{
-		if(pfileinzipreadinfo->crc32 != pfileinzipreadinfo->crc32wait)
-			err = PGE_ZIP_CRC_ERROR;
-	}
+    if(pfileinzipreadinfo->restreaduncompressed == 0)
+    {
+        if(pfileinzipreadinfo->crc32 != pfileinzipreadinfo->crc32wait)
+            err = PGE_ZIP_CRC_ERROR;
+    }
 
-	free(pfileinzipreadinfo->buffer);
-	pfileinzipreadinfo->buffer = NULL;
+    free(pfileinzipreadinfo->buffer);
+    pfileinzipreadinfo->buffer = NULL;
 
-	if(pfileinzipreadinfo->streaminitialised)
-		inflateEnd(&pfileinzipreadinfo->stream);
+    if(pfileinzipreadinfo->streaminitialised)
+        inflateEnd(&pfileinzipreadinfo->stream);
 
-	pfileinzipreadinfo->streaminitialised = 0;
+    pfileinzipreadinfo->streaminitialised = 0;
 
-	free(pfileinzipreadinfo);
+    free(pfileinzipreadinfo);
 
-	s->currentzipfileinfo = NULL;
+    s->currentzipfileinfo = NULL;
 
-	return err;
+    return err;
 }
 
 static int pgeZipGetCurrentFileInfo(pgeZip* file, zipFileInfo *pfileinfo, char *filename, unsigned long filenamebuffersize, void *extrafield, unsigned long extrafieldbuffersize, char *comment, unsigned long commentbuffersize)
 {
-	return pgeZipGetZipFileInfoInternal(file, pfileinfo, NULL, filename, filenamebuffersize, extrafield, extrafieldbuffersize, comment, commentbuffersize);
+    return pgeZipGetZipFileInfoInternal(file, pfileinfo, NULL, filename, filenamebuffersize, extrafield, extrafieldbuffersize, comment, commentbuffersize);
 }
 
 static int pgeZipGotoNextFile(pgeZip* file)
 {
-	_zip* s;	
-	int err;
+    _zip* s;	
+    int err;
 
-	if(file == NULL)
-		return PGE_ZIP_PARAM_ERROR;
+    if(file == NULL)
+        return PGE_ZIP_PARAM_ERROR;
 
-	s = (_zip*)file;
-	
-	if(!s->currentfileok)
-		return PGE_ZIP_EOF_LIST;
+    s = (_zip*)file;
+    
+    if(!s->currentfileok)
+        return PGE_ZIP_EOF_LIST;
 
-	if(s->numfile + 1 == s->gi.countentries)
-		return PGE_ZIP_EOF_LIST;
+    if(s->numfile + 1 == s->gi.countentries)
+        return PGE_ZIP_EOF_LIST;
 
-	s->posincentraldir += PGE_ZIP_CENTRALDIR_ITEM_SIZE + s->currentfileinfo.filenamesize + s->currentfileinfo.fileextrasize + s->currentfileinfo.filecommentsize ;
-	s->numfile++;
-	
-	err = pgeZipGetZipFileInfoInternal(file, &s->currentfileinfo, &s->currentfileinfointernal, NULL, 0, NULL, 0, NULL, 0);
-	
-	s->currentfileok = (err == PGE_ZIP_OK);
-	
-	return err;
+    s->posincentraldir += PGE_ZIP_CENTRALDIR_ITEM_SIZE + s->currentfileinfo.filenamesize + s->currentfileinfo.fileextrasize + s->currentfileinfo.filecommentsize ;
+    s->numfile++;
+    
+    err = pgeZipGetZipFileInfoInternal(file, &s->currentfileinfo, &s->currentfileinfointernal, NULL, 0, NULL, 0, NULL, 0);
+    
+    s->currentfileok = (err == PGE_ZIP_OK);
+    
+    return err;
 }
 
 static int pgeZipLocateFile(pgeZip* file, const char *filename, int casesensitive)
 {
-	(void)casesensitive;
-	
-	_zip* s;	
-	int err;
+    (void)casesensitive;
+    
+    _zip* s;	
+    int err;
 
-	unsigned long numfilesaved;
-	unsigned long posincentraldirsaved;
+    unsigned long numfilesaved;
+    unsigned long posincentraldirsaved;
 
-	if(file == NULL)
-		return PGE_ZIP_PARAM_ERROR;
+    if(file == NULL)
+        return PGE_ZIP_PARAM_ERROR;
 
-	if(strlen(filename) >= PGE_ZIP_MAX_FILENAME_SIZE)
-		return PGE_ZIP_PARAM_ERROR;
+    if(strlen(filename) >= PGE_ZIP_MAX_FILENAME_SIZE)
+        return PGE_ZIP_PARAM_ERROR;
 
-	s = (_zip*)file;
+    s = (_zip*)file;
 
-	if(!s->currentfileok)
-		return PGE_ZIP_EOF_LIST;
+    if(!s->currentfileok)
+        return PGE_ZIP_EOF_LIST;
 
-	numfilesaved = s->numfile;
-	posincentraldirsaved = s->posincentraldir;
+    numfilesaved = s->numfile;
+    posincentraldirsaved = s->posincentraldir;
 
-	err = pgeZipGotoFirstFile(file);
-	
-	char currentfilename[PGE_ZIP_MAX_FILENAME_SIZE + 1];
+    err = pgeZipGotoFirstFile(file);
+    
+    char currentfilename[PGE_ZIP_MAX_FILENAME_SIZE + 1];
 
-	while(err == PGE_ZIP_OK)
-	{
-		pgeZipGetCurrentFileInfo(file,NULL, currentfilename, sizeof(currentfilename) - 1, NULL, 0, NULL, 0);
+    while(err == PGE_ZIP_OK)
+    {
+        pgeZipGetCurrentFileInfo(file,NULL, currentfilename, sizeof(currentfilename) - 1, NULL, 0, NULL, 0);
 
-		if(strcmp(currentfilename, filename) == 0)
-			return PGE_ZIP_OK;
+        if(strcmp(currentfilename, filename) == 0)
+            return PGE_ZIP_OK;
 
-		err = pgeZipGotoNextFile(file);
-	}
+        err = pgeZipGotoNextFile(file);
+    }
 
-	s->numfile = numfilesaved;
-	s->posincentraldir = posincentraldirsaved;
-	
-	return err;
+    s->numfile = numfilesaved;
+    s->posincentraldir = posincentraldirsaved;
+    
+    return err;
 }
 
 static int pgeZipCheckCurrentFileCoherencyHeader(_zip *s, unsigned int *pisizevar, unsigned long *poffsetstaticextrafield, unsigned int *psizestaticextrafield)
 {
-	unsigned long umagic, udata, uflags;
-	unsigned long filenamesize;
-	unsigned long sizeextrafield;
-	int err = PGE_ZIP_OK;
+    unsigned long umagic, udata, uflags;
+    unsigned long filenamesize;
+    unsigned long sizeextrafield;
+    int err = PGE_ZIP_OK;
 
-	*pisizevar = 0;
-	*poffsetstaticextrafield = 0;
-	*psizestaticextrafield = 0;
+    *pisizevar = 0;
+    *poffsetstaticextrafield = 0;
+    *psizestaticextrafield = 0;
 
-	if(fseek(s->file, s->currentfileinfointernal.currentfileoffset + s->bytebeforezip, SEEK_SET) != 0)
-		return PGE_ZIP_ERRNO;
+    if(fseek(s->file, s->currentfileinfointernal.currentfileoffset + s->bytebeforezip, SEEK_SET) != 0)
+        return PGE_ZIP_ERRNO;
 
-	if(err == PGE_ZIP_OK)
-	{
-		if(pgeZipGetLong(s->file, &umagic) != PGE_ZIP_OK)
-			err = PGE_ZIP_ERRNO;
-		else if(umagic != 0x04034b50)
-			err = PGE_ZIP_BAD_FILE;
-	}
+    if(err == PGE_ZIP_OK)
+    {
+        if(pgeZipGetLong(s->file, &umagic) != PGE_ZIP_OK)
+            err = PGE_ZIP_ERRNO;
+        else if(umagic != 0x04034b50)
+            err = PGE_ZIP_BAD_FILE;
+    }
 
-	if(pgeZipGetShort(s->file, &udata) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
-		 
-	if(pgeZipGetShort(s->file, &uflags) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if(pgeZipGetShort(s->file, &udata) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
+         
+    if(pgeZipGetShort(s->file, &uflags) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if(pgeZipGetShort(s->file, &udata) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
-	else if((err == PGE_ZIP_OK) && (udata != s->currentfileinfo.compressionmethod))
-		err = PGE_ZIP_BAD_FILE;
+    if(pgeZipGetShort(s->file, &udata) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
+    else if((err == PGE_ZIP_OK) && (udata != s->currentfileinfo.compressionmethod))
+        err = PGE_ZIP_BAD_FILE;
 
-	if((err == PGE_ZIP_OK) && (s->currentfileinfo.compressionmethod != 0) && (s->currentfileinfo.compressionmethod != Z_DEFLATED))
-		err = PGE_ZIP_BAD_FILE;
+    if((err == PGE_ZIP_OK) && (s->currentfileinfo.compressionmethod != 0) && (s->currentfileinfo.compressionmethod != Z_DEFLATED))
+        err = PGE_ZIP_BAD_FILE;
 
-	if(pgeZipGetLong(s->file, &udata) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if(pgeZipGetLong(s->file, &udata) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if(pgeZipGetLong(s->file, &udata) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
-	else if((err == PGE_ZIP_OK) && (udata != s->currentfileinfo.crc) && ((uflags & 8) == 0))
-		err = PGE_ZIP_BAD_FILE;
+    if(pgeZipGetLong(s->file, &udata) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
+    else if((err == PGE_ZIP_OK) && (udata != s->currentfileinfo.crc) && ((uflags & 8) == 0))
+        err = PGE_ZIP_BAD_FILE;
 
-	if(pgeZipGetLong(s->file, &udata) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
-	else if((err == PGE_ZIP_OK) && (udata != s->currentfileinfo.compressedsize) && ((uflags & 8) == 0))
-		err = PGE_ZIP_BAD_FILE;
+    if(pgeZipGetLong(s->file, &udata) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
+    else if((err == PGE_ZIP_OK) && (udata != s->currentfileinfo.compressedsize) && ((uflags & 8) == 0))
+        err = PGE_ZIP_BAD_FILE;
 
-	if(pgeZipGetLong(s->file, &udata) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
-	else if((err == PGE_ZIP_OK) && (udata != s->currentfileinfo.uncompressedsize) && ((uflags & 8) == 0))
-		err = PGE_ZIP_BAD_FILE;
+    if(pgeZipGetLong(s->file, &udata) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
+    else if((err == PGE_ZIP_OK) && (udata != s->currentfileinfo.uncompressedsize) && ((uflags & 8) == 0))
+        err = PGE_ZIP_BAD_FILE;
 
-	if(pgeZipGetShort(s->file, &filenamesize) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
-	else if((err==PGE_ZIP_OK) && (filenamesize != s->currentfileinfo.filenamesize))
-		err = PGE_ZIP_BAD_FILE;
+    if(pgeZipGetShort(s->file, &filenamesize) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
+    else if((err==PGE_ZIP_OK) && (filenamesize != s->currentfileinfo.filenamesize))
+        err = PGE_ZIP_BAD_FILE;
 
-	*pisizevar += (unsigned int)filenamesize;
+    *pisizevar += (unsigned int)filenamesize;
 
-	if(pgeZipGetShort(s->file, &sizeextrafield) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if(pgeZipGetShort(s->file, &sizeextrafield) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	*poffsetstaticextrafield = s->currentfileinfointernal.currentfileoffset + PGE_ZIP_LOCALHEADER_SIZE + filenamesize;
-	*psizestaticextrafield = (unsigned int)sizeextrafield;
-	*pisizevar += (unsigned int)sizeextrafield;
+    *poffsetstaticextrafield = s->currentfileinfointernal.currentfileoffset + PGE_ZIP_LOCALHEADER_SIZE + filenamesize;
+    *psizestaticextrafield = (unsigned int)sizeextrafield;
+    *pisizevar += (unsigned int)sizeextrafield;
 
-	return err;
+    return err;
 }
-												
+                                                
 static int pgeZipOpenCurrentFile(pgeZip* file, const char *password)
 {
-	int err = PGE_ZIP_OK;
-	int store;
-	unsigned int isizevar;
-	_zip* s;
-	zipFileInfoInternal* pfileinzipreadinfo;
-	unsigned long localextrafieldoffset;
-	unsigned int localextrafieldsize;
-	
-	char source[12];
+    int err = PGE_ZIP_OK;
+    int store;
+    unsigned int isizevar;
+    _zip* s;
+    zipFileInfoInternal* pfileinzipreadinfo;
+    unsigned long localextrafieldoffset;
+    unsigned int localextrafieldsize;
+    
+    char source[12];
 
-	if(file == NULL)
-		return PGE_ZIP_PARAM_ERROR;
+    if(file == NULL)
+        return PGE_ZIP_PARAM_ERROR;
 
-	s = (_zip*)file;
+    s = (_zip*)file;
 
-	if(!s->currentfileok)
-		return PGE_ZIP_PARAM_ERROR;
+    if(!s->currentfileok)
+        return PGE_ZIP_PARAM_ERROR;
 
-	if(s->currentzipfileinfo != NULL)
-		pgeZipCloseCurrentFile(file);
+    if(s->currentzipfileinfo != NULL)
+        pgeZipCloseCurrentFile(file);
 
-	if(pgeZipCheckCurrentFileCoherencyHeader(s, &isizevar, &localextrafieldoffset, &localextrafieldsize) != PGE_ZIP_OK)
-		return PGE_ZIP_BAD_FILE;
+    if(pgeZipCheckCurrentFileCoherencyHeader(s, &isizevar, &localextrafieldoffset, &localextrafieldsize) != PGE_ZIP_OK)
+        return PGE_ZIP_BAD_FILE;
 
-	pfileinzipreadinfo = (zipFileInfoInternal*) malloc(sizeof(zipFileInfoInternal));
+    pfileinzipreadinfo = (zipFileInfoInternal*) malloc(sizeof(zipFileInfoInternal));
 
-	if(pfileinzipreadinfo == NULL)
-		return PGE_ZIP_INTERNAL_ERROR;
+    if(pfileinzipreadinfo == NULL)
+        return PGE_ZIP_INTERNAL_ERROR;
 
-	pfileinzipreadinfo->buffer = (char*)malloc(PGE_ZIP_BUFFER_SIZE);
-	pfileinzipreadinfo->localextrafieldoffset = localextrafieldoffset;
-	pfileinzipreadinfo->localextrafieldsize = localextrafieldsize;
-	pfileinzipreadinfo->localextrafieldpos = 0;
+    pfileinzipreadinfo->buffer = (char*)malloc(PGE_ZIP_BUFFER_SIZE);
+    pfileinzipreadinfo->localextrafieldoffset = localextrafieldoffset;
+    pfileinzipreadinfo->localextrafieldsize = localextrafieldsize;
+    pfileinzipreadinfo->localextrafieldpos = 0;
 
-	if(pfileinzipreadinfo->buffer == NULL)
-	{
-		free(pfileinzipreadinfo);
-		return PGE_ZIP_INTERNAL_ERROR;
-	}
+    if(pfileinzipreadinfo->buffer == NULL)
+    {
+        free(pfileinzipreadinfo);
+        return PGE_ZIP_INTERNAL_ERROR;
+    }
 
-	pfileinzipreadinfo->streaminitialised = 0;
-	
-	if((s->currentfileinfo.compressionmethod != 0) && (s->currentfileinfo.compressionmethod != Z_DEFLATED))
-		err = PGE_ZIP_BAD_FILE;
+    pfileinzipreadinfo->streaminitialised = 0;
+    
+    if((s->currentfileinfo.compressionmethod != 0) && (s->currentfileinfo.compressionmethod != Z_DEFLATED))
+        err = PGE_ZIP_BAD_FILE;
 
-	store = s->currentfileinfo.compressionmethod == 0;
+    store = s->currentfileinfo.compressionmethod == 0;
 
-	pfileinzipreadinfo->crc32wait = s->currentfileinfo.crc;
-	pfileinzipreadinfo->crc32 = 0;
-	pfileinzipreadinfo->compressionmethod = s->currentfileinfo.compressionmethod;
-	pfileinzipreadinfo->file = s->file;
-	pfileinzipreadinfo->bytebeforezip = s->bytebeforezip;
+    pfileinzipreadinfo->crc32wait = s->currentfileinfo.crc;
+    pfileinzipreadinfo->crc32 = 0;
+    pfileinzipreadinfo->compressionmethod = s->currentfileinfo.compressionmethod;
+    pfileinzipreadinfo->file = s->file;
+    pfileinzipreadinfo->bytebeforezip = s->bytebeforezip;
 
-	pfileinzipreadinfo->stream.total_out = 0;
+    pfileinzipreadinfo->stream.total_out = 0;
 
-	if(!store)
-	{
-		pfileinzipreadinfo->stream.zalloc = (alloc_func)0;
-	  	pfileinzipreadinfo->stream.zfree = (free_func)0;
-	  	pfileinzipreadinfo->stream.opaque = (voidpf)0;
+    if(!store)
+    {
+        pfileinzipreadinfo->stream.zalloc = (alloc_func)0;
+        pfileinzipreadinfo->stream.zfree = (free_func)0;
+        pfileinzipreadinfo->stream.opaque = (voidpf)0;
 
-	  	err = inflateInit2(&pfileinzipreadinfo->stream, -MAX_WBITS);
+        err = inflateInit2(&pfileinzipreadinfo->stream, -MAX_WBITS);
 
-	  	if(err == Z_OK)
-			pfileinzipreadinfo->streaminitialised = 1;
-	}
+        if(err == Z_OK)
+            pfileinzipreadinfo->streaminitialised = 1;
+    }
 
-	pfileinzipreadinfo->restreadcompressed = s->currentfileinfo.compressedsize;
-	pfileinzipreadinfo->restreaduncompressed = s->currentfileinfo.uncompressedsize;
+    pfileinzipreadinfo->restreadcompressed = s->currentfileinfo.compressedsize;
+    pfileinzipreadinfo->restreaduncompressed = s->currentfileinfo.uncompressedsize;
 
-	pfileinzipreadinfo->posinzip = s->currentfileinfointernal.currentfileoffset + PGE_ZIP_LOCALHEADER_SIZE + isizevar;
+    pfileinzipreadinfo->posinzip = s->currentfileinfointernal.currentfileoffset + PGE_ZIP_LOCALHEADER_SIZE + isizevar;
 
-	pfileinzipreadinfo->stream.avail_in = (unsigned int)0;
+    pfileinzipreadinfo->stream.avail_in = (unsigned int)0;
 
-	s->currentzipfileinfo = pfileinzipreadinfo;
-	
-	if(password != NULL)
-	{
-		int i;
-		s->crc32tab = get_crc_table();
-		pgeZipInitKeys(password, s->keys, s->crc32tab);
-		
-		if(fseek(pfileinzipreadinfo->file, s->currentzipfileinfo->posinzip + s->currentzipfileinfo->bytebeforezip, SEEK_SET) != 0)
-		{
-			free(pfileinzipreadinfo->buffer);
-			free(pfileinzipreadinfo);
-			
-			return PGE_ZIP_INTERNAL_ERROR;
-		}
-			
-		if(fread(source, 1, 12, pfileinzipreadinfo->file) < 12)
-		{
-			free(pfileinzipreadinfo->buffer);
-			free(pfileinzipreadinfo);
-			
-			return PGE_ZIP_INTERNAL_ERROR;
-		}
+    s->currentzipfileinfo = pfileinzipreadinfo;
+    
+    if(password != NULL)
+    {
+        int i;
+        s->crc32tab = get_crc_table();
+        pgeZipInitKeys(password, s->keys, s->crc32tab);
+        
+        if(fseek(pfileinzipreadinfo->file, s->currentzipfileinfo->posinzip + s->currentzipfileinfo->bytebeforezip, SEEK_SET) != 0)
+        {
+            free(pfileinzipreadinfo->buffer);
+            free(pfileinzipreadinfo);
+            
+            return PGE_ZIP_INTERNAL_ERROR;
+        }
+            
+        if(fread(source, 1, 12, pfileinzipreadinfo->file) < 12)
+        {
+            free(pfileinzipreadinfo->buffer);
+            free(pfileinzipreadinfo);
+            
+            return PGE_ZIP_INTERNAL_ERROR;
+        }
 
-		for(i = 0; i < 12; i++)
-			zdecode(s->keys, s->crc32tab, source[i]);
+        for(i = 0; i < 12; i++)
+            zdecode(s->keys, s->crc32tab, source[i]);
 
-		s->currentzipfileinfo->posinzip += 12;
-		s->encrypted = 1;
-	}
-	
-	return PGE_ZIP_OK;
+        s->currentzipfileinfo->posinzip += 12;
+        s->encrypted = 1;
+    }
+    
+    return PGE_ZIP_OK;
 }
 
 static int pgeZipReadCurrentFile(pgeZip* file, void* buf, unsigned int len)
 {
-	int err = PGE_ZIP_OK;
-	unsigned int iread = 0;
-	_zip* s;
-	zipFileInfoInternal* pfileinzipreadinfo;
+    int err = PGE_ZIP_OK;
+    unsigned int iread = 0;
+    _zip* s;
+    zipFileInfoInternal* pfileinzipreadinfo;
 
-	if(file == NULL)
-		return PGE_ZIP_PARAM_ERROR;
+    if(file == NULL)
+        return PGE_ZIP_PARAM_ERROR;
 
-	s = (_zip*)file;
-	pfileinzipreadinfo = s->currentzipfileinfo;
+    s = (_zip*)file;
+    pfileinzipreadinfo = s->currentzipfileinfo;
 
-	if(pfileinzipreadinfo == NULL)
-		return PGE_ZIP_PARAM_ERROR;
+    if(pfileinzipreadinfo == NULL)
+        return PGE_ZIP_PARAM_ERROR;
 
-	if((pfileinzipreadinfo->buffer == NULL))
-		return PGE_ZIP_EOF_LIST;
+    if((pfileinzipreadinfo->buffer == NULL))
+        return PGE_ZIP_EOF_LIST;
 
-	if(len == 0)
-		return 0;
+    if(len == 0)
+        return 0;
 
-	pfileinzipreadinfo->stream.next_out = (Bytef*)buf;
+    pfileinzipreadinfo->stream.next_out = (Bytef*)buf;
 
-	pfileinzipreadinfo->stream.avail_out = (unsigned int)len;
-	
-	if(len > pfileinzipreadinfo->restreaduncompressed)
-		pfileinzipreadinfo->stream.avail_out = (unsigned int)pfileinzipreadinfo->restreaduncompressed;
+    pfileinzipreadinfo->stream.avail_out = (unsigned int)len;
+    
+    if(len > pfileinzipreadinfo->restreaduncompressed)
+        pfileinzipreadinfo->stream.avail_out = (unsigned int)pfileinzipreadinfo->restreaduncompressed;
 
-	while(pfileinzipreadinfo->stream.avail_out > 0)
-	{
-		if((pfileinzipreadinfo->stream.avail_in == 0) && (pfileinzipreadinfo->restreadcompressed > 0))
-		{
-			unsigned int ureadthis = PGE_ZIP_BUFFER_SIZE;
+    while(pfileinzipreadinfo->stream.avail_out > 0)
+    {
+        if((pfileinzipreadinfo->stream.avail_in == 0) && (pfileinzipreadinfo->restreadcompressed > 0))
+        {
+            unsigned int ureadthis = PGE_ZIP_BUFFER_SIZE;
 
-			if(pfileinzipreadinfo->restreadcompressed < ureadthis)
-				ureadthis = (unsigned int)pfileinzipreadinfo->restreadcompressed;
+            if(pfileinzipreadinfo->restreadcompressed < ureadthis)
+                ureadthis = (unsigned int)pfileinzipreadinfo->restreadcompressed;
 
-			if(ureadthis == 0)
-				return PGE_ZIP_EOF;
+            if(ureadthis == 0)
+                return PGE_ZIP_EOF;
 
-			if(fseek(pfileinzipreadinfo->file, pfileinzipreadinfo->posinzip + pfileinzipreadinfo->bytebeforezip, SEEK_SET) != 0)
-				return PGE_ZIP_ERRNO;
+            if(fseek(pfileinzipreadinfo->file, pfileinzipreadinfo->posinzip + pfileinzipreadinfo->bytebeforezip, SEEK_SET) != 0)
+                return PGE_ZIP_ERRNO;
 
-			if(fread(pfileinzipreadinfo->buffer, ureadthis, 1, pfileinzipreadinfo->file) != 1)
-				return PGE_ZIP_ERRNO;
-				
-			if(s->encrypted)
-			{
-				unsigned int i;
-				
-				for(i = 0;i < ureadthis;i++)
-					pfileinzipreadinfo->buffer[i] = zdecode(s->keys, s->crc32tab, pfileinzipreadinfo->buffer[i]);
-			}
+            if(fread(pfileinzipreadinfo->buffer, ureadthis, 1, pfileinzipreadinfo->file) != 1)
+                return PGE_ZIP_ERRNO;
+                
+            if(s->encrypted)
+            {
+                unsigned int i;
+                
+                for(i = 0;i < ureadthis;i++)
+                    pfileinzipreadinfo->buffer[i] = zdecode(s->keys, s->crc32tab, pfileinzipreadinfo->buffer[i]);
+            }
 
-			pfileinzipreadinfo->posinzip += ureadthis;
+            pfileinzipreadinfo->posinzip += ureadthis;
 
-			pfileinzipreadinfo->restreadcompressed -= ureadthis;
-			
-			pfileinzipreadinfo->stream.next_in = (Bytef*)pfileinzipreadinfo->buffer;
-			pfileinzipreadinfo->stream.avail_in = (unsigned int)ureadthis;
-		}
-
-		if(pfileinzipreadinfo->compressionmethod == 0)
-		{
-			unsigned int udocopy, i;
-
-			if((pfileinzipreadinfo->stream.avail_in == 0) && (pfileinzipreadinfo->restreadcompressed == 0))
-				return (iread == 0) ? PGE_ZIP_EOF : iread;
-			
-			if(pfileinzipreadinfo->stream.avail_out < pfileinzipreadinfo->stream.avail_in)
-				udocopy = pfileinzipreadinfo->stream.avail_out;
-			else
-				udocopy = pfileinzipreadinfo->stream.avail_in;
-			
-			for(i = 0;i < udocopy; i++)
-				*(pfileinzipreadinfo->stream.next_out + i) = *(pfileinzipreadinfo->stream.next_in + i);
-
-			pfileinzipreadinfo->crc32 = crc32(pfileinzipreadinfo->crc32, pfileinzipreadinfo->stream.next_out, udocopy);
-			pfileinzipreadinfo->restreaduncompressed -= udocopy;
-			pfileinzipreadinfo->stream.avail_in -= udocopy;
-			pfileinzipreadinfo->stream.avail_out -= udocopy;
-			pfileinzipreadinfo->stream.next_out += udocopy;
-			pfileinzipreadinfo->stream.next_in += udocopy;
-			pfileinzipreadinfo->stream.total_out += udocopy;
-			iread += udocopy;
-		}
-		else
-		{
-			unsigned long utotaloutbefore, utotaloutafter;
-			const Bytef *bufbefore;
-			unsigned long uoutthis;
-			int flush = Z_SYNC_FLUSH;
-
-			utotaloutbefore = pfileinzipreadinfo->stream.total_out;
-			bufbefore = pfileinzipreadinfo->stream.next_out;
-
-			err = inflate(&pfileinzipreadinfo->stream, flush);
-
-			utotaloutafter = pfileinzipreadinfo->stream.total_out;
-			uoutthis = utotaloutafter - utotaloutbefore;
-			
-			pfileinzipreadinfo->crc32 = crc32(pfileinzipreadinfo->crc32, bufbefore, (unsigned int)(uoutthis));
-
-			pfileinzipreadinfo->restreaduncompressed -= uoutthis;
-
-			iread += (unsigned int)(utotaloutafter - utotaloutbefore);
+            pfileinzipreadinfo->restreadcompressed -= ureadthis;
             
-			if(err == Z_STREAM_END)
-				return (iread == 0) ? PGE_ZIP_EOF : iread;
+            pfileinzipreadinfo->stream.next_in = (Bytef*)pfileinzipreadinfo->buffer;
+            pfileinzipreadinfo->stream.avail_in = (unsigned int)ureadthis;
+        }
 
-			if(err != Z_OK)
-				break;
-		}
-	}
+        if(pfileinzipreadinfo->compressionmethod == 0)
+        {
+            unsigned int udocopy, i;
 
-	if(err == Z_OK)
-		return iread;
+            if((pfileinzipreadinfo->stream.avail_in == 0) && (pfileinzipreadinfo->restreadcompressed == 0))
+                return (iread == 0) ? PGE_ZIP_EOF : iread;
+            
+            if(pfileinzipreadinfo->stream.avail_out < pfileinzipreadinfo->stream.avail_in)
+                udocopy = pfileinzipreadinfo->stream.avail_out;
+            else
+                udocopy = pfileinzipreadinfo->stream.avail_in;
+            
+            for(i = 0;i < udocopy; i++)
+                *(pfileinzipreadinfo->stream.next_out + i) = *(pfileinzipreadinfo->stream.next_in + i);
 
-	return err;
+            pfileinzipreadinfo->crc32 = crc32(pfileinzipreadinfo->crc32, pfileinzipreadinfo->stream.next_out, udocopy);
+            pfileinzipreadinfo->restreaduncompressed -= udocopy;
+            pfileinzipreadinfo->stream.avail_in -= udocopy;
+            pfileinzipreadinfo->stream.avail_out -= udocopy;
+            pfileinzipreadinfo->stream.next_out += udocopy;
+            pfileinzipreadinfo->stream.next_in += udocopy;
+            pfileinzipreadinfo->stream.total_out += udocopy;
+            iread += udocopy;
+        }
+        else
+        {
+            unsigned long utotaloutbefore, utotaloutafter;
+            const Bytef *bufbefore;
+            unsigned long uoutthis;
+            int flush = Z_SYNC_FLUSH;
+
+            utotaloutbefore = pfileinzipreadinfo->stream.total_out;
+            bufbefore = pfileinzipreadinfo->stream.next_out;
+
+            err = inflate(&pfileinzipreadinfo->stream, flush);
+
+            utotaloutafter = pfileinzipreadinfo->stream.total_out;
+            uoutthis = utotaloutafter - utotaloutbefore;
+            
+            pfileinzipreadinfo->crc32 = crc32(pfileinzipreadinfo->crc32, bufbefore, (unsigned int)(uoutthis));
+
+            pfileinzipreadinfo->restreaduncompressed -= uoutthis;
+
+            iread += (unsigned int)(utotaloutafter - utotaloutbefore);
+            
+            if(err == Z_STREAM_END)
+                return (iread == 0) ? PGE_ZIP_EOF : iread;
+
+            if(err != Z_OK)
+                break;
+        }
+    }
+
+    if(err == Z_OK)
+        return iread;
+
+    return err;
 }
 
 pgeZip* pgeZipOpen(const char *filename)
 {
-	//printf("Opening zip\n");
-	_zip us;
-	_zip *s;
-	unsigned long centralpos, ul;
-	FILE *file;
+    //printf("Opening zip\n");
+    _zip us;
+    _zip *s;
+    unsigned long centralpos, ul;
+    FILE *file;
 
-	unsigned long numberdisk;
-	unsigned long numberdiskwithCD;
-	unsigned long numberentryCD;
+    unsigned long numberdisk;
+    unsigned long numberdiskwithCD;
+    unsigned long numberentryCD;
 
-	int err = PGE_ZIP_OK;
+    int err = PGE_ZIP_OK;
 
-	file = fopen(filename, "rb");
+    file = fopen(filename, "rb");
 
-	if(file == NULL)
-		return NULL;
+    if(file == NULL)
+        return NULL;
 
-	centralpos = pgeZipLocateCentralDir(file);
+    centralpos = pgeZipLocateCentralDir(file);
 
-	if(centralpos == 0)
-		err = PGE_ZIP_ERRNO;
+    if(centralpos == 0)
+        err = PGE_ZIP_ERRNO;
 
-	if(fseek(file, centralpos, SEEK_SET) != 0)
-		err = PGE_ZIP_ERRNO;
+    if(fseek(file, centralpos, SEEK_SET) != 0)
+        err = PGE_ZIP_ERRNO;
 
-	if(pgeZipGetLong(file, &ul) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if(pgeZipGetLong(file, &ul) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if(pgeZipGetShort(file, &numberdisk) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if(pgeZipGetShort(file, &numberdisk) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if(pgeZipGetShort(file, &numberdiskwithCD) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if(pgeZipGetShort(file, &numberdiskwithCD) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if(pgeZipGetShort(file, &us.gi.countentries) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if(pgeZipGetShort(file, &us.gi.countentries) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if(pgeZipGetShort(file, &numberentryCD) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if(pgeZipGetShort(file, &numberentryCD) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if((numberentryCD != us.gi.countentries) || (numberdiskwithCD != 0) || (numberdisk != 0))
-		err = PGE_ZIP_BAD_FILE;
+    if((numberentryCD != us.gi.countentries) || (numberdiskwithCD != 0) || (numberdisk != 0))
+        err = PGE_ZIP_BAD_FILE;
 
-	if(pgeZipGetLong(file, &us.centraldirsize) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if(pgeZipGetLong(file, &us.centraldirsize) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if(pgeZipGetLong(file, &us.centraldiroffset) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if(pgeZipGetLong(file, &us.centraldiroffset) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if(pgeZipGetShort(file, &us.gi.commentsize) != PGE_ZIP_OK)
-		err = PGE_ZIP_ERRNO;
+    if(pgeZipGetShort(file, &us.gi.commentsize) != PGE_ZIP_OK)
+        err = PGE_ZIP_ERRNO;
 
-	if((centralpos < us.centraldiroffset + us.centraldirsize) && (err == PGE_ZIP_OK))
-		err = PGE_ZIP_BAD_FILE;
+    if((centralpos < us.centraldiroffset + us.centraldirsize) && (err == PGE_ZIP_OK))
+        err = PGE_ZIP_BAD_FILE;
 
-	if(err != PGE_ZIP_OK)
-	{
-		fclose(file);
-		return NULL;
-	}
+    if(err != PGE_ZIP_OK)
+    {
+        fclose(file);
+        return NULL;
+    }
 
-	us.file = file;
-	us.bytebeforezip = centralpos - (us.centraldiroffset + us.centraldirsize);
-	us.centralpos = centralpos;
-	us.currentzipfileinfo = NULL;
-	us.encrypted = 0;
+    us.file = file;
+    us.bytebeforezip = centralpos - (us.centraldiroffset + us.centraldirsize);
+    us.centralpos = centralpos;
+    us.currentzipfileinfo = NULL;
+    us.encrypted = 0;
 
-	s = (_zip*)malloc(sizeof(_zip));
+    s = (_zip*)malloc(sizeof(_zip));
 
-	*s = us;
+    *s = us;
 
-	pgeZipGotoFirstFile((pgeZip*)s);
+    pgeZipGotoFirstFile((pgeZip*)s);
 
-	return(pgeZip*)s;
+    return(pgeZip*)s;
 }
 
 int pgeZipClose(pgeZip* zip)
 {
-	_zip* s;
+    _zip* s;
 
-	if(zip == NULL)
-		return 0;
+    if(zip == NULL)
+        return 0;
 
-	s = (_zip*)zip;
+    s = (_zip*)zip;
 
-	if(s->currentzipfileinfo != NULL)
-		pgeZipCloseCurrentFile(zip);
+    if(s->currentzipfileinfo != NULL)
+        pgeZipCloseCurrentFile(zip);
 
-	//printf("Fclose: %d\n", fclose(s->file));
-	
-	free(s);
+    //printf("Fclose: %d\n", fclose(s->file));
+    
+    free(s);
 
-	return 1;
+    return 1;
 }
 
 int pgeZipExtractCurrentFile(pgeZip *zip, int *nopath, const char *password)
 {
-	//void(overwrite);
-	
-	char filenameinzip[256];
-	char *filenameWithoutPath;
-	char *p;
-	void *buffer;
-	unsigned int buffersize = 64*1024;
-	int err = 0;
-	
-	FILE *fout = NULL;
-	
-	zipFileInfo fileInfo;
-	
-	err = pgeZipGetCurrentFileInfo(zip, &fileInfo, filenameinzip, sizeof(filenameinzip), NULL, 0, NULL, 0);
+    //void(overwrite);
+    
+    char filenameinzip[256];
+    char *filenameWithoutPath;
+    char *p;
+    void *buffer;
+    unsigned int buffersize = 64*1024;
+    int err = 0;
+    
+    FILE *fout = NULL;
+    
+    zipFileInfo fileInfo;
+    
+    err = pgeZipGetCurrentFileInfo(zip, &fileInfo, filenameinzip, sizeof(filenameinzip), NULL, 0, NULL, 0);
 
-	if(err != 0)
-	{
-		printf("error %d with zipfile in pgeZipGetCurrentFileInfo\n", err);
-		return -1;
-	}
-	
-	buffer = (void *)malloc(buffersize);
-	
-	if(!buffer)
-	{
-		printf("Error allocating buffer\n");
-		
-		return 0;
-	}
-	
-	p = filenameWithoutPath = filenameinzip;
-	
-	while((*p) != '\0')
-	{
-		if(((*p) == '/') || ((*p) == '\\'))
-			filenameWithoutPath = p + 1;
-		
-		p++;
-	}
-	
-	if((*filenameWithoutPath) == '\0')
-	{
-		if((*nopath) == 0)
-		{
-			//printf("Creating directory: %s\n", filenameinzip);
-			mkdir(filenameinzip, 0777);
-		}
-	}
-	else
-	{
-		const char *writeFilename;
-		
-		if((*nopath) == 0)
-			writeFilename = filenameinzip;
-		else
-			writeFilename = filenameWithoutPath;
-			
-		err = pgeZipOpenCurrentFile(zip, password);
-		
-		if(err != PGE_ZIP_OK)
-			printf("Error with zipfile in pgeZipOpenCurrentFile\n");
-			
-		fout = fopen(writeFilename, "wb");
-		
-		if((fout == NULL) && ((*nopath) == 0) && (filenameWithoutPath != (char *)filenameinzip))
-		{
-			char c = *(filenameWithoutPath - 1);
-			*(filenameWithoutPath - 1) = '\0';
-			mkdir(writeFilename, 0777);
-			*(filenameWithoutPath - 1) = c;
-			fout = fopen(writeFilename, "wb");
-		}
-		
-		if(fout == NULL)
-			printf("Error opening file\n");
-			
-		do
-		{
-			err = pgeZipReadCurrentFile(zip, buffer, buffersize);
-			
-			if(err < 0)
-			{
-				printf("Error with zipfile in pgeZipReadCurrentFile\n");
-				break;
-			}
-			
-			if(err > 0)
-			{
-				fwrite(buffer, 1, err, fout);
-			}
-			
-		} while (err > 0);
-		
-		fclose(fout);
-		
-		err = pgeZipCloseCurrentFile(zip);
-		
-		if(err != PGE_ZIP_OK)
-			printf("Error with zipfile in pgeZipCloseCurrentFile\n");
-	}
-			
-	if(buffer)
-		free(buffer);
-			
-	return err;
+    if(err != 0)
+    {
+        printf("error %d with zipfile in pgeZipGetCurrentFileInfo\n", err);
+        return -1;
+    }
+    
+    buffer = (void *)malloc(buffersize);
+    
+    if(!buffer)
+    {
+        printf("Error allocating buffer\n");
+        
+        return 0;
+    }
+    
+    p = filenameWithoutPath = filenameinzip;
+    
+    while((*p) != '\0')
+    {
+        if(((*p) == '/') || ((*p) == '\\'))
+            filenameWithoutPath = p + 1;
+        
+        p++;
+    }
+    
+    if((*filenameWithoutPath) == '\0')
+    {
+        if((*nopath) == 0)
+        {
+            //printf("Creating directory: %s\n", filenameinzip);
+            mkdir(filenameinzip, 0777);
+        }
+    }
+    else
+    {
+        const char *writeFilename;
+        
+        if((*nopath) == 0)
+            writeFilename = filenameinzip;
+        else
+            writeFilename = filenameWithoutPath;
+            
+        err = pgeZipOpenCurrentFile(zip, password);
+        
+        if(err != PGE_ZIP_OK)
+            printf("Error with zipfile in pgeZipOpenCurrentFile\n");
+            
+        fout = fopen(writeFilename, "wb");
+        
+        if((fout == NULL) && ((*nopath) == 0) && (filenameWithoutPath != (char *)filenameinzip))
+        {
+            char c = *(filenameWithoutPath - 1);
+            *(filenameWithoutPath - 1) = '\0';
+            mkdir(writeFilename, 0777);
+            *(filenameWithoutPath - 1) = c;
+            fout = fopen(writeFilename, "wb");
+        }
+        
+        if(fout == NULL)
+            printf("Error opening file\n");
+            
+        do
+        {
+            err = pgeZipReadCurrentFile(zip, buffer, buffersize);
+            
+            if(err < 0)
+            {
+                printf("Error with zipfile in pgeZipReadCurrentFile\n");
+                break;
+            }
+            
+            if(err > 0)
+            {
+                fwrite(buffer, 1, err, fout);
+            }
+            
+        } while (err > 0);
+        
+        fclose(fout);
+        
+        err = pgeZipCloseCurrentFile(zip);
+        
+        if(err != PGE_ZIP_OK)
+            printf("Error with zipfile in pgeZipCloseCurrentFile\n");
+    }
+            
+    if(buffer)
+        free(buffer);
+            
+    return err;
 }
 
 int pgeZipExtract(pgeZip* zip, const char *password)
 {
-	unsigned int i;
-	zipGlobalInfo gi;
-	memset(&gi, 0, sizeof(zipGlobalInfo));
-	int err;
-	int nopath = 0;
-	
-	err = pgeZipGetGlobalInfo(zip, &gi);
-	
-	if(err != PGE_ZIP_OK)
-		printf("Error with zipfile in pgeZipGetGlobalInfo\n");
-		
-	for(i = 0;i < gi.countentries;i++)
-	{
-		if(pgeZipExtractCurrentFile(zip, &nopath, password) != PGE_ZIP_OK)
-			break;
-			
-		if((i + 1) < gi.countentries)
-		{
-			err = pgeZipGotoNextFile(zip);
-			
-			if(err != PGE_ZIP_OK)
-				printf("Error with zipfile in pgeZipGotoNextFile\n");
-		}
-	}
-	
-	return 1;	
+    unsigned int i;
+    zipGlobalInfo gi;
+    memset(&gi, 0, sizeof(zipGlobalInfo));
+    int err;
+    int nopath = 0;
+    
+    err = pgeZipGetGlobalInfo(zip, &gi);
+    
+    if(err != PGE_ZIP_OK)
+        printf("Error with zipfile in pgeZipGetGlobalInfo\n");
+        
+    for(i = 0;i < gi.countentries;i++)
+    {
+        if(pgeZipExtractCurrentFile(zip, &nopath, password) != PGE_ZIP_OK)
+            break;
+            
+        if((i + 1) < gi.countentries)
+        {
+            err = pgeZipGotoNextFile(zip);
+            
+            if(err != PGE_ZIP_OK)
+                printf("Error with zipfile in pgeZipGotoNextFile\n");
+        }
+    }
+    
+    return 1;	
 }
 
 pgeZipFile* pgeZipFileRead(pgeZip* zip, const char *filename, const char *password)
 {
-	char filenameinzip[256];
-	int err = 0;
+    char filenameinzip[256];
+    int err = 0;
 
-	pgeZipFile* zipfile = (pgeZipFile*) malloc(sizeof(pgeZipFile));
-	
-	if(!zipfile)
-		return NULL;
+    pgeZipFile* zipfile = (pgeZipFile*) malloc(sizeof(pgeZipFile));
+    
+    if(!zipfile)
+        return NULL;
 
-	if(pgeZipLocateFile(zip, filename, 0) != 0)
-	{
-		free(zipfile);
-		return NULL;
-	}
+    if(pgeZipLocateFile(zip, filename, 0) != 0)
+    {
+        free(zipfile);
+        return NULL;
+    }
 
-	zipFileInfo fileinfo;
-	
-	err = pgeZipGetCurrentFileInfo(zip, &fileinfo, filenameinzip, sizeof(filenameinzip), NULL, 0, NULL, 0);
+    zipFileInfo fileinfo;
+    
+    err = pgeZipGetCurrentFileInfo(zip, &fileinfo, filenameinzip, sizeof(filenameinzip), NULL, 0, NULL, 0);
 
-	if(err != 0)
-	{
-		free(zipfile);
-		return NULL;
-	}
+    if(err != 0)
+    {
+        free(zipfile);
+        return NULL;
+    }
 
-  	err = pgeZipOpenCurrentFile(zip, password);
+    err = pgeZipOpenCurrentFile(zip, password);
 
-	if(err != 0)
-	{
-		free(zipfile);
-		return NULL;
-	}
+    if(err != 0)
+    {
+        free(zipfile);
+        return NULL;
+    }
 
-	zipfile->size = fileinfo.uncompressedsize;
+    zipfile->size = fileinfo.uncompressedsize;
 
-	zipfile->data = (unsigned char*)malloc(fileinfo.uncompressedsize);
-	
-	if(!zipfile->data)
-	{
-		free(zipfile);
-		return NULL;
-	}
+    zipfile->data = (unsigned char*)malloc(fileinfo.uncompressedsize);
+    
+    if(!zipfile->data)
+    {
+        free(zipfile);
+        return NULL;
+    }
 
-	unsigned int count = 0;
-	err = 1;
+    unsigned int count = 0;
+    err = 1;
 
-	while(err > 0)
-	{
-		err = pgeZipReadCurrentFile(zip, &zipfile->data[count], fileinfo.uncompressedsize);
+    while(err > 0)
+    {
+        err = pgeZipReadCurrentFile(zip, &zipfile->data[count], fileinfo.uncompressedsize);
 
-		if(err < 0)
-		{
-			break;
-		}
-		else
-			count += err;
-	}
+        if(err < 0)
+        {
+            break;
+        }
+        else
+            count += err;
+    }
 
-	if(err == 0)
-	{
-		err = pgeZipCloseCurrentFile(zip);
+    if(err == 0)
+    {
+        err = pgeZipCloseCurrentFile(zip);
 
-		if(err != 0)
-		{
-			free(zipfile->data);
-			free(zipfile);
-			return NULL;
-		}
-		    
-		return zipfile;
-	}
-	else
-	{
-		pgeZipCloseCurrentFile(zip);
-		free(zipfile->data);
-		free(zipfile);
-		
-		return NULL;
-	}
+        if(err != 0)
+        {
+            free(zipfile->data);
+            free(zipfile);
+            return NULL;
+        }
+            
+        return zipfile;
+    }
+    else
+    {
+        pgeZipCloseCurrentFile(zip);
+        free(zipfile->data);
+        free(zipfile);
+        
+        return NULL;
+    }
 }
 
 void pgeZipFileFree(pgeZipFile* file)
 {
-	if(file->data)
-		free(file->data);
-		
-	if(file)
-		free(file);
+    if(file->data)
+        free(file->data);
+        
+    if(file)
+        free(file);
 }

@@ -38,7 +38,7 @@ extern "C" {
 #include <netinet/in.h>
 
 #ifdef __PSP__
-	#include <sys/fd_set.h>
+    #include <sys/fd_set.h>
 #endif
 
 #define PGE_SOCKET_TCP SOCK_STREAM	/**< Stream socket */

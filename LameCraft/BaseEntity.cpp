@@ -3,25 +3,25 @@
 
 BaseEntity::BaseEntity()
 {
-	vertices = NULL;
+    vertices = NULL;
 
-	position = Vector3(0,0,0);
-	scale = Vector3(0,0,0);
-	angle = Vector3(0,0,0);
-	collisionBox = Vector3(0,0,0);
+    position = Vector3(0,0,0);
+    scale = Vector3(0,0,0);
+    angle = Vector3(0,0,0);
+    collisionBox = Vector3(0,0,0);
 
-	colour = Vector3(0,0,0);
-	alpha = 1.0f;
+    colour = Vector3(0,0,0);
+    alpha = 1.0f;
 
-	ortho = false;
+    ortho = false;
 }
 
 BaseEntity::~BaseEntity()
 {
-	if(vertices != NULL)
-	{
-		free(vertices);
-	}
+    if(vertices != NULL)
+    {
+        free(vertices);
+    }
 }
 
 void BaseEntity::SetPosition(Vector3 position2)

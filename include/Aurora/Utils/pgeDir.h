@@ -38,8 +38,8 @@ extern "C" {
  */
 enum pgeDirEntryTypes
 {
-	PGE_DIR_ENTRY_TYPE_FILE,
-	PGE_DIR_ENTRY_TYPE_DIR
+    PGE_DIR_ENTRY_TYPE_FILE,
+    PGE_DIR_ENTRY_TYPE_DIR
 };
 
 /**
@@ -47,10 +47,10 @@ enum pgeDirEntryTypes
  */
 typedef struct
 {
-	char name[256];
-	unsigned int size;
-	unsigned int type;
-	
+    char name[256];
+    unsigned int size;
+    unsigned int type;
+    
 } pgeDirEntry;
 
 /**
@@ -58,10 +58,10 @@ typedef struct
  */
 typedef struct
 {
-	int fd;
-	int count;
-	pgeDirEntry *entries;
-	
+    int fd;
+    int count;
+    pgeDirEntry *entries;
+    
 } pgeDir;
 
 /**

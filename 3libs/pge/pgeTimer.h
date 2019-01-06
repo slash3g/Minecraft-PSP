@@ -38,13 +38,13 @@ extern "C" {
  */
 typedef struct
 {
-	float deltatime;				/**<  The delta time */
-	unsigned long long timenow;		/**<  Current time */
-	unsigned long long timelastask;	/**<  Time of last update */
-	unsigned long long totaltime;	/**<  Time passed since creation */
-	unsigned int tickresolution;	/**<  Tick resolution */
-	int paused;
-	
+    float deltatime;				/**<  The delta time */
+    unsigned long long timenow;		/**<  Current time */
+    unsigned long long timelastask;	/**<  Time of last update */
+    unsigned long long totaltime;	/**<  Time passed since creation */
+    unsigned int tickresolution;	/**<  Tick resolution */
+    int paused;
+    
 } pgeTimer;
 
 /**

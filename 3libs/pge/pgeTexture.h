@@ -35,29 +35,29 @@ extern "C" {
 
 enum pgePixelFormat
 {
-	PGE_PIXEL_FORMAT_5650,	/**< Pixelformat R5:G6:B5:A0. */
-	PGE_PIXEL_FORMAT_5551,	/**< Pixelformat R5:G5:B5:A1. */
-	PGE_PIXEL_FORMAT_4444,	/**< Pixelformat R4:G4:B4:A4. */
-	PGE_PIXEL_FORMAT_8888,	/**< Pixelformat R8:G8:B8:A8. */
-	PGE_PIXEL_FORMAT_T4,	/**< Pixelformat 4bit indexed. */
-	PGE_PIXEL_FORMAT_T8,	/**< Pixelformat 8bit indexed. */
-	PGE_PIXEL_FORMAT_T16,	/**< Pixelformat 16bit indexed. */
-	PGE_PIXEL_FORMAT_T32	/**< Pixelformat 32bit indexed. */
+    PGE_PIXEL_FORMAT_5650,	/**< Pixelformat R5:G6:B5:A0. */
+    PGE_PIXEL_FORMAT_5551,	/**< Pixelformat R5:G5:B5:A1. */
+    PGE_PIXEL_FORMAT_4444,	/**< Pixelformat R4:G4:B4:A4. */
+    PGE_PIXEL_FORMAT_8888,	/**< Pixelformat R8:G8:B8:A8. */
+    PGE_PIXEL_FORMAT_T4,	/**< Pixelformat 4bit indexed. */
+    PGE_PIXEL_FORMAT_T8,	/**< Pixelformat 8bit indexed. */
+    PGE_PIXEL_FORMAT_T16,	/**< Pixelformat 16bit indexed. */
+    PGE_PIXEL_FORMAT_T32	/**< Pixelformat 32bit indexed. */
 };
 
 enum pgeTextureMode
 {
-	PGE_TEX_MODE_MODULATE,
-	PGE_TEX_MODE_DECAL,
-	PGE_TEX_MODE_BLEND,
-	PGE_TEX_MODE_REPLACE,
-	PGE_TEX_MODE_ADD
+    PGE_TEX_MODE_MODULATE,
+    PGE_TEX_MODE_DECAL,
+    PGE_TEX_MODE_BLEND,
+    PGE_TEX_MODE_REPLACE,
+    PGE_TEX_MODE_ADD
 };
 
 enum pgeMemoryLocation
 {
-	PGE_RAM,
-	PGE_VRAM
+    PGE_RAM,
+    PGE_VRAM
 };
 
 /**
@@ -65,19 +65,19 @@ enum pgeMemoryLocation
  */
 typedef struct pgeTexture
 {
-	void					*palette;		/**< Image palette. */
-	enum pgePixelFormat		palFormat;		/**< Palette format - one of PGE_PIXEL_FORMAT_5650, PGE_PIXEL_FORMAT_5551, PGE_PIXEL_FORMAT_4444, PGE_PIXEL_FORMAT_8888. */
-	void					*data;			/**< Image data. */
-	unsigned int			size;			/**< Size of data in bytes. */
-	unsigned int			width;			/**< Image width. */
-	unsigned int			height;			/**< Image height. */
-	unsigned int			textureWidth;	/**< Texture width (power of two). */
-	unsigned int			textureHeight;	/**< Texture height (power of two). */
-	unsigned int			bits;			/**< Image bits per pixel. */
-	enum pgePixelFormat		format;			/**< Image format - one of ::pgePixelFormat. */
-	char					swizzled;		/**< Is image swizzled. */
-	enum pgeMemoryLocation	location;		/**< One of ::pgeMemoryLocation. */
-	
+    void					*palette;		/**< Image palette. */
+    enum pgePixelFormat		palFormat;		/**< Palette format - one of PGE_PIXEL_FORMAT_5650, PGE_PIXEL_FORMAT_5551, PGE_PIXEL_FORMAT_4444, PGE_PIXEL_FORMAT_8888. */
+    void					*data;			/**< Image data. */
+    unsigned int			size;			/**< Size of data in bytes. */
+    unsigned int			width;			/**< Image width. */
+    unsigned int			height;			/**< Image height. */
+    unsigned int			textureWidth;	/**< Texture width (power of two). */
+    unsigned int			textureHeight;	/**< Texture height (power of two). */
+    unsigned int			bits;			/**< Image bits per pixel. */
+    enum pgePixelFormat		format;			/**< Image format - one of ::pgePixelFormat. */
+    char					swizzled;		/**< Is image swizzled. */
+    enum pgeMemoryLocation	location;		/**< One of ::pgeMemoryLocation. */
+    
 } pgeTexture;
 
 /**

@@ -6,52 +6,52 @@
 
 namespace Aurora
 {
-	namespace Graphics
-	{
-		Destroyer::Destroyer()
-		{
-			boxVertices = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices2 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices3 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices4 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices5 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices6 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
+    namespace Graphics
+    {
+        Destroyer::Destroyer()
+        {
+            boxVertices = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
+            boxVertices2 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
+            boxVertices3 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
+            boxVertices4 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
+            boxVertices5 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
+            boxVertices6 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
 
-			boxVertices11 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
-			boxVertices12 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
-			boxVertices13 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
-			boxVertices14 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
-			boxVertices15 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
-			boxVertices16 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
+            boxVertices11 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
+            boxVertices12 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
+            boxVertices13 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
+            boxVertices14 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
+            boxVertices15 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
+            boxVertices16 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
 
-			size = 0.0f;
-		}
+            size = 0.0f;
+        }
 
-		Destroyer::~Destroyer()
-		{
-			free(boxVertices);
-			free(boxVertices2);
-			free(boxVertices3);
-			free(boxVertices4);
-			free(boxVertices5);
-			free(boxVertices6);
+        Destroyer::~Destroyer()
+        {
+            free(boxVertices);
+            free(boxVertices2);
+            free(boxVertices3);
+            free(boxVertices4);
+            free(boxVertices5);
+            free(boxVertices6);
 
-			free(boxVertices11);
-			free(boxVertices12);
-			free(boxVertices13);
-			free(boxVertices14);
-			free(boxVertices15);
-			free(boxVertices16);
-		}
+            free(boxVertices11);
+            free(boxVertices12);
+            free(boxVertices13);
+            free(boxVertices14);
+            free(boxVertices15);
+            free(boxVertices16);
+        }
 
-		void Destroyer::Update(float stad, CraftWorld* crft, int blockId)
-		{
-			int i = 0;
-			float block = 1/16.0f;
-			float block1 = 15.0f / 16.0f;
-			float pixel = 1.0f/16.0f;
+        void Destroyer::Update(float stad, CraftWorld* crft, int blockId)
+        {
+            int i = 0;
+            float block = 1/16.0f;
+            float block1 = 15.0f / 16.0f;
+            float pixel = 1.0f/16.0f;
 
-			BoundingBox modelBox = crft->blockTypes[blockId].collideBox;
+            BoundingBox modelBox = crft->blockTypes[blockId].collideBox;
 
             int temp = stad;
             if(stad == -1)
@@ -359,11 +359,11 @@ namespace Aurora
 
                 sceKernelDcacheWritebackInvalidateRange(boxVertices16,4 * sizeof(SimplePSPVertex2));
             }*/
-		}
+        }
 
-		void Destroyer::Render(float stad)
-		{
-		    //if(stad != -1)
+        void Destroyer::Render(float stad)
+        {
+            //if(stad != -1)
             //{
                 sceGuEnable(GU_TEXTURE_2D);
                 sceGuBlendFunc(GU_ADD, GU_DST_COLOR, GU_SRC_COLOR, 0xFFFFFFFF,0xFFFFFFFF);
@@ -400,7 +400,7 @@ namespace Aurora
                 sceGuDepthOffset(0);
                 sceGuDepthMask(0);*/
             //}
-		}
-	}
+        }
+    }
 }
 

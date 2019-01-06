@@ -140,19 +140,19 @@ StatePlayCreative::StatePlayCreative()
     devMode = false;
     makeScreen = false;
 
-	canHeadBob = true;
-	bobCycle = 0.0f;
+    canHeadBob = true;
+    bobCycle = 0.0f;
     bobType = false;
 
     cubeLight = 0.0f;
 
-	anim[0] = 0;
-	anim[1] = 0;
-	anim[2] = 0;
+    anim[0] = 0;
+    anim[1] = 0;
+    anim[2] = 0;
 
-	canFly = false;
+    canFly = false;
 
-	for(int i = 0; i <= 3; i += 1)
+    for(int i = 0; i <= 3; i += 1)
     {
         craftSlotId[i] = -1;
         craftSlotAm[i] = -1;
@@ -455,8 +455,8 @@ void StatePlayCreative::LoadTextures()
     nbuttonSprite->SetPosition(240,150);
     nbuttonSprite->Scale(2,2);
 
-	moverSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,60,6,12);
-	moverSprite->Scale(2,2);
+    moverSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,60,6,12);
+    moverSprite->Scale(2,2);
 
     // inventory section
 
@@ -8610,24 +8610,24 @@ void StatePlayCreative::Update(StateManager* sManager)
             {
                 walkSoundSpeed *= 0.7f;
             }
-			if(headInLava || headInWater)
+            if(headInLava || headInWater)
             {
                 walkSoundSpeed *= 0.5f;
             }
-		    walkSoundAccu += walkSoundSpeed;
+            walkSoundAccu += walkSoundSpeed;
 
-			if(walkSoundAccu > 0.428f || walkSoundAccu == 0.0f)
-			{
-				mSoundMgr->PlayWalkSound(soundBlockType);
-				walkSoundAccu = 0.0f;
-			}
+            if(walkSoundAccu > 0.428f || walkSoundAccu == 0.0f)
+            {
+                mSoundMgr->PlayWalkSound(soundBlockType);
+                walkSoundAccu = 0.0f;
+            }
 
-			float animSpeed = 2.621*PI*dt;
-			if(footInLava || footInWater)
+            float animSpeed = 2.621*PI*dt;
+            if(footInLava || footInWater)
             {
                 animSpeed *= 0.7f;
             }
-			if(headInLava || headInWater)
+            if(headInLava || headInWater)
             {
                 animSpeed *= 0.5f;
             }
@@ -8659,10 +8659,10 @@ void StatePlayCreative::Update(StateManager* sManager)
             float bobCose = cosf(bobCycle - (PI/2.0f) + PI)/3.0f;
 
             //fppCam->m_vOffset = Vector3(0.0f,0.06f*bobSine+0.03f,0.0f);
-		}
-		else
-		{
-			walkSoundAccu = 0.45f;
+        }
+        else
+        {
+            walkSoundAccu = 0.45f;
             if(bobCycle > PI/2.0f)
             {
                 bobCycle -= (bobCycle-(PI/2.0f))/3.0f;
@@ -8672,7 +8672,7 @@ void StatePlayCreative::Update(StateManager* sManager)
                 bobCycle += ((PI/2.0f) - bobCycle)/3.0f;
             }
             fppCam->m_vOffset = Vector3(0.0f,0.0f,0.0f);
-		}
+        }
 
         if(invEn == true || craft3xEn == true || chestEn == true || furnaceEn == true)
         {
@@ -8739,9 +8739,9 @@ void StatePlayCreative::Draw(StateManager* sManager)
         angleFactor = 1.0f;
     }
 
-	bool needUpdate = fppCam->needUpdate;
-	float nullFactor = (1.0f-mWorld->dawnSunsetFactor)+(1.0f-angleFactor);
-	if(nullFactor > 1.0f)
+    bool needUpdate = fppCam->needUpdate;
+    float nullFactor = (1.0f-mWorld->dawnSunsetFactor)+(1.0f-angleFactor);
+    if(nullFactor > 1.0f)
     {
         nullFactor = 1.0f;
     }
@@ -9355,37 +9355,37 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
     /// RENDER DESTROY MODEL
     if (((startDt == 1 && dStd >= 0 && dStd <= 9) || showCube == true) && makeScreen == false)
-	{
-		MatrixPush();
+    {
+        MatrixPush();
 
         DrawSetDepthTest(true);
         DrawSetAlphaTest(true);
-		DrawSetBlend(true);
+        DrawSetBlend(true);
 
-		sceGuDepthMask(1);
+        sceGuDepthMask(1);
 
-		MatrixTranslation(Vector3(cubePos.x,cubePos.y,cubePos.z));
-		MatrixColor(0xFFFFFFFF);
+        MatrixTranslation(Vector3(cubePos.x,cubePos.y,cubePos.z));
+        MatrixColor(0xFFFFFFFF);
 
         TextureManager::Instance()->SetTextureModeulate(texture);
 
-		destroyer->Update(dStd, mWorld, mWorld->GetBlock(cubePos.x,cubePos.y,cubePos.z));
-		destroyer->Render(dStd);
+        destroyer->Update(dStd, mWorld, mWorld->GetBlock(cubePos.x,cubePos.y,cubePos.z));
+        destroyer->Render(dStd);
 
-		sceGuDepthMask(0);
+        sceGuDepthMask(0);
 
-		DrawSetBlend(false);
+        DrawSetBlend(false);
         DrawSetAlphaTest(false);
         DrawSetDepthTest(false);
 
-		MatrixPop();
-	}
+        MatrixPop();
+    }
     ///
 
     /// RENDER STEVE'S HAND
     if(mWorld->mainOptions.guiDrawing == 1)
-	{
-	    //if(mWorld->invId[27+barPosition] != -1)
+    {
+        //if(mWorld->invId[27+barPosition] != -1)
         //{
             float cubeBob = sinf(bobCycle - (3.14/2) + 3.14)/16;
             float cubeBob2 = cosf(bobCycle - (3.14/2) + 3.14)/18;
@@ -9481,14 +9481,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
             }
             sceGuColor(0xFFFFFFFF);
         //}
-	}
-	sceGuColor(0xFFFFFFFF);
-	///
+    }
+    sceGuColor(0xFFFFFFFF);
+    ///
 
-	/// DRAW MASKS
-	mRender->SetOrtho(0,0,0,0,0,0);
-	if(headInLava == 1 || footInLava == 1)
-	{
+    /// DRAW MASKS
+    mRender->SetOrtho(0,0,0,0,0,0);
+    if(headInLava == 1 || footInLava == 1)
+    {
         DrawSetDepthTest(false);
         DrawSetDepthMask(true);
         DrawSetBlend(true);
@@ -9496,14 +9496,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
         MatrixColor(GU_COLOR(1,1,1,0.7));
 
-		TextureManager::Instance()->SetTextureModeulate(red);
-		advancedBlit(0,0,SCR_WIDTH,SCR_HEIGHT,0,0,32);
+        TextureManager::Instance()->SetTextureModeulate(red);
+        advancedBlit(0,0,SCR_WIDTH,SCR_HEIGHT,0,0,32);
 
         DrawPlaceTexture(false);
         DrawSetBlend(false);
         DrawSetDepthMask(false);
         DrawSetDepthTest(true);
-	}
+    }
 
     if((invEn == 1 || craft3xEn == 1 || chestEn == 1 || menuState != 0 || furnaceEn == 1) && makeScreen == false)
     {
@@ -9561,8 +9561,8 @@ void StatePlayCreative::Draw(StateManager* sManager)
         DrawSetDepthTest(true);
     }
 
-	if(headInWater)
-	{
+    if(headInWater)
+    {
         if (GRAVITY != -4.0f)
         {
             GRAVITY = -4.0f;
@@ -9575,14 +9575,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
         MatrixColor(GU_COLOR(1,1,1,0.8));
 
-		waterScreen->Draw();
+        waterScreen->Draw();
 
         DrawPlaceTexture(false);
         DrawSetBlend(false);
         DrawSetDepthMask(false);
         DrawSetDepthTest(true);
-	}
-	else
+    }
+    else
     {
         if (GRAVITY != -6.8f)
         {
@@ -9591,13 +9591,13 @@ void StatePlayCreative::Draw(StateManager* sManager)
     }
     ///
 
-	/// GUI
-	sceGuDisable(GU_DEPTH_TEST);
-	sceGuDepthMask(1);
-	sceGuEnable(GU_BLEND);
-	sceGuColor(GU_COLOR(1,1,1,1.0f));
+    /// GUI
+    sceGuDisable(GU_DEPTH_TEST);
+    sceGuDepthMask(1);
+    sceGuEnable(GU_BLEND);
+    sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-	if ((invEn == false && craft3xEn == false && chestEn == false && furnaceEn == false && menuState == 0 && mWorld->mainOptions.guiDrawing == 1) || makeScreen == true)
+    if ((invEn == false && craft3xEn == false && chestEn == false && furnaceEn == false && menuState == 0 && mWorld->mainOptions.guiDrawing == 1) || makeScreen == true)
     {
         barSprite->Draw();
         if (menuState != 1)
@@ -9669,7 +9669,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
             }
         }
     }
-	sceGuDisable(GU_BLEND);
+    sceGuDisable(GU_BLEND);
 
     /// 3D BLOCKS AND ITEMS ON 2D PANEL
     if ((invEn == false && craft3xEn == false && chestEn == false && menuState == 0 && mWorld->mainOptions.guiDrawing == 1 && furnaceEn == false) || makeScreen == true)
@@ -10034,10 +10034,10 @@ void StatePlayCreative::Draw(StateManager* sManager)
         }
     }
 
-	DrawSetDepthTest(false);
-	DrawSetDepthMask(true);
-	DrawSetBlend(true);
-	MatrixColor(GU_COLOR(1,1,1,1.0f));
+    DrawSetDepthTest(false);
+    DrawSetDepthMask(true);
+    DrawSetBlend(true);
+    MatrixColor(GU_COLOR(1,1,1,1.0f));
     // durability strip drawing
     if ((invEn == false && craft3xEn == false && chestEn == false && furnaceEn == false && menuState == 0 && mWorld->mainOptions.guiDrawing == 1) || makeScreen == true)
     {
@@ -10497,13 +10497,13 @@ void StatePlayCreative::Draw(StateManager* sManager)
     sceGuEnable(GU_DEPTH_TEST);
 
     if(makeScreen)
-	{
-		//end frame now to update frame buffer
-		mRender->EndFrame();
-		//make screenshot
-		mRender->TakeNextScreenshot();
-		makeScreen = false;
-	}
+    {
+        //end frame now to update frame buffer
+        mRender->EndFrame();
+        //make screenshot
+        mRender->TakeNextScreenshot();
+        makeScreen = false;
+    }
 
     int language = mRender->GetFontLanguage();
     mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),GU_COLOR(0.0f,0.0f,0.0f,1),0x00000200);

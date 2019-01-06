@@ -4,14 +4,14 @@
 class DirectionBlock
 {
 public:
-	DirectionBlock(int x, int y, int z, char dir);
-	virtual ~DirectionBlock();
+    DirectionBlock(int x, int y, int z, char dir);
+    virtual ~DirectionBlock();
 
-	int X;
-	int Y;
-	int Z;
+    int X;
+    int Y;
+    int Z;
 
-	char direction;
+    char direction;
 };
 
 #endif

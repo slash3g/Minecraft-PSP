@@ -9,69 +9,69 @@ using namespace Aurora::Math;
 
 namespace Aurora
 {
-	namespace Graphics
-	{
-		class Camera
-		{
-		public:
-			Camera();
-			virtual ~Camera();
+    namespace Graphics
+    {
+        class Camera
+        {
+        public:
+            Camera();
+            virtual ~Camera();
 
-			void PositionCamera(float positionX, float positionY, float positionZ,
-						 		    float viewX,     float viewY,     float viewZ,
-									float upVectorX, float upVectorY, float upVectorZ);
+            void PositionCamera(float positionX, float positionY, float positionZ,
+                                    float viewX,     float viewY,     float viewZ,
+                                    float upVectorX, float upVectorY, float upVectorZ);
 
-			void Move(float speed);
-			void MoveTo(Vector3 newPos);
-			void MovePhysic(float speed);
-			Vector3 MoveFoCollision(float speed);
-			void MoveAfterCollision(Vector3 newPos);
+            void Move(float speed);
+            void MoveTo(Vector3 newPos);
+            void MovePhysic(float speed);
+            Vector3 MoveFoCollision(float speed);
+            void MoveAfterCollision(Vector3 newPos);
 
-			void Strafe(float speed);
-			void StrafePhysic(float speed);
+            void Strafe(float speed);
+            void StrafePhysic(float speed);
 
-			void MovePhysicNoY(float speed);
-			//Vector3 StrafeFoCollision(float speed);
-			//void StrafeAfterCollision(Vector3 newPos);
+            void MovePhysicNoY(float speed);
+            //Vector3 StrafeFoCollision(float speed);
+            //void StrafeAfterCollision(Vector3 newPos);
 
-			void RotateView(float angle, float x, float y, float z);
-			void PitchView(float speed);
+            void RotateView(float angle, float x, float y, float z);
+            void PitchView(float speed);
 
-			float atan_(float y, float x);
-
-
-			Frustum mFrustum;
-			bool needUpdate;
+            float atan_(float y, float x);
 
 
-		//private:
+            Frustum mFrustum;
+            bool needUpdate;
 
-			// The camera's position
-			Vector3 m_vPosition;
 
-			// The camera's offset
-			Vector3 m_vOffset;
+        //private:
 
-			// The camera's view
-			Vector3 m_vView;
+            // The camera's position
+            Vector3 m_vPosition;
 
-			// The camera's up vector
-			Vector3 m_vUpVector;
+            // The camera's offset
+            Vector3 m_vOffset;
 
-			// The camera's strafe vector
-			Vector3 m_vStrafe;
+            // The camera's view
+            Vector3 m_vView;
 
-			//TODO wtf is this for??
-			Vector3 m_vVelocity;
+            // The camera's up vector
+            Vector3 m_vUpVector;
 
-			Vector3 vVector;
+            // The camera's strafe vector
+            Vector3 m_vStrafe;
 
-			float horAngle;
+            //TODO wtf is this for??
+            Vector3 m_vVelocity;
 
-			float upDownAngle;
-			float upDownAngle2;
-		};
-	}
+            Vector3 vVector;
+
+            float horAngle;
+
+            float upDownAngle;
+            float upDownAngle2;
+        };
+    }
 }
 
 #endif

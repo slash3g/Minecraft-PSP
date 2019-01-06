@@ -63,127 +63,127 @@
 
 namespace Aurora
 {
-	namespace Graphics
-	{
-		class RenderManager
-		{
-		public:
+    namespace Graphics
+    {
+        class RenderManager
+        {
+        public:
 
-			enum FontColor
-			{
-				RED =	0xFF0000FF,
-				YELLOW = 0xFFFF00FF,
-				GREEN =	0xFF00FF00,
-				BLUE =	0xFFFF0000,
-				WHITE =	0xFFFFFFFF,
-				LITEGRAY = 0xFFBFBFBF,
-				GRAY =  0xFF7F7F7F,
-				DARKGRAY = 0xFF3F3F3F,
-				BLACK = 0xFF000000
-			};
+            enum FontColor
+            {
+                RED =	0xFF0000FF,
+                YELLOW = 0xFFFF00FF,
+                GREEN =	0xFF00FF00,
+                BLUE =	0xFFFF0000,
+                WHITE =	0xFFFFFFFF,
+                LITEGRAY = 0xFFBFBFBF,
+                GRAY =  0xFF7F7F7F,
+                DARKGRAY = 0xFF3F3F3F,
+                BLACK = 0xFF000000
+            };
 
-			float fovv;
+            float fovv;
 
-			void Init();
+            void Init();
 
-			void InitDebugFont();
-			void SetFontStyle(float size, unsigned int color, unsigned int shadowColor, unsigned int options);
-			void SetFont(int type);
-			void SetDefaultFont();
-			int GetFontLanguage();
+            void InitDebugFont();
+            void SetFontStyle(float size, unsigned int color, unsigned int shadowColor, unsigned int options);
+            void SetFont(int type);
+            void SetDefaultFont();
+            int GetFontLanguage();
 
-			void DebugPrint(int x,int y, const char *message, ...);
-			void Start();
-			void CleanBuffers();
-			void DrawCube(float x, float y, float z);
-
-
-			void StartFrame(float a, float b, float c);
-			void EndFrame();
-
-			//dialogs rendering
-			void StartDialog();
-			void EndDialog();
-
-			void UseVerticalSync(bool Enabled);
-			void SetClearColor(float r,float g,float b,float a);
-
-			void SetOrtho(float left, float right, float bottom, float top, float zNear, float zFar);
-			void SetOrtho2(float left, float right, float bottom, float top, float zNear, float zFar);
-			void SetPerspective(float _fov,float _aspect,float _znear,float _zfar);
-			void LookAt();
-
-			void DrawToTexture(Image* offscreenTexture );
-			void SetRTT();
-
-			void Draw(ObjModel *model);
-
-			void SetActiveCamera(Camera *camera);
-			void UpdateFrustumMatrix();
-
-			void SetClearColour(unsigned int color);
-
-			void TakeScreenshot(const char* filename);
-			void TakeNextScreenshot();
-
-			int GetCpuUsage() {return g_cpu_load;}
-			int GetGpuUsage() {return g_gpu_load;}
-			void CollectPerformance(bool state){performanceCounter = state; }
+            void DebugPrint(int x,int y, const char *message, ...);
+            void Start();
+            void CleanBuffers();
+            void DrawCube(float x, float y, float z);
 
 
-			static RenderManager * InstancePtr();
-			int defaultFontType;
+            void StartFrame(float a, float b, float c);
+            void EndFrame();
 
-			Camera *mCam;
+            //dialogs rendering
+            void StartDialog();
+            void EndDialog();
 
-			protected:
+            void UseVerticalSync(bool Enabled);
+            void SetClearColor(float r,float g,float b,float a);
 
-			static RenderManager m_RenderManager;
+            void SetOrtho(float left, float right, float bottom, float top, float zNear, float zFar);
+            void SetOrtho2(float left, float right, float bottom, float top, float zNear, float zFar);
+            void SetPerspective(float _fov,float _aspect,float _znear,float _zfar);
+            void LookAt();
+
+            void DrawToTexture(Image* offscreenTexture );
+            void SetRTT();
+
+            void Draw(ObjModel *model);
+
+            void SetActiveCamera(Camera *camera);
+            void UpdateFrustumMatrix();
+
+            void SetClearColour(unsigned int color);
+
+            void TakeScreenshot(const char* filename);
+            void TakeNextScreenshot();
+
+            int GetCpuUsage() {return g_cpu_load;}
+            int GetGpuUsage() {return g_gpu_load;}
+            void CollectPerformance(bool state){performanceCounter = state; }
+
+
+            static RenderManager * InstancePtr();
+            int defaultFontType;
+
+            Camera *mCam;
+
+            protected:
+
+            static RenderManager m_RenderManager;
 
 
 
-		private:
-			unsigned int cleanColor;
+        private:
+            unsigned int cleanColor;
 
             void* _fbp0;
-			void* _fbp1;
-			void* _zbp;
-			void* _frameBuffer;
+            void* _fbp1;
+            void* _zbp;
+            void* _frameBuffer;
 
-			char list[0x20000] __attribute__((aligned(64)));//__attribute__((aligned(16))) list[262144]
-			int listNum;
+            char list[0x20000] __attribute__((aligned(64)));//__attribute__((aligned(16))) list[262144]
+            int listNum;
 
-			bool mVerticalSync;
+            bool mVerticalSync;
 
-			ScePspFMatrix4 proj;
-			ScePspFMatrix4 view;
-			ScePspFMatrix4 projection_view_matrix;
+            ScePspFMatrix4 proj;
+            ScePspFMatrix4 view;
+            ScePspFMatrix4 projection_view_matrix;
 
-			//debug font
-			intraFont* debugFont;
-			intraFont* numFont;
-			intraFont* engFont;
-			intraFont* rusFont;
-			float fontVerticalShift;
-			int fontType;
+            //debug font
+            intraFont* debugFont;
+            intraFont* numFont;
+            intraFont* engFont;
+            intraFont* rusFont;
+            float fontVerticalShift;
+            int fontType;
 
-			float fov,aspect,znear,zfar;
+            float fov,aspect,znear,zfar;
 
-			int screenNumber;
+            int screenNumber;
 
-		private:
+        private:
 
-			//cpu and gpu timing
-			int g_vbl_count;	// previous vblank count
-			int g_vbl_step;		// previous vblank step
-			int g_vbl_time;		// previous vblank time
-			int g_cpu_load;		// current cpu load
-			int g_gpu_load;		// current gpu load
-			int g_frame_count;
-			bool performanceCounter;
+            //cpu and gpu timing
+            int g_vbl_count;	// previous vblank count
+            int g_vbl_step;		// previous vblank step
+            int g_vbl_time;		// previous vblank time
+            int g_cpu_load;		// current cpu load
+            int g_gpu_load;		// current gpu load
+            int g_frame_count;
+            bool performanceCounter;
 
-		};
-	}
+        };
+    }
 
 }
 

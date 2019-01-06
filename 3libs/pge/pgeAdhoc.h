@@ -69,11 +69,11 @@ extern "C" {
 
 typedef struct
 {
-	char mac[18];
-	char nickname[128];
-	char hello[128];
-	int event;
-	
+    char mac[18];
+    char nickname[128];
+    char hello[128];
+    int event;
+    
 } pgeAdhocPeerEvent;
 
 // PROTOTYPES

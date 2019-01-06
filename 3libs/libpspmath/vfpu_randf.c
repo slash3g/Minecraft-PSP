@@ -3,7 +3,7 @@
 float vfpu_randf(float min, float max) {
     float result;
     __asm__ volatile (
-		"mtv      %1, S000\n"
+        "mtv      %1, S000\n"
         "mtv      %2, S001\n"
         "vsub.s   S001, S001, S000\n"
         "vrndf1.s S002\n"

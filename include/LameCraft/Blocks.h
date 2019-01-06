@@ -7,289 +7,289 @@ class GrassBlock : public BaseBlock
 {
 public:
 
-	GrassBlock();
+    GrassBlock();
 
-	static block_t getID();
+    static block_t getID();
 };
 
 class DirtBlock : public BaseBlock
 {
 public:
 
-	DirtBlock();
-	static block_t getID();
+    DirtBlock();
+    static block_t getID();
 };
 
 class RockBlock : public BaseBlock
 {
 public:
 
-	RockBlock();
-	static block_t getID();
+    RockBlock();
+    static block_t getID();
 };
 
 class WaterBlock : public BaseBlock
 {
 public:
 
-	WaterBlock();
-	static block_t getID();
+    WaterBlock();
+    static block_t getID();
 };
 
 class GoldBlock : public BaseBlock
 {
 public:
 
-	GoldBlock();
-	static block_t getID();
+    GoldBlock();
+    static block_t getID();
 };
 
 class LadderBlock : public BaseBlock
 {
 public:
 
-	LadderBlock();
-	static block_t getID();
+    LadderBlock();
+    static block_t getID();
 };
 
 class SandBlock : public BaseBlock
 {
 public:
 
-	SandBlock();
-	static block_t getID();
+    SandBlock();
+    static block_t getID();
 };
 
 class WoodBlock : public BaseBlock
 {
 public:
 
-	WoodBlock();
-	static block_t getID();
+    WoodBlock();
+    static block_t getID();
 };
 
 class LeavesBlock : public BaseBlock
 {
 public:
 
-	LeavesBlock();
-	static block_t getID();
+    LeavesBlock();
+    static block_t getID();
 };
 
 class BlackWoolBlock : public BaseBlock
 {
 public:
 
-	BlackWoolBlock();
-	static block_t getID();
+    BlackWoolBlock();
+    static block_t getID();
 };
 
 class GrayWoolBlock : public BaseBlock
 {
 public:
 
-	GrayWoolBlock();
-	static block_t getID();
+    GrayWoolBlock();
+    static block_t getID();
 };
 
 class RedWoolBlock : public BaseBlock
 {
 public:
 
-	RedWoolBlock();
-	static block_t getID();
+    RedWoolBlock();
+    static block_t getID();
 };
 
 class PinkWoolBlock : public BaseBlock
 {
 public:
 
-	PinkWoolBlock();
-	static block_t getID();
+    PinkWoolBlock();
+    static block_t getID();
 };
 
 class DarkGreenWoolBlock : public BaseBlock
 {
 public:
 
-	DarkGreenWoolBlock();
-	static block_t getID();
+    DarkGreenWoolBlock();
+    static block_t getID();
 };
 
 class GreenWoolBlock : public BaseBlock
 {
 public:
 
-	GreenWoolBlock();
-	static block_t getID();
+    GreenWoolBlock();
+    static block_t getID();
 };
 
 class BrownWoolBlock : public BaseBlock
 {
 public:
 
-	BrownWoolBlock();
-	static block_t getID();
+    BrownWoolBlock();
+    static block_t getID();
 };
 
 class YellowWoolBlock : public BaseBlock
 {
 public:
 
-	YellowWoolBlock();
-	static block_t getID();
+    YellowWoolBlock();
+    static block_t getID();
 };
 
 class BlueWoolBlock : public BaseBlock
 {
 public:
 
-	BlueWoolBlock();
-	static block_t getID();
+    BlueWoolBlock();
+    static block_t getID();
 };
 
 class LightBlueWoolBlock : public BaseBlock
 {
 public:
 
-	LightBlueWoolBlock();
-	static block_t getID();
+    LightBlueWoolBlock();
+    static block_t getID();
 };
 
 class VioletWoolBlock : public BaseBlock
 {
 public:
 
-	VioletWoolBlock();
-	static block_t getID();
+    VioletWoolBlock();
+    static block_t getID();
 };
 
 class PastelWoolBlock : public BaseBlock
 {
 public:
 
-	PastelWoolBlock();
-	static block_t getID();
+    PastelWoolBlock();
+    static block_t getID();
 };
 
 class OrangeWoolBlock : public BaseBlock
 {
 public:
 
-	OrangeWoolBlock();
-	static block_t getID();
+    OrangeWoolBlock();
+    static block_t getID();
 };
 
 class LightGrayWoolBlock : public BaseBlock
 {
 public:
 
-	LightGrayWoolBlock();
-	static block_t getID();
+    LightGrayWoolBlock();
+    static block_t getID();
 };
 
 class WhiteWoolBlock : public BaseBlock
 {
 public:
 
-	WhiteWoolBlock();
-	static block_t getID();
+    WhiteWoolBlock();
+    static block_t getID();
 };
 
 class CactusBlock : public BaseBlock
 {
 public:
 
-	CactusBlock();
-	static block_t getID();
+    CactusBlock();
+    static block_t getID();
 };
 
 class SandStone : public BaseBlock
 {
 public:
 
-	SandStone();
-	static block_t getID();
+    SandStone();
+    static block_t getID();
 };
 
 class BrickBlock : public BaseBlock
 {
 public:
 
-	BrickBlock();
-	static block_t getID();
+    BrickBlock();
+    static block_t getID();
 };
 
 class CageBlock : public BaseBlock
 {
 public:
 
-	CageBlock();
-	static block_t getID();
+    CageBlock();
+    static block_t getID();
 };
 
 class SnowSoil : public BaseBlock
 {
 public:
 
-	SnowSoil();
-	static block_t getID();
+    SnowSoil();
+    static block_t getID();
 };
 
 class DarkWoodBlock : public BaseBlock
 {
 public:
 
-	DarkWoodBlock();
-	static block_t getID();
+    DarkWoodBlock();
+    static block_t getID();
 };
 
 class WhiteWoodBlock : public BaseBlock
 {
 public:
 
-	WhiteWoodBlock();
-	static block_t getID();
+    WhiteWoodBlock();
+    static block_t getID();
 };
 
 class IceBlock : public BaseBlock
 {
 public:
 
-	IceBlock();
-	static block_t getID();
+    IceBlock();
+    static block_t getID();
 };
 
 class CaneBlock : public BaseBlock
 {
 public:
 
-	CaneBlock();
-	static block_t getID();
+    CaneBlock();
+    static block_t getID();
 };
 
 class OakPlanks : public BaseBlock
 {
 public:
 
-	OakPlanks();
-	static block_t getID();
+    OakPlanks();
+    static block_t getID();
 };
 
 class ShelfBlock : public BaseBlock
 {
 public:
 
-	ShelfBlock();
-	static block_t getID();
+    ShelfBlock();
+    static block_t getID();
 };
 
 class CobbleStone : public BaseBlock
 {
 public:
 
-	CobbleStone();
-	static block_t getID();
+    CobbleStone();
+    static block_t getID();
 };
 
 //
@@ -297,152 +297,152 @@ class SpruceLeaves : public BaseBlock
 {
 public:
 
-	SpruceLeaves();
-	static block_t getID();
+    SpruceLeaves();
+    static block_t getID();
 };
 
 class BirchLeaves : public BaseBlock
 {
 public:
 
-	BirchLeaves();
-	static block_t getID();
+    BirchLeaves();
+    static block_t getID();
 };
 
 class Sponge : public BaseBlock
 {
 public:
 
-	Sponge();
-	static block_t getID();
+    Sponge();
+    static block_t getID();
 };
 
 class GlassBlock : public BaseBlock
 {
 public:
 
-	GlassBlock();
-	static block_t getID();
+    GlassBlock();
+    static block_t getID();
 };
 
 class IronOre : public BaseBlock
 {
 public:
 
-	IronOre();
-	static block_t getID();
+    IronOre();
+    static block_t getID();
 };
 
 class CoalOre : public BaseBlock
 {
 public:
 
-	CoalOre();
-	static block_t getID();
+    CoalOre();
+    static block_t getID();
 };
 
 class DiamondOre : public BaseBlock
 {
 public:
 
-	DiamondOre();
-	static block_t getID();
+    DiamondOre();
+    static block_t getID();
 };
 
 class RedstoneOre : public BaseBlock
 {
 public:
 
-	RedstoneOre();
-	static block_t getID();
+    RedstoneOre();
+    static block_t getID();
 };
 
 class LapisOre : public BaseBlock
 {
 public:
 
-	LapisOre();
-	static block_t getID();
+    LapisOre();
+    static block_t getID();
 };
 
 class Obsidian : public BaseBlock
 {
 public:
 
-	Obsidian();
-	static block_t getID();
+    Obsidian();
+    static block_t getID();
 };
 
 class SnowBlock : public BaseBlock
 {
 public:
 
-	SnowBlock();
-	static block_t getID();
+    SnowBlock();
+    static block_t getID();
 };
 
 class Torch : public BaseBlock
 {
 public:
 
-	Torch();
-	static block_t getID();
+    Torch();
+    static block_t getID();
 };
 
 class Door1 : public BaseBlock
 {
 public:
 
-	Door1();
-	static block_t getID();
+    Door1();
+    static block_t getID();
 };
 
 class Door2 : public BaseBlock
 {
 public:
 
-	Door2();
-	static block_t getID();
+    Door2();
+    static block_t getID();
 };
 
 class Door3 : public BaseBlock
 {
 public:
 
-	Door3();
-	static block_t getID();
+    Door3();
+    static block_t getID();
 };
 
 class Door4 : public BaseBlock
 {
 public:
 
-	Door4();
-	static block_t getID();
+    Door4();
+    static block_t getID();
 };
 
 class Door5 : public BaseBlock
 {
 public:
 
-	Door5();
-	static block_t getID();
+    Door5();
+    static block_t getID();
 };
 
 class Door6 : public BaseBlock
 {
 public:
 
-	Door6();
-	static block_t getID();
+    Door6();
+    static block_t getID();
 };
 
 class Door7 : public BaseBlock
 {
 public:
 
-	Door7();
-	static block_t getID();
+    Door7();
+    static block_t getID();
 };
 
 class Door8 : public BaseBlock
@@ -1115,16 +1115,16 @@ class WheatBlock5 : public BaseBlock
 {
 public:
 
-	WheatBlock5();
-	static block_t getID();
+    WheatBlock5();
+    static block_t getID();
 };
 
 class WheatBlock6 : public BaseBlock
 {
 public:
 
-	WheatBlock6();
-	static block_t getID();
+    WheatBlock6();
+    static block_t getID();
 };
 
 class WorldSky : public BaseBlock
@@ -1147,152 +1147,152 @@ class IronBlock : public BaseBlock
 {
 public:
 
-	IronBlock();
-	static block_t getID();
+    IronBlock();
+    static block_t getID();
 };
 
 class JackOLantern1 : public BaseBlock
 {
 public:
 
-	JackOLantern1();
-	static block_t getID();
+    JackOLantern1();
+    static block_t getID();
 };
 
 class JackOLantern2 : public BaseBlock
 {
 public:
 
-	JackOLantern2();
-	static block_t getID();
+    JackOLantern2();
+    static block_t getID();
 };
 
 class JackOLantern3 : public BaseBlock
 {
 public:
 
-	JackOLantern3();
-	static block_t getID();
+    JackOLantern3();
+    static block_t getID();
 };
 
 class JackOLantern4 : public BaseBlock
 {
 public:
 
-	JackOLantern4();
-	static block_t getID();
+    JackOLantern4();
+    static block_t getID();
 };
 
 class TrapdoorOpen1 : public BaseBlock
 {
 public:
 
-	TrapdoorOpen1();
-	static block_t getID();
+    TrapdoorOpen1();
+    static block_t getID();
 };
 
 class TrapdoorOpen2 : public BaseBlock
 {
 public:
 
-	TrapdoorOpen2();
-	static block_t getID();
+    TrapdoorOpen2();
+    static block_t getID();
 };
 
 class TrapdoorOpen3 : public BaseBlock
 {
 public:
 
-	TrapdoorOpen3();
-	static block_t getID();
+    TrapdoorOpen3();
+    static block_t getID();
 };
 
 class TrapdoorOpen4 : public BaseBlock
 {
 public:
 
-	TrapdoorOpen4();
-	static block_t getID();
+    TrapdoorOpen4();
+    static block_t getID();
 };
 
 class TrapdoorClosed1 : public BaseBlock
 {
 public:
 
-	TrapdoorClosed1();
-	static block_t getID();
+    TrapdoorClosed1();
+    static block_t getID();
 };
 
 class TrapdoorClosed2 : public BaseBlock
 {
 public:
 
-	TrapdoorClosed2();
-	static block_t getID();
+    TrapdoorClosed2();
+    static block_t getID();
 };
 
 class TrapdoorClosed3 : public BaseBlock
 {
 public:
 
-	TrapdoorClosed3();
-	static block_t getID();
+    TrapdoorClosed3();
+    static block_t getID();
 };
 
 class TrapdoorClosed4 : public BaseBlock
 {
 public:
 
-	TrapdoorClosed4();
-	static block_t getID();
+    TrapdoorClosed4();
+    static block_t getID();
 };
 
 class BirchPlanks : public BaseBlock
 {
 public:
 
-	BirchPlanks();
-	static block_t getID();
+    BirchPlanks();
+    static block_t getID();
 };
 
 class SprucePlanks : public BaseBlock
 {
 public:
 
-	SprucePlanks();
-	static block_t getID();
+    SprucePlanks();
+    static block_t getID();
 };
 
 class BirchHalfBlock : public BaseBlock
 {
 public:
 
-	BirchHalfBlock();
-	static block_t getID();
+    BirchHalfBlock();
+    static block_t getID();
 };
 
 class SpruceHalfBlock : public BaseBlock
 {
 public:
 
-	SpruceHalfBlock();
-	static block_t getID();
+    SpruceHalfBlock();
+    static block_t getID();
 };
 
 class BirchFence : public BaseBlock
 {
 public:
 
-	BirchFence();
-	static block_t getID();
+    BirchFence();
+    static block_t getID();
 };
 
 class SpruceFence : public BaseBlock
 {
 public:
 
-	SpruceFence();
-	static block_t getID();
+    SpruceFence();
+    static block_t getID();
 };
 
 class BirchStair1 : public BaseBlock
@@ -1596,144 +1596,144 @@ class BlackWoolCarpet : public BaseBlock
 {
 public:
 
-	BlackWoolCarpet();
-	static block_t getID();
+    BlackWoolCarpet();
+    static block_t getID();
 };
 
 class GrayWoolCarpet : public BaseBlock
 {
 public:
 
-	GrayWoolCarpet();
-	static block_t getID();
+    GrayWoolCarpet();
+    static block_t getID();
 };
 
 class RedWoolCarpet : public BaseBlock
 {
 public:
 
-	RedWoolCarpet();
-	static block_t getID();
+    RedWoolCarpet();
+    static block_t getID();
 };
 
 class PinkWoolCarpet : public BaseBlock
 {
 public:
 
-	PinkWoolCarpet();
-	static block_t getID();
+    PinkWoolCarpet();
+    static block_t getID();
 };
 
 class DarkGreenWoolCarpet : public BaseBlock
 {
 public:
 
-	DarkGreenWoolCarpet();
-	static block_t getID();
+    DarkGreenWoolCarpet();
+    static block_t getID();
 };
 
 class GreenWoolCarpet : public BaseBlock
 {
 public:
 
-	GreenWoolCarpet();
-	static block_t getID();
+    GreenWoolCarpet();
+    static block_t getID();
 };
 
 class BrownWoolCarpet : public BaseBlock
 {
 public:
 
-	BrownWoolCarpet();
-	static block_t getID();
+    BrownWoolCarpet();
+    static block_t getID();
 };
 
 class YellowWoolCarpet : public BaseBlock
 {
 public:
 
-	YellowWoolCarpet();
-	static block_t getID();
+    YellowWoolCarpet();
+    static block_t getID();
 };
 
 class BlueWoolCarpet : public BaseBlock
 {
 public:
 
-	BlueWoolCarpet();
-	static block_t getID();
+    BlueWoolCarpet();
+    static block_t getID();
 };
 
 class LightBlueWoolCarpet : public BaseBlock
 {
 public:
 
-	LightBlueWoolCarpet();
-	static block_t getID();
+    LightBlueWoolCarpet();
+    static block_t getID();
 };
 
 class VioletWoolCarpet : public BaseBlock
 {
 public:
 
-	VioletWoolCarpet();
-	static block_t getID();
+    VioletWoolCarpet();
+    static block_t getID();
 };
 
 class PastelWoolCarpet : public BaseBlock
 {
 public:
 
-	PastelWoolCarpet();
-	static block_t getID();
+    PastelWoolCarpet();
+    static block_t getID();
 };
 
 class OrangeWoolCarpet : public BaseBlock
 {
 public:
 
-	OrangeWoolCarpet();
-	static block_t getID();
+    OrangeWoolCarpet();
+    static block_t getID();
 };
 
 class LightGrayWoolCarpet : public BaseBlock
 {
 public:
 
-	LightGrayWoolCarpet();
-	static block_t getID();
+    LightGrayWoolCarpet();
+    static block_t getID();
 };
 
 class WhiteWoolCarpet : public BaseBlock
 {
 public:
 
-	WhiteWoolCarpet();
-	static block_t getID();
+    WhiteWoolCarpet();
+    static block_t getID();
 };
 
 class HayBale : public BaseBlock
 {
 public:
 
-	HayBale();
-	static block_t getID();
+    HayBale();
+    static block_t getID();
 };
 
 class CoalBlock : public BaseBlock
 {
 public:
 
-	CoalBlock();
-	static block_t getID();
+    CoalBlock();
+    static block_t getID();
 };
 
 class RedstoneBlock : public BaseBlock
 {
 public:
 
-	RedstoneBlock();
-	static block_t getID();
+    RedstoneBlock();
+    static block_t getID();
 };
 
 #endif

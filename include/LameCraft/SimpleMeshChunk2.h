@@ -16,47 +16,47 @@ class SimpleMeshChunk
 {
 public:
 
-	//unsigned short id;
+    //unsigned short id;
     bool inFrustum;
 
-	unsigned char chunkStartZ;
-	unsigned char chunkStartY;
-	unsigned char chunkStartX;
+    unsigned char chunkStartZ;
+    unsigned char chunkStartY;
+    unsigned char chunkStartX;
 
-	bool periodicallyUpadted;
-	bool haveTransparentVerts;
+    bool periodicallyUpadted;
+    bool haveTransparentVerts;
 
-	BoundingBox bBox;
+    BoundingBox bBox;
 
-	SimpleMeshChunk();
-	SimpleMeshChunk(int _chunkSize);
-	~SimpleMeshChunk();
+    SimpleMeshChunk();
+    SimpleMeshChunk(int _chunkSize);
+    ~SimpleMeshChunk();
 
-	int trienglesCount;
-	bool created;
-	bool needUpdate;
+    int trienglesCount;
+    bool created;
+    bool needUpdate;
 
-	void position(float x,float y,float z);
-	void textureCoord(float u,float v);
-	void triangle(int x,int y,int z);
-	void colour(float x,float y,float z);
+    void position(float x,float y,float z);
+    void textureCoord(float u,float v);
+    void triangle(int x,int y,int z);
+    void colour(float x,float y,float z);
 
-	void info(float x,float y,float z,float u,float v,float r,float g,float b);
-	void vert(float x,float y,float z,float u,float v,float r,float g,float b);
+    void info(float x,float y,float z,float u,float v,float r,float g,float b);
+    void vert(float x,float y,float z,float u,float v,float r,float g,float b);
 
-	void start();
-	void end();
+    void start();
+    void end();
 
-	void end2();
+    void end2();
 
-	void drawChunk();
-	void reset();
+    void drawChunk();
+    void reset();
 
-	CraftPSPVertex *meshVertices;
+    CraftPSPVertex *meshVertices;
 
 private:
     std::vector<CraftPSPVertex> mVertices;
-	std::vector<Vector3> mTriangle;
+    std::vector<Vector3> mTriangle;
 };
 
 #endif

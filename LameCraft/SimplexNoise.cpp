@@ -83,34 +83,34 @@ static unsigned char simplex[64][4] = {
   {2,1,0,3},{0,0,0,0},{0,0,0,0},{0,0,0,0},{3,1,0,2},{0,0,0,0},{3,2,0,1},{3,2,1,0}};
 
 float grad1( int hash, float *gx ) {
-	int h = hash & 15;
-	*gx = 1.0f + (h & 7);   // Gradient value is one of 1.0, 2.0, ..., 8.0
-	if (h&8) *gx = - *gx;   // Make half of the gradients negative
-	return 0;
+    int h = hash & 15;
+    *gx = 1.0f + (h & 7);   // Gradient value is one of 1.0, 2.0, ..., 8.0
+    if (h&8) *gx = - *gx;   // Make half of the gradients negative
+    return 0;
 }
 
 void grad2( int hash, float *gx, float *gy ) {
-	int h = hash & 7;
-	*gx = grad2lut[h][0];
-	*gy = grad2lut[h][1];
-	return;
+    int h = hash & 7;
+    *gx = grad2lut[h][0];
+    *gy = grad2lut[h][1];
+    return;
 }
 
 void grad3( int hash, float *gx, float *gy, float *gz ) {
-	int h = hash & 15;
-	*gx = grad3lut[h][0];
-	*gy = grad3lut[h][1];
-	*gz = grad3lut[h][2];
-	return;
+    int h = hash & 15;
+    *gx = grad3lut[h][0];
+    *gy = grad3lut[h][1];
+    *gz = grad3lut[h][2];
+    return;
 }
 
 void grad4( int hash, float *gx, float *gy, float *gz, float *gw) {
-	int h = hash & 31;
-	*gx = grad4lut[h][0];
-	*gy = grad4lut[h][1];
-	*gz = grad4lut[h][2];
-	*gw = grad4lut[h][3];
-	return;
+    int h = hash & 31;
+    *gx = grad4lut[h][0];
+    *gy = grad4lut[h][1];
+    *gz = grad4lut[h][2];
+    *gw = grad4lut[h][3];
+    return;
 }
 
 SimplexNoise::SimplexNoise(void)
@@ -123,7 +123,7 @@ SimplexNoise::SimplexNoise(void)
 
 SimplexNoise::SimplexNoise(int seed)
 {
-	setSeed(seed);
+    setSeed(seed);
 }
 
 
@@ -133,25 +133,25 @@ SimplexNoise::~SimplexNoise(void)
 
 float SimplexNoise::Linear(float a,float b,float x)
 {
-	return  a*(1.0f-x) + b*x;
+    return  a*(1.0f-x) + b*x;
 }
 
 void SimplexNoise::setSeed(int seed)
 {
-	srand(seed);
-	unsigned char temp[256];
+    srand(seed);
+    unsigned char temp[256];
 
-	int i = 0;
-	for(i = 0;i < 256;i++)
-	{
-		temp[i] = rand() % 256;
-	}
+    int i = 0;
+    for(i = 0;i < 256;i++)
+    {
+        temp[i] = rand() % 256;
+    }
 
-	i = 0;
-	for(i = 0; i < 512;i++)
-	{
-		perm[i] = temp[i % 256];
-	}
+    i = 0;
+    for(i = 0; i < 512;i++)
+    {
+        perm[i] = temp[i % 256];
+    }
 }
 
 float SimplexNoise::sdnoise1( float x, float *dnoise_dx)
@@ -199,7 +199,7 @@ float SimplexNoise::sdnoise1( float x, float *dnoise_dx)
 
 float SimplexNoise::sdnoise2( float x, float y, float *dnoise_dx, float *dnoise_dy )
 {
-	float n0, n1, n2; /* Noise contributions from the three simplex corners */
+    float n0, n1, n2; /* Noise contributions from the three simplex corners */
     float gx0, gy0, gx1, gy1, gx2, gy2; /* Gradients at simplex corners */
 
     /* Skew the input space to determine which simplex cell we're in */
@@ -238,10 +238,10 @@ float SimplexNoise::sdnoise2( float x, float y, float *dnoise_dx, float *dnoise_
     float t20, t40;
     if( t0 < 0.0f ) t40 = t20 = t0 = n0 = gx0 = gy0 = 0.0f; /* No influence */
     else {
-		if(ii < 0 || jj < 0)
-		{
-			int aa = 1;
-		}
+        if(ii < 0 || jj < 0)
+        {
+            int aa = 1;
+        }
 
       grad2( perm[ii + perm[jj]], &gx0, &gy0 );
       t20 = t0 * t0;
@@ -277,14 +277,14 @@ float SimplexNoise::sdnoise2( float x, float y, float *dnoise_dx, float *dnoise_
      * for the last two arguments */
     if( ( dnoise_dx != 0 ) && ( dnoise_dy != 0 ) )
       {
-	/*  A straight, unoptimised calculation would be like:
+    /*  A straight, unoptimised calculation would be like:
      *    *dnoise_dx = -8.0f * t20 * t0 * x0 * ( gx0 * x0 + gy0 * y0 ) + t40 * gx0;
      *    *dnoise_dy = -8.0f * t20 * t0 * y0 * ( gx0 * x0 + gy0 * y0 ) + t40 * gy0;
      *    *dnoise_dx += -8.0f * t21 * t1 * x1 * ( gx1 * x1 + gy1 * y1 ) + t41 * gx1;
      *    *dnoise_dy += -8.0f * t21 * t1 * y1 * ( gx1 * x1 + gy1 * y1 ) + t41 * gy1;
      *    *dnoise_dx += -8.0f * t22 * t2 * x2 * ( gx2 * x2 + gy2 * y2 ) + t42 * gx2;
      *    *dnoise_dy += -8.0f * t22 * t2 * y2 * ( gx2 * x2 + gy2 * y2 ) + t42 * gy2;
-	 */
+     */
         float temp0 = t20 * t0 * ( gx0* x0 + gy0 * y0 );
         *dnoise_dx = temp0 * x0;
         *dnoise_dy = temp0 * y0;
@@ -418,7 +418,7 @@ float SimplexNoise::sdnoise3( float x, float y, float z,float *dnoise_dx, float 
      * for the last three arguments */
     if( ( dnoise_dx != 0 ) && ( dnoise_dy != 0 ) && ( dnoise_dz != 0 ))
       {
-	/*  A straight, unoptimised calculation would be like:
+    /*  A straight, unoptimised calculation would be like:
      *     *dnoise_dx = -8.0f * t20 * t0 * x0 * dot(gx0, gy0, gz0, x0, y0, z0) + t40 * gx0;
      *    *dnoise_dy = -8.0f * t20 * t0 * y0 * dot(gx0, gy0, gz0, x0, y0, z0) + t40 * gy0;
      *    *dnoise_dz = -8.0f * t20 * t0 * z0 * dot(gx0, gy0, gz0, x0, y0, z0) + t40 * gz0;
@@ -458,7 +458,7 @@ float SimplexNoise::sdnoise3( float x, float y, float z,float *dnoise_dx, float 
         *dnoise_dy *= 28.0f;
         *dnoise_dz *= 28.0f;
       }
-	return noise;
+    return noise;
 }
 
 #define F4 0.309016994f // F4 = (Math.sqrt(5.0)-1.0)/4.0
@@ -613,7 +613,7 @@ float SimplexNoise::sdnoise4( float x, float y, float z, float w,	float *dnoise_
      * for the last four arguments */
     if( ( dnoise_dx != 0 ) && ( dnoise_dy != 0 ) && ( dnoise_dz != 0 ) && ( dnoise_dw != 0 ) )
       {
-	/*  A straight, unoptimised calculation would be like:
+    /*  A straight, unoptimised calculation would be like:
      *     *dnoise_dx = -8.0f * t20 * t0 * x0 * dot(gx0, gy0, gz0, gw0, x0, y0, z0, w0) + t40 * gx0;
      *    *dnoise_dy = -8.0f * t20 * t0 * y0 * dot(gx0, gy0, gz0, gw0, x0, y0, z0, w0) + t40 * gy0;
      *    *dnoise_dz = -8.0f * t20 * t0 * z0 * dot(gx0, gy0, gz0, gw0, x0, y0, z0, w0) + t40 * gz0;

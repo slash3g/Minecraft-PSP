@@ -12,8 +12,8 @@
 class BlockEntity
 {
 public:
-	BlockEntity(int create_x, int create_y, int create_z);
-	virtual ~BlockEntity();
+    BlockEntity(int create_x, int create_y, int create_z);
+    virtual ~BlockEntity();
 
     int GetX();
     int GetY();
@@ -22,9 +22,9 @@ public:
     Vector3 GetPosition();
 
 private:
-	int x;
-	int y;
-	int z;
+    int x;
+    int y;
+    int z;
 };
 
 #endif

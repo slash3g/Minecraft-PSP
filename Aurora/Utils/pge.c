@@ -35,75 +35,75 @@
 //#include "support/pgesupportprx.h"
 
 #ifdef __PSP__
-	PSP_MODULE_INFO("Phoenix Game Engine", PSP_MODULE_USER, 1, PGE_VERSION);
-	PSP_MAIN_THREAD_ATTR(PSP_THREAD_ATTR_USER|PSP_THREAD_ATTR_VFPU);
+    PSP_MODULE_INFO("Phoenix Game Engine", PSP_MODULE_USER, 1, PGE_VERSION);
+    PSP_MAIN_THREAD_ATTR(PSP_THREAD_ATTR_USER|PSP_THREAD_ATTR_VFPU);
 #endif
 
 static int running = 1;
 
 static int pgeExitCallback(int arg1, int arg2, void *common)
 {
-	(void)arg1;
-	(void)arg2;
-	(void)common;
+    (void)arg1;
+    (void)arg2;
+    (void)common;
 
-	running = 0;
+    running = 0;
 
-	return 0;
+    return 0;
 }
 
 static int pgeCallbackThread(SceSize args, void *argp)
 {
-	(void)args;
-	(void)argp;
+    (void)args;
+    (void)argp;
 
-	int cbid;
+    int cbid;
 
-	cbid = sceKernelCreateCallback("PgeExitCallback", pgeExitCallback, NULL);
-	sceKernelRegisterExitCallback(cbid);
+    cbid = sceKernelCreateCallback("PgeExitCallback", pgeExitCallback, NULL);
+    sceKernelRegisterExitCallback(cbid);
 
-	sceKernelSleepThreadCB();
+    sceKernelSleepThreadCB();
 
-	return 0;
+    return 0;
 }
 
 static int pgeCallbackSetup(void)
 {
-	int thid = 0;
+    int thid = 0;
 
-	thid = sceKernelCreateThread("PgeCallbackThread", pgeCallbackThread, 0x11, 0xFA0, PSP_THREAD_ATTR_USER, 0);
+    thid = sceKernelCreateThread("PgeCallbackThread", pgeCallbackThread, 0x11, 0xFA0, PSP_THREAD_ATTR_USER, 0);
 
-	if(thid >= 0)
-		sceKernelStartThread(thid, 0, 0);
+    if(thid >= 0)
+        sceKernelStartThread(thid, 0, 0);
 
-	return thid;
+    return thid;
 }
 
 void pgeExit(void)
 {
-	running = 0;
+    running = 0;
 
-	sceKernelExitGame();
+    sceKernelExitGame();
 }
 
 void pgeDelay(unsigned int delay)
 {
-	sceKernelDelayThread(delay);
+    sceKernelDelayThread(delay);
 }
 
 void *pgeMalloc(int size)
 {
-	void *ptr = malloc(size);
-	return ptr;
+    void *ptr = malloc(size);
+    return ptr;
 }
 
 void pgeFree(void *ptr)
 {
-	if(ptr != NULL)
-		free(ptr);
+    if(ptr != NULL)
+        free(ptr);
 }
 
 void *pgeRealloc(void *ptr, int size)
 {
-	return realloc(ptr, size);
+    return realloc(ptr, size);
 }

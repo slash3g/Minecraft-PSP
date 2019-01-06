@@ -8,26 +8,26 @@
 
 namespace Aurora
 {
-	namespace Graphics
-	{
-		class SkyBox
-		{
-		public:
-			SkyBox();
-			~SkyBox();
+    namespace Graphics
+    {
+        class SkyBox
+        {
+        public:
+            SkyBox();
+            ~SkyBox();
 
             void BuildVertexObject();
-			void Update();
-			void Render(Vector3 color, Vector3 playerPos, float camAngle);
+            void Update();
+            void Render(Vector3 color, Vector3 playerPos, float camAngle);
 
-		private:
+        private:
 
-			SimplePSPVertex2 *skyBoxVertices;
+            SimplePSPVertex2 *skyBoxVertices;
 
-			float size;
-			int vertsNum;
-		};
-	}
+            float size;
+            int vertsNum;
+        };
+    }
 }
 
 #endif

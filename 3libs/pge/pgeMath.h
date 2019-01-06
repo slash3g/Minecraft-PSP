@@ -39,8 +39,8 @@ extern "C" {
 */
 typedef struct
 {
-	float	x1, y1, x2, y2;
-	int clean;
+    float	x1, y1, x2, y2;
+    int clean;
 } pgeRect2;
 
 /**

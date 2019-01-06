@@ -9,22 +9,22 @@
 
 namespace Aurora
 {
-	namespace Graphics
-	{
-		class InventoryPlayer
-		{
-		public:
-			InventoryPlayer();
-			~InventoryPlayer();
+    namespace Graphics
+    {
+        class InventoryPlayer
+        {
+        public:
+            InventoryPlayer();
+            ~InventoryPlayer();
 
-			void Update();
-			void Render(CraftWorld *world, float dt, float angle, int texNum, int handItemId);
+            void Update();
+            void Render(CraftWorld *world, float dt, float angle, int texNum, int handItemId);
 
-			float mainAngle;
-			float scale;
-			float animT;
+            float mainAngle;
+            float scale;
+            float animT;
 
-		private:
+        private:
 
             float rHandAngle;
             float lHandAngle;
@@ -32,8 +32,8 @@ namespace Aurora
             float lLegAngle;
 
             Vector3 position;
-		};
-	}
+        };
+    }
 }
 
 #endif

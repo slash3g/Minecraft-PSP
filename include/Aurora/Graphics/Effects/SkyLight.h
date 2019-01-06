@@ -7,24 +7,24 @@
 
 namespace Aurora
 {
-	namespace Graphics
-	{
-		class SkyLight
-		{
-		public:
-			SkyLight();
-			~SkyLight();
+    namespace Graphics
+    {
+        class SkyLight
+        {
+        public:
+            SkyLight();
+            ~SkyLight();
 
-			void UpdateLightSource(float sun_angle);
-			void Render();
+            void UpdateLightSource(float sun_angle);
+            void Render();
 
-		private:
+        private:
 
-			TexturesPSPVertex *skyVertices;
+            TexturesPSPVertex *skyVertices;
 
-			float sun_angle;
-		};
-	}
+            float sun_angle;
+        };
+    }
 }
 
 #endif

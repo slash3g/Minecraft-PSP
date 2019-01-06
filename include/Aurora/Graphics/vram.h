@@ -7,8 +7,8 @@ extern "C" {
 #endif
 
 /*
-	The following are a few helperfunctions to help manage vram in gu-examples.
-	Do not use for your own code, it's better you manage it in your own way.
+    The following are a few helperfunctions to help manage vram in gu-examples.
+    Do not use for your own code, it's better you manage it in your own way.
 */
 
 /* make a static allocation of vram memory and return pointer relative to vram start */

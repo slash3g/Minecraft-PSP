@@ -11,17 +11,17 @@ int ChunkDataProvider::so = 0;
 
 ChunkDataProvider::ChunkDataProvider()
 {
-	// the loadingscreen is loaded as a thread
-	thid_2 = sceKernelCreateThread("ChunkHeart", ChunkDataDealer, 0x16, 0x10000, THREAD_ATTR_VFPU|THREAD_ATTR_USER, NULL);
-	// start the thread
-	sceKernelStartThread(thid_2, 0, 0);
+    // the loadingscreen is loaded as a thread
+    thid_2 = sceKernelCreateThread("ChunkHeart", ChunkDataDealer, 0x16, 0x10000, THREAD_ATTR_VFPU|THREAD_ATTR_USER, NULL);
+    // start the thread
+    sceKernelStartThread(thid_2, 0, 0);
 }
 
 
 void ChunkDataProvider::KillDealer()
 {
-	// shut down the dealer again.
-	sceKernelTerminateDeleteThread(thid_2);
+    // shut down the dealer again.
+    sceKernelTerminateDeleteThread(thid_2);
 }
 
 
@@ -44,6 +44,6 @@ int ChunkDataProvider::ChunkDataDealer(SceSize args, void *argp)
     free(testChunkData);
     busy = false;
 
-	return 0;
+    return 0;
 }
 

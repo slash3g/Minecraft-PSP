@@ -33,16 +33,16 @@ namespace utils
 void EndianUtils::flipEndian (void *data, size_t size)
 {
 #if NOISEPP_BIG_ENDIAN
-	if (size < 2)
-		return;
-	assert (size % 2 == 0);
-	char byte;
-	for(size_t i=0;i<size/2;++i)
-	{
-		byte = *(char*)((long)data+i);
-		*(char*)((long)data+i) = *(char*)((long)data+(size-i-1));
-		*(char*)((long)data+(size-i-1)) = byte;
-	}
+    if (size < 2)
+        return;
+    assert (size % 2 == 0);
+    char byte;
+    for(size_t i=0;i<size/2;++i)
+    {
+        byte = *(char*)((long)data+i);
+        *(char*)((long)data+i) = *(char*)((long)data+(size-i-1));
+        *(char*)((long)data+(size-i-1)) = byte;
+    }
 #endif
 }
 

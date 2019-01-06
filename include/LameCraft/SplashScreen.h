@@ -13,19 +13,19 @@ class SplashScreen
 {
 public:
 
-	SplashScreen(const char* filename,int startW,int startH,int endW,int endH,float splashTime);
-	SplashScreen(int textureNumber,int startW,int startH,int endW,int endH,float splashTime);
-	~SplashScreen();
+    SplashScreen(const char* filename,int startW,int startH,int endW,int endH,float splashTime);
+    SplashScreen(int textureNumber,int startW,int startH,int endW,int endH,float splashTime);
+    ~SplashScreen();
 
-	void ShowSplash();
+    void ShowSplash();
 
 private:
 
-	float finishTime;
-	float timer;
-	float dt;
-	Sprite* sprite;
-	Timer mTimer;
+    float finishTime;
+    float timer;
+    float dt;
+    Sprite* sprite;
+    Timer mTimer;
 
 };
 

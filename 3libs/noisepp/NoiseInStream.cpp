@@ -46,40 +46,40 @@ FileInStream::FileInStream ()
 
 FileInStream::FileInStream(const std::string &filename)
 {
-	open (filename);
+    open (filename);
 }
 
 bool FileInStream::open (const std::string &filename)
 {
-	mFile.open (filename.c_str(), std::ios::binary);
-	return mFile.is_open ();
+    mFile.open (filename.c_str(), std::ios::binary);
+    return mFile.is_open ();
 }
 
 bool FileInStream::isOpen ()
 {
-	return mFile.is_open ();
+    return mFile.is_open ();
 }
 
 void FileInStream::close ()
 {
-	mFile.close ();
+    mFile.close ();
 }
 
 void FileInStream::read (void *buffer, size_t len)
 {
-	mFile.read ((char*)buffer, (std::streamsize)len);
-	//if (mFile.bad())
-	//	throw std::runtime_error ("Unexpected EOF");
+    mFile.read ((char*)buffer, (std::streamsize)len);
+    //if (mFile.bad())
+    //	throw std::runtime_error ("Unexpected EOF");
 }
 
 size_t FileInStream::tell ()
 {
-	return mFile.tellg ();
+    return mFile.tellg ();
 }
 
 void FileInStream::seek (size_t pos)
 {
-	mFile.seekg ((std::streamoff)pos);
+    mFile.seekg ((std::streamoff)pos);
 }
 
 MemoryInStream::MemoryInStream () : mBuffer(NULL), mPosition(0), mSize(0)
@@ -88,27 +88,27 @@ MemoryInStream::MemoryInStream () : mBuffer(NULL), mPosition(0), mSize(0)
 
 void MemoryInStream::open (char *buffer, size_t size)
 {
-	mBuffer = buffer;
-	mSize = size;
-	mPosition = 0;
+    mBuffer = buffer;
+    mSize = size;
+    mPosition = 0;
 }
 
 void MemoryInStream::read (void *buffer, size_t len)
 {
-	//if (mPosition+len > mSize)
-	//	throw std::runtime_error ("Unexpected EOF");
-	std::memcpy (buffer, mBuffer+mPosition, len);
-	mPosition += len;
+    //if (mPosition+len > mSize)
+    //	throw std::runtime_error ("Unexpected EOF");
+    std::memcpy (buffer, mBuffer+mPosition, len);
+    mPosition += len;
 }
 
 size_t MemoryInStream::tell ()
 {
-	return mPosition;
+    return mPosition;
 }
 
 void MemoryInStream::seek (size_t pos)
 {
-	mPosition = pos;
+    mPosition = pos;
 }
 
 };

@@ -233,22 +233,22 @@ void StateMenu::Init()
     InputHelper::Instance()->Init();
     InputHelper::Instance()->Load();
 
-	animationscreen = 1;
-	fontcoloroption = 0;
-	fontcolor = 0;
-	srand(time(0));
+    animationscreen = 1;
+    fontcoloroption = 0;
+    fontcolor = 0;
+    srand(time(0));
 
     tpCurrent = 0;
-	tpMax = 0;
-	tpEnd = 0;
-	tpStart = 0;
-	tpPos = 0;
-	tpSelectPos = 0;
+    tpMax = 0;
+    tpEnd = 0;
+    tpStart = 0;
+    tpPos = 0;
+    tpSelectPos = 0;
 
-	for(int i = 0; i <= 31; i++)
-	{
-	    worldName[i] = ' ';
-	}
+    for(int i = 0; i <= 31; i++)
+    {
+        worldName[i] = ' ';
+    }
 }
 
 void StateMenu::Enter()
@@ -3132,25 +3132,25 @@ void StateMenu::ScanTexturePacks(const char* dirName)
 /*
     texturePackList.clear();
 
-	FILE *infile;
-	char textLine[80];
-	char textPack[80];
+    FILE *infile;
+    char textLine[80];
+    char textPack[80];
 
-	infile = fopen("Assets/texturePacks.txt","rt");
+    infile = fopen("Assets/texturePacks.txt","rt");
 
-	 while(fgets(textLine, 80, infile) != NULL)
-	 {
-		 sscanf(textLine,"%s",textPack);
-		 std::string texturePack = textPack;
+     while(fgets(textLine, 80, infile) != NULL)
+     {
+         sscanf(textLine,"%s",textPack);
+         std::string texturePack = textPack;
 
-		 size_t found = texturePack.find(".tp");
-		 size_t found2 = texturePack.find(".TP");
-		 if(found != std::string::npos || found2 != std::string::npos)// found
-		 {
-		 	texturePackList.push_back(texturePack);
-		 }
-	 }
-	 fclose(infile);
+         size_t found = texturePack.find(".tp");
+         size_t found2 = texturePack.find(".TP");
+         if(found != std::string::npos || found2 != std::string::npos)// found
+         {
+            texturePackList.push_back(texturePack);
+         }
+     }
+     fclose(infile);
 
 */
 

@@ -9,10 +9,10 @@
 
 namespace Aurora
 {
-	namespace Graphics
-	{
-		InventoryPlayer::InventoryPlayer()
-		{
+    namespace Graphics
+    {
+        InventoryPlayer::InventoryPlayer()
+        {
             rHandAngle = PI;
             lHandAngle = PI;
             rLegAngle = PI;
@@ -23,20 +23,20 @@ namespace Aurora
 
             position = Vector3(0,0,0);
             animT = 0.0f;
-		}
+        }
 
-		InventoryPlayer::~InventoryPlayer()
-		{
+        InventoryPlayer::~InventoryPlayer()
+        {
 
-		}
+        }
 
-		void  InventoryPlayer::Update()
-		{
+        void  InventoryPlayer::Update()
+        {
 
-		}
+        }
 
-		void InventoryPlayer::Render(CraftWorld *world, float dt, float angle, int texNum, int handItemId)
-		{
+        void InventoryPlayer::Render(CraftWorld *world, float dt, float angle, int texNum, int handItemId)
+        {
             animT += PI*dt*0.5f;
             if(animT >= 2*PI)
             {
@@ -367,7 +367,7 @@ namespace Aurora
             sceGuColor(0xFFFFFFFF);
 
             sceGumPopMatrix();
-		}
-	}
+        }
+    }
 }
 

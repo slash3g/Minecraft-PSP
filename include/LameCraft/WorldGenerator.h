@@ -48,34 +48,34 @@ using namespace noisepp;
 
 class WorldGenerator
 {
-	public:
-		void initRandompMap(int worldSize, int worldHeight, int chunkSize, CraftWorld *world, bool makeTrees,bool makeWater,bool makeCaves, unsigned int seedII, int worldType);
-		void initTrees(int WORLD_SIZE,  CraftWorld *world, PerlinModule* perlin, int seed);
-		void initRandomTrees(int WORLD_SIZE,  CraftWorld *world);
+    public:
+        void initRandompMap(int worldSize, int worldHeight, int chunkSize, CraftWorld *world, bool makeTrees,bool makeWater,bool makeCaves, unsigned int seedII, int worldType);
+        void initTrees(int WORLD_SIZE,  CraftWorld *world, PerlinModule* perlin, int seed);
+        void initRandomTrees(int WORLD_SIZE,  CraftWorld *world);
 
-		void initPumpkins(int WORLD_SIZE,  CraftWorld *world);
+        void initPumpkins(int WORLD_SIZE,  CraftWorld *world);
 
-		void initFlowers(int WORLD_SIZE, CraftWorld *world);
-		void initGrass(int WORLD_SIZE, CraftWorld *world);
-		void initOtherVegetation(int WORLD_SIZE, CraftWorld *world);
+        void initFlowers(int WORLD_SIZE, CraftWorld *world);
+        void initGrass(int WORLD_SIZE, CraftWorld *world);
+        void initOtherVegetation(int WORLD_SIZE, CraftWorld *world);
 
-		void initLavaPools(int WORLD_SIZE, CraftWorld *world);
-		void initBiome(int WORLD_SIZE, CraftWorld *world, PerlinModule* perlin, int seed);
+        void initLavaPools(int WORLD_SIZE, CraftWorld *world);
+        void initBiome(int WORLD_SIZE, CraftWorld *world, PerlinModule* perlin, int seed);
 
-		void initCanes(int WORLD_SIZE, CraftWorld *world, int waterLevel);
-		void initBedrock(int WORLD_SIZE, CraftWorld *world);
+        void initCanes(int WORLD_SIZE, CraftWorld *world, int waterLevel);
+        void initBedrock(int WORLD_SIZE, CraftWorld *world);
         void initBeachSand(int WORLD_SIZE, CraftWorld *world);
 
         void initErosion(int WORLD_SIZE, CraftWorld *world);
 
         void initOre(int WORLD_SIZE, CraftWorld *world, int oreID, float oreConcentration, int oreLowestBoundary, int oreHighestBoundary, int variations);
 
-		void initDungeons(int WORLD_SIZE, CraftWorld *world);
+        void initDungeons(int WORLD_SIZE, CraftWorld *world);
 
         void initClay(int WORLD_SIZE, CraftWorld *world);
-		void initDirt(int WORLD_SIZE, CraftWorld *world);
-		void initGravel(int WORLD_SIZE, CraftWorld *world);
-		void initLavaLakes(int WORLD_SIZE, CraftWorld *world);
+        void initDirt(int WORLD_SIZE, CraftWorld *world);
+        void initGravel(int WORLD_SIZE, CraftWorld *world);
+        void initLavaLakes(int WORLD_SIZE, CraftWorld *world);
         void initWaterLakes(int WORLD_SIZE, CraftWorld *world);
 
         int GenerateOreVine(int WORLD_SIZE, CraftWorld *world, int x, int y, int z, int oreID, int type);

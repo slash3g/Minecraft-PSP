@@ -12,15 +12,15 @@
 class MonsterSpawnerEntity : public BlockEntity
 {
 public:
-	MonsterSpawnerEntity(int create_x, int create_y, int create_z, std::string create_mobToSpawn);
-	virtual ~MonsterSpawnerEntity();
+    MonsterSpawnerEntity(int create_x, int create_y, int create_z, std::string create_mobToSpawn);
+    virtual ~MonsterSpawnerEntity();
 
-	void Update(float dt);
-	void SetStandardProperties();
+    void Update(float dt);
+    void SetStandardProperties();
 
-	bool ItIsTimeToSpawn();
-	std::string MobToSpawn();
-	int MobCountToSpawn();
+    bool ItIsTimeToSpawn();
+    std::string MobToSpawn();
+    int MobCountToSpawn();
 
     BoundingBox actArea;
     bool forceSpawn;

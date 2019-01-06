@@ -40,49 +40,49 @@ namespace utils
 /// Gradient color renderer.
 class GradientRenderer
 {
-	public:
-		/// Constructor.
-		GradientRenderer();
-		/// Adds a gradient point.
-		/// @param value Position of the gradient point.
-		/// @param color Color value of the gradient point.
-		void addGradient (Real value, const ColourValue &color);
-		/// Renders the data to an image.
-		/// @param image The image to render to.
-		/// @param data The source data.
-		/// @param jobQueue A pointer to a JobQueue. The JobQueue will be deleted after usage. Passing NULL will use an system optimal queue.
-		void renderImage (Image &image, const Real *data, JobQueue *jobQueue=0);
-		/// Sets a callback
-		void setCallback (BuilderCallback *callback);
-		/// Destructor.
-		~GradientRenderer();
-	protected:
-	private:
-		struct Gradient
-		{
-			Real value;
-			ColourValue color;
-			bool operator< (const Gradient &g) const
-			{
-				return (value < g.value);
-			}
-		};
-		typedef std::vector<Gradient> GradientVector;
-		GradientVector mGradients;
-		BuilderCallback *mCallback;
-		class GradientRendererJob : public Job
-		{
-			private:
-				GradientRenderer *renderer;
-				int width;
-				const Real *data;
-				unsigned char *buffer;
+    public:
+        /// Constructor.
+        GradientRenderer();
+        /// Adds a gradient point.
+        /// @param value Position of the gradient point.
+        /// @param color Color value of the gradient point.
+        void addGradient (Real value, const ColourValue &color);
+        /// Renders the data to an image.
+        /// @param image The image to render to.
+        /// @param data The source data.
+        /// @param jobQueue A pointer to a JobQueue. The JobQueue will be deleted after usage. Passing NULL will use an system optimal queue.
+        void renderImage (Image &image, const Real *data, JobQueue *jobQueue=0);
+        /// Sets a callback
+        void setCallback (BuilderCallback *callback);
+        /// Destructor.
+        ~GradientRenderer();
+    protected:
+    private:
+        struct Gradient
+        {
+            Real value;
+            ColourValue color;
+            bool operator< (const Gradient &g) const
+            {
+                return (value < g.value);
+            }
+        };
+        typedef std::vector<Gradient> GradientVector;
+        GradientVector mGradients;
+        BuilderCallback *mCallback;
+        class GradientRendererJob : public Job
+        {
+            private:
+                GradientRenderer *renderer;
+                int width;
+                const Real *data;
+                unsigned char *buffer;
 
-			public:
-				GradientRendererJob(GradientRenderer *renderer, int width, const Real *data, unsigned char *buffer);
-				void execute ();
-				void finish ();
-		};
+            public:
+                GradientRendererJob(GradientRenderer *renderer, int width, const Real *data, unsigned char *buffer);
+                void execute ();
+                void finish ();
+        };
 };
 
 };

@@ -15,7 +15,7 @@ class CraftWorld;
 class LameMob
 {
 public:
-	LameMob(Vector3 mobPosition, int mobNumber);
+    LameMob(Vector3 mobPosition, int mobNumber);
     virtual ~LameMob();
 
     float DistanceToPlayer();

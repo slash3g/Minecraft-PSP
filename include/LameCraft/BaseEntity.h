@@ -14,8 +14,8 @@ class BaseEntity
 {
 public:
 
-	BaseEntity();
-	virtual ~BaseEntity();
+    BaseEntity();
+    virtual ~BaseEntity();
 
     void SetPosition(Vector3 position2);
     void SetScale(Vector3 scale2);

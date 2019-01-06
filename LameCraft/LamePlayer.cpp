@@ -2,11 +2,11 @@
 
 LamePlayer::LamePlayer()
 {
-	// TODO Auto-generated constructor stub
+    // TODO Auto-generated constructor stub
 
 }
 
 LamePlayer::~LamePlayer()
 {
-	// TODO Auto-generated destructor stub
+    // TODO Auto-generated destructor stub
 }

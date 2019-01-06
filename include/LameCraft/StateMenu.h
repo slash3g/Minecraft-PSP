@@ -31,7 +31,7 @@
 #include <errno.h>
 
 #ifdef __PSP__
-	#include <sys/stat.h>
+    #include <sys/stat.h>
 #endif
 
 
@@ -46,48 +46,48 @@ class SaveFile
 {
 public:
 
-	int saveVersion;
-	bool compression;
-	char worldGameMode;
-	char worldName[50];
-	bool locked;
-	std::string fileName;
+    int saveVersion;
+    bool compression;
+    char worldGameMode;
+    char worldName[50];
+    bool locked;
+    std::string fileName;
 
-	int saveSize;
+    int saveSize;
 };
 
 class TP
 {
 public:
     Sprite* packSprite;
-	std::string name;
-	std::string description;
+    std::string name;
+    std::string description;
 };
 
 class StateMenu : public CGameState
 {
 public:
-	StateMenu();
-	virtual ~StateMenu();
+    StateMenu();
+    virtual ~StateMenu();
 
-	void Init();
-	void Enter();
-	void CleanUp();
+    void Init();
+    void Enter();
+    void CleanUp();
 
-	void Pause();
-	void Resume();
+    void Pause();
+    void Resume();
 
-	void HandleEvents(StateManager* sManager);
-	void Update(StateManager* sManager);
-	void Draw(StateManager* sManager);
+    void HandleEvents(StateManager* sManager);
+    void Update(StateManager* sManager);
+    void Draw(StateManager* sManager);
 
 private:
 
-	void ScanSaveFiles(const char* dirName);
-	void ScanTexturePacks(const char* dirName);
-	void DrawText(int x,int y, unsigned int color, float size, const char *message, ...);
-	inline bool fileExists(const std::string& name);
-	int fileSize(const std::string& name);
+    void ScanSaveFiles(const char* dirName);
+    void ScanTexturePacks(const char* dirName);
+    void DrawText(int x,int y, unsigned int color, float size, const char *message, ...);
+    inline bool fileExists(const std::string& name);
+    int fileSize(const std::string& name);
 
     unsigned int hash(const char* s, unsigned int seed);
 
@@ -145,101 +145,101 @@ private:
     bool directiony;
 
     Sprite *buttonSmallSprite;
-	Sprite *sbuttonSmallSprite;
-	Sprite *nbuttonSmallSprite;
+    Sprite *sbuttonSmallSprite;
+    Sprite *nbuttonSmallSprite;
 
-	Sprite *buttonSprite;
-	Sprite *sbuttonSprite;
+    Sprite *buttonSprite;
+    Sprite *sbuttonSprite;
 
-	Sprite *nbuttonSprite;
+    Sprite *nbuttonSprite;
 
-	Sprite *mbuttonSprite;
-	Sprite *smbuttonSprite;
+    Sprite *mbuttonSprite;
+    Sprite *smbuttonSprite;
 
-	Sprite *backSprite;
-	Sprite *logoSprite;
-	Sprite *lamecraftSprite;
+    Sprite *backSprite;
+    Sprite *logoSprite;
+    Sprite *lamecraftSprite;
 
-	Sprite *rectFilledSprite;
-	Sprite *rectEmptySprite;
+    Sprite *rectFilledSprite;
+    Sprite *rectEmptySprite;
 
-	Sprite *blackBackground;
+    Sprite *blackBackground;
 
-	RenderManager *mRender;
-	SystemManager *mSystemMgr;
-	SoundManager *mSoundMgr;
+    RenderManager *mRender;
+    SystemManager *mSystemMgr;
+    SoundManager *mSoundMgr;
 
     // converter vars
     bool schematicExists;
 
-	short newW_width;
-	short newW_height;
-	short newW_length;
+    short newW_width;
+    short newW_height;
+    short newW_length;
 
-	char newW_gameMode;
-	bool newW_deleteCaves;
-	int conversionStage;
-	int errorType;
+    char newW_gameMode;
+    bool newW_deleteCaves;
+    int conversionStage;
+    int errorType;
 
-	std::string lol;
+    std::string lol;
 
     int converterPos;
-	//
+    //
 
     int SplashNumber;
     float splashSize;
 
     unsigned int seed_1;
-	int selectPos;
-	int loadSelectPos;
-	int loadSavePos;
-	int aboutPos;
-	char worldName[32];
+    int selectPos;
+    int loadSelectPos;
+    int loadSavePos;
+    int aboutPos;
+    char worldName[32];
 
     float size_f;
 
-	float fontcolor;
-	bool fontcoloroption;
+    float fontcolor;
+    bool fontcoloroption;
 
-	bool saveSubmenu;
-	int saveSubMenuSelect;
+    bool saveSubmenu;
+    int saveSubMenuSelect;
 
     pgeZip* theZip;
 
-	int loadSaveStart;
-	int loadSaveEnd;
-	int loadSaveMax;
+    int loadSaveStart;
+    int loadSaveEnd;
+    int loadSaveMax;
 
-	short animationscreen;
-	short menuState;//0 main,1 load,2 options
+    short animationscreen;
+    short menuState;//0 main,1 load,2 options
 
-	int nextSaveFileNumber;
-	std::string nextSaveFileName;
+    int nextSaveFileNumber;
+    std::string nextSaveFileName;
 
-	std::vector<SaveFile> saveFilesList;
-	std::vector<TP> texturePackList;
-	std::string newWorldName;
-	std::string newWorldSeed;
-	std::string newWorldNamestr;
-	//options for parametric map generation
-	bool makeTrees;
-	bool makeWater;
-	bool makeCaves;
+    std::vector<SaveFile> saveFilesList;
+    std::vector<TP> texturePackList;
+    std::string newWorldName;
+    std::string newWorldSeed;
+    std::string newWorldNamestr;
+    //options for parametric map generation
+    bool makeTrees;
+    bool makeWater;
+    bool makeCaves;
     int terrainBuilder;
-	short gameMode;
-	int worldType;
+    short gameMode;
+    int worldType;
 
     short generateSelectPose;
 
-	//game version
-	short currentVersion;
+    //game version
+    short currentVersion;
 
-	int tpCurrent;
-	int tpMax;
-	int tpEnd;
-	int tpStart;
-	int tpPos;
-	int tpSelectPos;
+    int tpCurrent;
+    int tpMax;
+    int tpEnd;
+    int tpStart;
+    int tpPos;
+    int tpSelectPos;
 };
 
 #endif

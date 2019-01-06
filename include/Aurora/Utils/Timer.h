@@ -7,26 +7,26 @@
 
 namespace Aurora
 {
-	namespace Utils
-	{
+    namespace Utils
+    {
 
-		class Timer
-		{
-			public:
-				Timer();
-				virtual ~Timer();
+        class Timer
+        {
+            public:
+                Timer();
+                virtual ~Timer();
 
-				double GetDeltaTime( void );	// Returns the delta time
+                double GetDeltaTime( void );	// Returns the delta time
 
-			private:
-				double dt;
+            private:
+                double dt;
 
-				u64 timeNow;
-				u64 timeLastAsk;
-				u32 tickResolution;
-		};
+                u64 timeNow;
+                u64 timeLastAsk;
+                u32 tickResolution;
+        };
 
-	}
+    }
 }
 
 #endif /* TIMER_H_ */

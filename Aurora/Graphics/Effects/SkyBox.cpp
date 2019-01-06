@@ -6,22 +6,22 @@
 
 namespace Aurora
 {
-	namespace Graphics
-	{
-		SkyBox::SkyBox()
-		{
-		    vertsNum = 0;
+    namespace Graphics
+    {
+        SkyBox::SkyBox()
+        {
+            vertsNum = 0;
             BuildVertexObject();
-		}
+        }
 
-		SkyBox::~SkyBox()
-		{
-			free(skyBoxVertices);
-		}
+        SkyBox::~SkyBox()
+        {
+            free(skyBoxVertices);
+        }
 
-		void SkyBox::BuildVertexObject()
-		{
-		    bool skyBoxMatrix[11*14] = {0,0,0,0,1,1,1,1,1,1,0,0,0,0,
+        void SkyBox::BuildVertexObject()
+        {
+            bool skyBoxMatrix[11*14] = {0,0,0,0,1,1,1,1,1,1,0,0,0,0,
                                         0,0,0,1,1,1,1,1,1,1,1,0,0,0,
                                         0,0,1,1,1,1,1,1,1,1,1,1,0,0,
                                         0,1,1,1,1,1,1,1,1,1,1,1,1,0,
@@ -109,34 +109,34 @@ namespace Aurora
                 delete 	mTriangle[aa];
             }
             mTriangle.clear();
-		}
+        }
 
-		void SkyBox::Update()
-		{
+        void SkyBox::Update()
+        {
 
-		}
+        }
 
-		void SkyBox::Render(Vector3 color, Vector3 playerPos, float camAngle)
-		{
+        void SkyBox::Render(Vector3 color, Vector3 playerPos, float camAngle)
+        {
             sceGumRotateX(0.0f);
             sceGumRotateY(-camAngle);
             sceGumRotateZ(0.0f);
 
-		    sceGuColor(GU_COLOR(color.x,color.y,color.z,1.0f));
-		    sceGuFrontFace(GU_CW);
+            sceGuColor(GU_COLOR(color.x,color.y,color.z,1.0f));
+            sceGuFrontFace(GU_CW);
 
-			sceGuEnable(GU_BLEND);
+            sceGuEnable(GU_BLEND);
             sceGuDisable(GU_DEPTH_TEST);
-			//sceGuDepthMask(GU_TRUE);
+            //sceGuDepthMask(GU_TRUE);
 
-			sceGumDrawArray(GU_TRIANGLES, GU_VERTEX_32BITF | GU_TRANSFORM_3D, vertsNum, 0, skyBoxVertices);
+            sceGumDrawArray(GU_TRIANGLES, GU_VERTEX_32BITF | GU_TRANSFORM_3D, vertsNum, 0, skyBoxVertices);
 
            // sceGuDepthMask(GU_FALSE);
             sceGuEnable(GU_DEPTH_TEST);
-			sceGuDisable(GU_BLEND);
+            sceGuDisable(GU_BLEND);
 
-			sceGuFrontFace(GU_CCW);
-		}
-	}
+            sceGuFrontFace(GU_CCW);
+        }
+    }
 }
 

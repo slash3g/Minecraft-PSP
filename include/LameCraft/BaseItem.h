@@ -12,31 +12,31 @@ typedef unsigned short item_t;
 class BaseItem
 {
 public:
-	char textureRow;
-	char plane;
+    char textureRow;
+    char plane;
 
-	short furnItem;
+    short furnItem;
     short durabilityPoints;
 
-	short points;
-	short addPoints;
-	short add2Points;
+    short points;
+    short addPoints;
+    short add2Points;
 
-	bool terrainTexture;
+    bool terrainTexture;
     bool stackable;
 
-	char itemType; // "D" - default, "T" - tool, "F" - food, "H" - helmet, "C" - chestplate, "L" - leggings, "B" - boots "Y" - dye
+    char itemType; // "D" - default, "T" - tool, "F" - food, "H" - helmet, "C" - chestplate, "L" - leggings, "B" - boots "Y" - dye
 
-	TexturesPSPVertex *vertices;
-	TexturesPSPVertex *addVertices;
-	TexturesPSPVertex *add2Vertices;
+    TexturesPSPVertex *vertices;
+    TexturesPSPVertex *addVertices;
+    TexturesPSPVertex *add2Vertices;
 
-	TexturesPSPVertex *dropVertices;
+    TexturesPSPVertex *dropVertices;
 
-	BaseItem();
-	virtual ~BaseItem();
+    BaseItem();
+    virtual ~BaseItem();
 
-	static item_t getBaseID();
+    static item_t getBaseID();
     std::string name;
 };
 

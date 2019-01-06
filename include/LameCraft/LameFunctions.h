@@ -26,29 +26,29 @@ inline float ATAN2(float dx, float dz)
 #define PIBY2_FLOAT  1.5707963f
 inline float ATAN2_fast(float y, float x)
 {
-	if ( x == 0.0f )
-	{
-		if ( y > 0.0f ) return PIBY2_FLOAT;
-		if ( y == 0.0f ) return 0.0f;
-		return -PIBY2_FLOAT;
-	}
-	float atan;
-	float z = y/x;
-	if ( fabs( z ) < 1.0f )
-	{
-		atan = z/(1.0f + 0.28f*z*z);
-		if ( x < 0.0f )
-		{
-			if ( y < 0.0f ) return atan - PI_FLOAT;
-			return atan + PI_FLOAT;
-		}
-	}
-	else
-	{
-		atan = PIBY2_FLOAT - z/(z*z + 0.28f);
-		if ( y < 0.0f ) return atan - PI_FLOAT;
-	}
-	return atan;
+    if ( x == 0.0f )
+    {
+        if ( y > 0.0f ) return PIBY2_FLOAT;
+        if ( y == 0.0f ) return 0.0f;
+        return -PIBY2_FLOAT;
+    }
+    float atan;
+    float z = y/x;
+    if ( fabs( z ) < 1.0f )
+    {
+        atan = z/(1.0f + 0.28f*z*z);
+        if ( x < 0.0f )
+        {
+            if ( y < 0.0f ) return atan - PI_FLOAT;
+            return atan + PI_FLOAT;
+        }
+    }
+    else
+    {
+        atan = PIBY2_FLOAT - z/(z*z + 0.28f);
+        if ( y < 0.0f ) return atan - PI_FLOAT;
+    }
+    return atan;
 }
 
 inline void MatrixAngle(Vector3 angle)

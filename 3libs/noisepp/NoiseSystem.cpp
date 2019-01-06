@@ -46,48 +46,48 @@ int System::mNumberOfCPUs = System::calculateNumberOfCPUs();
 
 int System::calculateNumberOfCPUs()
 {
-	return 1;
+    return 1;
 }
 
 int System::getNumberOfCPUs()
 {
-	return mNumberOfCPUs;
+    return mNumberOfCPUs;
 }
 
 Pipeline1D *System::createOptimalPipeline1D ()
 {
 #if NOISEPP_ENABLE_THREADS
-	if (mNumberOfCPUs > 1)
-		return new ThreadedPipeline1D (mNumberOfCPUs);
+    if (mNumberOfCPUs > 1)
+        return new ThreadedPipeline1D (mNumberOfCPUs);
 #endif
-	return new Pipeline1D;
+    return new Pipeline1D;
 }
 
 Pipeline2D *System::createOptimalPipeline2D ()
 {
 #if NOISEPP_ENABLE_THREADS
-	if (mNumberOfCPUs > 1)
-		return new ThreadedPipeline2D (mNumberOfCPUs);
+    if (mNumberOfCPUs > 1)
+        return new ThreadedPipeline2D (mNumberOfCPUs);
 #endif
-	return new Pipeline2D;
+    return new Pipeline2D;
 }
 
 Pipeline3D *System::createOptimalPipeline3D ()
 {
 #if NOISEPP_ENABLE_THREADS
-	if (mNumberOfCPUs > 1)
-		return new ThreadedPipeline3D (mNumberOfCPUs);
+    if (mNumberOfCPUs > 1)
+        return new ThreadedPipeline3D (mNumberOfCPUs);
 #endif
-	return new Pipeline3D;
+    return new Pipeline3D;
 }
 
 JobQueue *System::createOptimalJobQueue ()
 {
 #if NOISEPP_ENABLE_THREADS
-	if (mNumberOfCPUs > 1)
-		return new ThreadedJobQueue (mNumberOfCPUs);
+    if (mNumberOfCPUs > 1)
+        return new ThreadedJobQueue (mNumberOfCPUs);
 #endif
-	return new JobQueue;
+    return new JobQueue;
 }
 
 };

@@ -45,9 +45,9 @@ typedef void pgeZip;
  */
 typedef struct
 {
-	unsigned char *data;	/**<  The file data */
-	int size;				/**<  Size of the data */
-	
+    unsigned char *data;	/**<  The file data */
+    int size;				/**<  Size of the data */
+    
 } pgeZipFile;
 
 /**

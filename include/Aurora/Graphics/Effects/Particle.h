@@ -12,24 +12,24 @@
 
 namespace Aurora
 {
-	namespace Graphics
-	{
-		class Particle
-		{
-		public:
+    namespace Graphics
+    {
+        class Particle
+        {
+        public:
 
-			Particle(CraftWorld* world, std::string _name, Vector3 _position);
-			virtual ~Particle();
+            Particle(CraftWorld* world, std::string _name, Vector3 _position);
+            virtual ~Particle();
 
-			void Update(CraftWorld* crtf, float dt);
-			void Render(Frustum &camFrustum);
+            void Update(CraftWorld* crtf, float dt);
+            void Render(Frustum &camFrustum);
 
-			bool CheckCollision(CraftWorld* crtf);
+            bool CheckCollision(CraftWorld* crtf);
 
-			void SetVelocity(Vector3 _velocity);
-			void SetFramesAmount(int _totalFrames);
-			void SetScale(float scale);
-			void SetScale(float minScale, float maxScale);
+            void SetVelocity(Vector3 _velocity);
+            void SetFramesAmount(int _totalFrames);
+            void SetScale(float scale);
+            void SetScale(float minScale, float maxScale);
 
             void SetMaxLiveTime(int _maxLiveTime);
             void SetLiveTime(int _liveTime); // in milisecs
@@ -39,14 +39,14 @@ namespace Aurora
             void SetBrightness(float brightness);
             void SetBrightness(float minBrightness, float maxBrightness);
 
-			void BuildVerticies();
-			void BuildVerticiesForBlockCrack(CraftWorld* crtf, int blockId);
-			void BuildVerticiesForItemCrack(CraftWorld* crtf, int itemId);
+            void BuildVerticies();
+            void BuildVerticiesForBlockCrack(CraftWorld* crtf, int blockId);
+            void BuildVerticiesForItemCrack(CraftWorld* crtf, int itemId);
 
-			Vector3 position;
-			Vector3 velocity;
+            Vector3 position;
+            Vector3 velocity;
 
-			bool toDestroy;
+            bool toDestroy;
             float friction;
 
             // additional vars
@@ -57,29 +57,29 @@ namespace Aurora
             float varf1;
             float varf2;
 
-		private:
+        private:
 
-		    TexturesPSPVertex *particleVertices;
+            TexturesPSPVertex *particleVertices;
 
-			float horizontalScale;
-			float verticalScale;
-			int texture;
+            float horizontalScale;
+            float verticalScale;
+            int texture;
 
-			float timeToLive;
-			float maxTimeToLive;
-			int frame;
-			int totalFrames;
+            float timeToLive;
+            float maxTimeToLive;
+            int frame;
+            int totalFrames;
 
-			Vector3 color;
+            Vector3 color;
 
-			float gravity;
-			float myLight;
-			bool rederMe;
+            float gravity;
+            float myLight;
+            bool rederMe;
 
-			std::string name;
-			BoundingBox bBox;
-		};
-	}
+            std::string name;
+            BoundingBox bBox;
+        };
+    }
 }
 
 #endif

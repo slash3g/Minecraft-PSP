@@ -170,24 +170,24 @@ CraftWorld::CraftWorld()
     lightFactor = Vector3(1.0f,1.0f,1.0f);
 
     /*startSkyColor = Vector3(184,211,255);
-	endSkyColor = Vector3(119,184,255);
-	//startSkyColor = Vector3(176,198,255);
-	//endSkyColor = Vector3(158,157,255);
-	dawnSunsetSkyColor = Vector3(255,163,58);*/
+    endSkyColor = Vector3(119,184,255);
+    //startSkyColor = Vector3(176,198,255);
+    //endSkyColor = Vector3(158,157,255);
+    dawnSunsetSkyColor = Vector3(255,163,58);*/
 
-	dawnSunsetClearSkyColor = Vector3(0,0,0);
-	startClearSkyColor = Vector3(0,0,0);
-	endClearSkyColor = Vector3(0,0,0);
+    dawnSunsetClearSkyColor = Vector3(0,0,0);
+    startClearSkyColor = Vector3(0,0,0);
+    endClearSkyColor = Vector3(0,0,0);
 
-	dawnSunsetRainySkyColor = Vector3(0,0,0);
-	startRainySkyColor = Vector3(0,0,0);
-	endRainySkyColor = Vector3(0,0,0);
+    dawnSunsetRainySkyColor = Vector3(0,0,0);
+    startRainySkyColor = Vector3(0,0,0);
+    endRainySkyColor = Vector3(0,0,0);
 
     dawnSunsetSkyColor = Vector3(0,0,0);
-	startSkyColor = Vector3(0,0,0);
-	endSkyColor = Vector3(0,0,0);
+    startSkyColor = Vector3(0,0,0);
+    endSkyColor = Vector3(0,0,0);
 
-	rainyColorAlpha = 0.0f;
+    rainyColorAlpha = 0.0f;
 
     brightFactor = 1.0f;
     starsFactor = 0.0f;
@@ -3134,16 +3134,16 @@ void CraftWorld::GetSkyColor()
     endRainySkyColor = Vector3(r,g,b);
 
     startClearSkyColor *= 1.0f/255.0f;
-	endClearSkyColor *= 1.0f/255.0f;
-	dawnSunsetClearSkyColor *= 1.0f/255.0f;
+    endClearSkyColor *= 1.0f/255.0f;
+    dawnSunsetClearSkyColor *= 1.0f/255.0f;
 
     startRainySkyColor *= 1.0f/255.0f;
-	endRainySkyColor *= 1.0f/255.0f;
-	dawnSunsetRainySkyColor *= 1.0f/255.0f;
+    endRainySkyColor *= 1.0f/255.0f;
+    dawnSunsetRainySkyColor *= 1.0f/255.0f;
 
-	startSkyColor = startClearSkyColor;
-	endSkyColor = endClearSkyColor;
-	dawnSunsetSkyColor = dawnSunsetClearSkyColor;
+    startSkyColor = startClearSkyColor;
+    endSkyColor = endClearSkyColor;
+    dawnSunsetSkyColor = dawnSunsetClearSkyColor;
 }
 
 void CraftWorld::SetWolrdTime(float time)
@@ -12592,10 +12592,10 @@ void CraftWorld::UpdateLightAreaIn(Vector3 pos)
             for(int yy = y_start; yy <= y_end; yy++)
             {
                 if(LightSourceBlock(GetBlock(xx,yy,zz)) == true)
-				{
+                {
                     RemoveLigtSourceAtPosition(xx,yy,zz,Torch::getID());
-				    SetLigtSourcePosition(xx,yy,zz,Torch::getID());
-				}
+                    SetLigtSourcePosition(xx,yy,zz,Torch::getID());
+                }
             }
         }
     }
@@ -12614,9 +12614,9 @@ void CraftWorld::UpdateLightAreaIn(Vector3 pos)
             for(int yy = y_start; yy <= y_end; yy++)
             {
                 if(LightSourceBlock(GetBlock(xx,yy,zz)) == true)
-				{
+                {
 
-				}
+                }
             }
         }
     }*/

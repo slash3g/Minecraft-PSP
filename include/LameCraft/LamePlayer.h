@@ -4,8 +4,8 @@
 class LamePlayer
 {
 public:
-	LamePlayer();
-	virtual ~LamePlayer();
+    LamePlayer();
+    virtual ~LamePlayer();
 };
 
 #endif /* LAMEPLAYER_H_ */

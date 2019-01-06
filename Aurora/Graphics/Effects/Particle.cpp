@@ -6,32 +6,32 @@
 
 namespace Aurora
 {
-	namespace Graphics
-	{
-		Particle::Particle(CraftWorld* world, std::string _name, Vector3 _position)
-		{
-		    particleVertices = NULL;
-		    texture = -1;
+    namespace Graphics
+    {
+        Particle::Particle(CraftWorld* world, std::string _name, Vector3 _position)
+        {
+            particleVertices = NULL;
+            texture = -1;
 
-			position = _position;
-			name = _name;
+            position = _position;
+            name = _name;
 
-			horizontalScale = 0.3f;
-			verticalScale = 0.3f;
+            horizontalScale = 0.3f;
+            verticalScale = 0.3f;
 
-			gravity = 0.9;
-			maxTimeToLive = 0.0f;
+            gravity = 0.9;
+            maxTimeToLive = 0.0f;
 
-			color = Vector3(1,1,1);
+            color = Vector3(1,1,1);
 
             SetMaxLiveTime(0.0f);
-			SetLiveTime(0.0f);
-			SetScale(0.3f);
-			SetGravity(-0.3f);
-			SetFramesAmount(0);
-			SetBrightness(1.0f);
-			frame = 0;
-			totalFrames = 0;
+            SetLiveTime(0.0f);
+            SetScale(0.3f);
+            SetGravity(-0.3f);
+            SetFramesAmount(0);
+            SetBrightness(1.0f);
+            frame = 0;
+            totalFrames = 0;
 
 
             var1 = -1;
@@ -40,13 +40,13 @@ namespace Aurora
             varf1 = -1.0f;
             varf2 = -1.0f;
 
-			toDestroy = false;
-			rederMe = true;
-			friction = 0.0f;
+            toDestroy = false;
+            rederMe = true;
+            friction = 0.0f;
 
-			myLight = 1.0f;
+            myLight = 1.0f;
 
-			if(name == "smoke")
+            if(name == "smoke")
             {
                 texture = TextureHelper::Instance()->GetTexture(TextureHelper::smokeTexture);
 
@@ -82,7 +82,7 @@ namespace Aurora
                 velocity = Vector3(veloc_x_shift,0.0f,veloc_z_shift);
             }
 
-			if(name == "black smoke")
+            if(name == "black smoke")
             {
                 texture = TextureHelper::Instance()->GetTexture(TextureHelper::smokeTexture);
 
@@ -115,7 +115,7 @@ namespace Aurora
 
                 totalFrames = 1;
             }
-			if(name == "explosion")
+            if(name == "explosion")
             {
                 texture = TextureHelper::Instance()->GetTexture(TextureHelper::explosionTexture);
 
@@ -193,135 +193,135 @@ namespace Aurora
             }
             bBox =  BoundingBox(Vector3(position.x-0.33f,position.y-0.33f,position.z-0.33f),Vector3(position.x+0.33f,position.y+0.33f,position.z+0.33f));
 
-			//sceKernelDcacheWritebackInvalidateRange(particleVertices,4 * sizeof(TexturesPSPVertex));
-			//particleVertices = (TexturesPSPVertex*)malloc(14 * sizeof(TexturesPSPVertex));
-		}
+            //sceKernelDcacheWritebackInvalidateRange(particleVertices,4 * sizeof(TexturesPSPVertex));
+            //particleVertices = (TexturesPSPVertex*)malloc(14 * sizeof(TexturesPSPVertex));
+        }
 
         Particle::~Particle()
-		{
-		    if(particleVertices != NULL)
+        {
+            if(particleVertices != NULL)
             {
                 free(particleVertices);
             }
-		}
+        }
 
-		void Particle::SetVelocity(Vector3 _velocity)
-		{
-		    velocity = _velocity;
-		}
+        void Particle::SetVelocity(Vector3 _velocity)
+        {
+            velocity = _velocity;
+        }
 
         void Particle::SetScale(float scale)
-		{
-		    horizontalScale = scale;
-		    verticalScale = scale;
-		}
+        {
+            horizontalScale = scale;
+            verticalScale = scale;
+        }
 
         void Particle::SetScale(float minScale, float maxScale)
-		{
-		    float scale = (minScale*100 + rand() % (int)((maxScale-minScale)*100)) / 100.0f;
-		    horizontalScale = scale;
-		    verticalScale = scale;
-		}
+        {
+            float scale = (minScale*100 + rand() % (int)((maxScale-minScale)*100)) / 100.0f;
+            horizontalScale = scale;
+            verticalScale = scale;
+        }
 
         void Particle::SetColor(Vector3 _color)
-		{
-		    color = _color;
-		}
+        {
+            color = _color;
+        }
 
         void Particle::SetBrightness(float brightness)
-		{
-		    color = Vector3(brightness, brightness, brightness);
-		}
+        {
+            color = Vector3(brightness, brightness, brightness);
+        }
 
         void Particle::SetBrightness(float minBrightness, float maxBrightness)
-		{
-		    float brightness = (minBrightness*100 + rand() % (int)((maxBrightness-minBrightness)*100)) / 100.0f;
-		    color = Vector3(brightness, brightness, brightness);
-		}
+        {
+            float brightness = (minBrightness*100 + rand() % (int)((maxBrightness-minBrightness)*100)) / 100.0f;
+            color = Vector3(brightness, brightness, brightness);
+        }
 
         void Particle::SetMaxLiveTime(int _maxLiveTime)
-		{
-		    maxTimeToLive = _maxLiveTime / 1000.0f;
-		}
+        {
+            maxTimeToLive = _maxLiveTime / 1000.0f;
+        }
 
         void Particle::SetLiveTime(int _liveTime)
-		{
-		    timeToLive = _liveTime / 1000.0f;
-		}
+        {
+            timeToLive = _liveTime / 1000.0f;
+        }
 
         void Particle::SetLiveTime(int minLiveTime, int maxLiveTime)
-		{
-		    int _liveTime = minLiveTime/10 + rand() % ((maxLiveTime-minLiveTime)/10);
-		    timeToLive = _liveTime / 100.0f;
-		}
+        {
+            int _liveTime = minLiveTime/10 + rand() % ((maxLiveTime-minLiveTime)/10);
+            timeToLive = _liveTime / 100.0f;
+        }
 
-		void Particle::SetFramesAmount(int _totalFrames)
-		{
-		    frame = 0;
-		    totalFrames = _totalFrames;
-		}
+        void Particle::SetFramesAmount(int _totalFrames)
+        {
+            frame = 0;
+            totalFrames = _totalFrames;
+        }
 
         void Particle::SetGravity(float _gravity)
-		{
+        {
             gravity = _gravity;
-		}
+        }
 
-		void Particle::BuildVerticies()
-		{
-		    float frameSize = 1.0f/(totalFrames);
+        void Particle::BuildVerticies()
+        {
+            float frameSize = 1.0f/(totalFrames);
 
-		    ScePspFMatrix4 t;
-			sceGumMatrixMode(GU_VIEW);
-			sceGumStoreMatrix(&t);
-			sceGumMatrixMode(GU_MODEL);
+            ScePspFMatrix4 t;
+            sceGumMatrixMode(GU_VIEW);
+            sceGumStoreMatrix(&t);
+            sceGumMatrixMode(GU_MODEL);
 
             ScePspFVector3 up, right;
 
-			right.x = t.x.x * horizontalScale * 1;
-			right.y = t.y.x * horizontalScale * 1;
-			right.z = t.z.x * horizontalScale * 1;
-			up.x = t.x.y * verticalScale * 1;
-			up.y = t.y.y * verticalScale * 1;
-			up.z = t.z.y * verticalScale * 1;
+            right.x = t.x.x * horizontalScale * 1;
+            right.y = t.y.x * horizontalScale * 1;
+            right.z = t.z.x * horizontalScale * 1;
+            up.x = t.x.y * verticalScale * 1;
+            up.y = t.y.y * verticalScale * 1;
+            up.z = t.z.y * verticalScale * 1;
 
-			int i = 0;
+            int i = 0;
 
-			particleVertices[i].x = position.x - right.x + up.x;// * stepScale;
-			particleVertices[i].y = position.y - right.y + up.y;// * stepScale;
-			particleVertices[i].z = position.z - right.z + up.z;// * stepScale;
+            particleVertices[i].x = position.x - right.x + up.x;// * stepScale;
+            particleVertices[i].y = position.y - right.y + up.y;// * stepScale;
+            particleVertices[i].z = position.z - right.z + up.z;// * stepScale;
             particleVertices[i].u = frame*frameSize;// * textureScale;
-			particleVertices[i].v = 0.f;// * textureScale;
-			i++;
+            particleVertices[i].v = 0.f;// * textureScale;
+            i++;
 
-			// (x, y - 1, z)
-			particleVertices[i].x = position.x - right.x - up.x;// * stepScale;
-			particleVertices[i].y = position.y - right.y - up.y;// * stepScale;
-			particleVertices[i].z = position.z - right.z - up.z;// * stepScale;
-			particleVertices[i].u = frame*frameSize;// * textureScale;
-			particleVertices[i].v = 1.f;// * textureScale;
-			i++;
+            // (x, y - 1, z)
+            particleVertices[i].x = position.x - right.x - up.x;// * stepScale;
+            particleVertices[i].y = position.y - right.y - up.y;// * stepScale;
+            particleVertices[i].z = position.z - right.z - up.z;// * stepScale;
+            particleVertices[i].u = frame*frameSize;// * textureScale;
+            particleVertices[i].v = 1.f;// * textureScale;
+            i++;
 
-			// (x + 1, y, z)
-			particleVertices[i].x = position.x + right.x + up.x;// * stepScale;
-			particleVertices[i].y = position.y + right.y + up.y;// * stepScale;
-			particleVertices[i].z = position.z + right.z + up.z;// * stepScale;
-			particleVertices[i].u = frame*frameSize+frameSize;// * textureScale;
-			particleVertices[i].v = 0.f;// * textureScale;
-			i++;
+            // (x + 1, y, z)
+            particleVertices[i].x = position.x + right.x + up.x;// * stepScale;
+            particleVertices[i].y = position.y + right.y + up.y;// * stepScale;
+            particleVertices[i].z = position.z + right.z + up.z;// * stepScale;
+            particleVertices[i].u = frame*frameSize+frameSize;// * textureScale;
+            particleVertices[i].v = 0.f;// * textureScale;
+            i++;
 
-			// (x + 1, y - 1, z)
-			particleVertices[i].x = position.x + right.x - up.x;// * stepScale;
-			particleVertices[i].y = position.y + right.y - up.y;//* stepScale;
-			particleVertices[i].z = position.z + right.z - up.z;// * stepScale;
-			particleVertices[i].u = frame*frameSize+frameSize;// * textureScale;
-			particleVertices[i].v = 1.f;// * textureScale;
+            // (x + 1, y - 1, z)
+            particleVertices[i].x = position.x + right.x - up.x;// * stepScale;
+            particleVertices[i].y = position.y + right.y - up.y;//* stepScale;
+            particleVertices[i].z = position.z + right.z - up.z;// * stepScale;
+            particleVertices[i].u = frame*frameSize+frameSize;// * textureScale;
+            particleVertices[i].v = 1.f;// * textureScale;
 
             sceKernelDcacheWritebackInvalidateRange(particleVertices,4 * sizeof(TexturesPSPVertex));
-		}
+        }
 
-		void Particle::BuildVerticiesForBlockCrack(CraftWorld* crtf, int blockId)
-		{
-		    float texturePixel = (float)1.0f/256.0f;
+        void Particle::BuildVerticiesForBlockCrack(CraftWorld* crtf, int blockId)
+        {
+            float texturePixel = (float)1.0f/256.0f;
             float percent = (float)1.0f/16.0f;
 
             int tex_x, tex_y;
@@ -347,59 +347,59 @@ namespace Aurora
             float texCordX = varf2;
             float texScaleX = texturePixel*4 + texturePixel*0.5f;
 
-		    ScePspFMatrix4 t;
-			sceGumMatrixMode(GU_VIEW);
-			sceGumStoreMatrix(&t);
-			sceGumMatrixMode(GU_MODEL);
+            ScePspFMatrix4 t;
+            sceGumMatrixMode(GU_VIEW);
+            sceGumStoreMatrix(&t);
+            sceGumMatrixMode(GU_MODEL);
 
             ScePspFVector3 up, right;
 
-			right.x = t.x.x * horizontalScale * 1;
-			right.y = t.y.x * horizontalScale * 1;
-			right.z = t.z.x * horizontalScale * 1;
-			up.x = t.x.y * verticalScale * 1;
-			up.y = t.y.y * verticalScale * 1;
-			up.z = t.z.y * verticalScale * 1;
+            right.x = t.x.x * horizontalScale * 1;
+            right.y = t.y.x * horizontalScale * 1;
+            right.z = t.z.x * horizontalScale * 1;
+            up.x = t.x.y * verticalScale * 1;
+            up.y = t.y.y * verticalScale * 1;
+            up.z = t.z.y * verticalScale * 1;
 
-			int i = 0;
+            int i = 0;
 
-			particleVertices[i].x = position.x - right.x + up.x;// * stepScale;
-			particleVertices[i].y = position.y - right.y + up.y;// * stepScale;
-			particleVertices[i].z = position.z - right.z + up.z;// * stepScale;
+            particleVertices[i].x = position.x - right.x + up.x;// * stepScale;
+            particleVertices[i].y = position.y - right.y + up.y;// * stepScale;
+            particleVertices[i].z = position.z - right.z + up.z;// * stepScale;
             particleVertices[i].u = texCordX;// * textureScale;
-			particleVertices[i].v = texCordY;// * textureScale;
-			i++;
+            particleVertices[i].v = texCordY;// * textureScale;
+            i++;
 
-			// (x, y - 1, z)
-			particleVertices[i].x = position.x - right.x - up.x;// * stepScale;
-			particleVertices[i].y = position.y - right.y - up.y;// * stepScale;
-			particleVertices[i].z = position.z - right.z - up.z;// * stepScale;
-			particleVertices[i].u = texCordX;// * textureScale;
-			particleVertices[i].v = texCordY+texScaleY;// * textureScale;
-			i++;
+            // (x, y - 1, z)
+            particleVertices[i].x = position.x - right.x - up.x;// * stepScale;
+            particleVertices[i].y = position.y - right.y - up.y;// * stepScale;
+            particleVertices[i].z = position.z - right.z - up.z;// * stepScale;
+            particleVertices[i].u = texCordX;// * textureScale;
+            particleVertices[i].v = texCordY+texScaleY;// * textureScale;
+            i++;
 
-			// (x + 1, y, z)
-			particleVertices[i].x = position.x + right.x + up.x;// * stepScale;
-			particleVertices[i].y = position.y + right.y + up.y;// * stepScale;
-			particleVertices[i].z = position.z + right.z + up.z;// * stepScale;
-			particleVertices[i].u = texCordX+texScaleX;// * textureScale;
-			particleVertices[i].v = texCordY;// * textureScale;
-			i++;
+            // (x + 1, y, z)
+            particleVertices[i].x = position.x + right.x + up.x;// * stepScale;
+            particleVertices[i].y = position.y + right.y + up.y;// * stepScale;
+            particleVertices[i].z = position.z + right.z + up.z;// * stepScale;
+            particleVertices[i].u = texCordX+texScaleX;// * textureScale;
+            particleVertices[i].v = texCordY;// * textureScale;
+            i++;
 
-			// (x + 1, y - 1, z)
-			particleVertices[i].x = position.x + right.x - up.x;// * stepScale;
-			particleVertices[i].y = position.y + right.y - up.y;//* stepScale;
-			particleVertices[i].z = position.z + right.z - up.z;// * stepScale;
-			particleVertices[i].u = texCordX+texScaleX;// * textureScale;
-			particleVertices[i].v = texCordY+texScaleY;// * textureScale;
+            // (x + 1, y - 1, z)
+            particleVertices[i].x = position.x + right.x - up.x;// * stepScale;
+            particleVertices[i].y = position.y + right.y - up.y;//* stepScale;
+            particleVertices[i].z = position.z + right.z - up.z;// * stepScale;
+            particleVertices[i].u = texCordX+texScaleX;// * textureScale;
+            particleVertices[i].v = texCordY+texScaleY;// * textureScale;
 
             //sceKernelDcacheWritebackInvalidateRange(particleVertices,4 * sizeof(TexturesPSPVertex));
             sceKernelDcacheWritebackInvalidateAll();
-		}
+        }
 
-		void Particle::BuildVerticiesForItemCrack(CraftWorld* crtf, int itemId)
-		{
-		    float texturePixel = (float)1.0f/256.0f;
+        void Particle::BuildVerticiesForItemCrack(CraftWorld* crtf, int itemId)
+        {
+            float texturePixel = (float)1.0f/256.0f;
             float percent = (float)1.0f/16.0f;
 
             if(varf1 == -1.0f)
@@ -413,58 +413,58 @@ namespace Aurora
             float texCordX = varf2;
             float texScaleX = texturePixel*4 + texturePixel*0.5f;
 
-		    ScePspFMatrix4 t;
-			sceGumMatrixMode(GU_VIEW);
-			sceGumStoreMatrix(&t);
-			sceGumMatrixMode(GU_MODEL);
+            ScePspFMatrix4 t;
+            sceGumMatrixMode(GU_VIEW);
+            sceGumStoreMatrix(&t);
+            sceGumMatrixMode(GU_MODEL);
 
             ScePspFVector3 up, right;
 
-			right.x = t.x.x * horizontalScale * 1;
-			right.y = t.y.x * horizontalScale * 1;
-			right.z = t.z.x * horizontalScale * 1;
-			up.x = t.x.y * verticalScale * 1;
-			up.y = t.y.y * verticalScale * 1;
-			up.z = t.z.y * verticalScale * 1;
+            right.x = t.x.x * horizontalScale * 1;
+            right.y = t.y.x * horizontalScale * 1;
+            right.z = t.z.x * horizontalScale * 1;
+            up.x = t.x.y * verticalScale * 1;
+            up.y = t.y.y * verticalScale * 1;
+            up.z = t.z.y * verticalScale * 1;
 
-			int i = 0;
+            int i = 0;
 
-			particleVertices[i].x = position.x - right.x + up.x;// * stepScale;
-			particleVertices[i].y = position.y - right.y + up.y;// * stepScale;
-			particleVertices[i].z = position.z - right.z + up.z;// * stepScale;
+            particleVertices[i].x = position.x - right.x + up.x;// * stepScale;
+            particleVertices[i].y = position.y - right.y + up.y;// * stepScale;
+            particleVertices[i].z = position.z - right.z + up.z;// * stepScale;
             particleVertices[i].u = texCordX;// * textureScale;
-			particleVertices[i].v = texCordY;// * textureScale;
-			i++;
+            particleVertices[i].v = texCordY;// * textureScale;
+            i++;
 
-			// (x, y - 1, z)
-			particleVertices[i].x = position.x - right.x - up.x;// * stepScale;
-			particleVertices[i].y = position.y - right.y - up.y;// * stepScale;
-			particleVertices[i].z = position.z - right.z - up.z;// * stepScale;
-			particleVertices[i].u = texCordX;// * textureScale;
-			particleVertices[i].v = texCordY+texScaleY;// * textureScale;
-			i++;
+            // (x, y - 1, z)
+            particleVertices[i].x = position.x - right.x - up.x;// * stepScale;
+            particleVertices[i].y = position.y - right.y - up.y;// * stepScale;
+            particleVertices[i].z = position.z - right.z - up.z;// * stepScale;
+            particleVertices[i].u = texCordX;// * textureScale;
+            particleVertices[i].v = texCordY+texScaleY;// * textureScale;
+            i++;
 
-			// (x + 1, y, z)
-			particleVertices[i].x = position.x + right.x + up.x;// * stepScale;
-			particleVertices[i].y = position.y + right.y + up.y;// * stepScale;
-			particleVertices[i].z = position.z + right.z + up.z;// * stepScale;
-			particleVertices[i].u = texCordX+texScaleX;// * textureScale;
-			particleVertices[i].v = texCordY;// * textureScale;
-			i++;
+            // (x + 1, y, z)
+            particleVertices[i].x = position.x + right.x + up.x;// * stepScale;
+            particleVertices[i].y = position.y + right.y + up.y;// * stepScale;
+            particleVertices[i].z = position.z + right.z + up.z;// * stepScale;
+            particleVertices[i].u = texCordX+texScaleX;// * textureScale;
+            particleVertices[i].v = texCordY;// * textureScale;
+            i++;
 
-			// (x + 1, y - 1, z)
-			particleVertices[i].x = position.x + right.x - up.x;// * stepScale;
-			particleVertices[i].y = position.y + right.y - up.y;//* stepScale;
-			particleVertices[i].z = position.z + right.z - up.z;// * stepScale;
-			particleVertices[i].u = texCordX+texScaleX;// * textureScale;
-			particleVertices[i].v = texCordY+texScaleY;// * textureScale;
+            // (x + 1, y - 1, z)
+            particleVertices[i].x = position.x + right.x - up.x;// * stepScale;
+            particleVertices[i].y = position.y + right.y - up.y;//* stepScale;
+            particleVertices[i].z = position.z + right.z - up.z;// * stepScale;
+            particleVertices[i].u = texCordX+texScaleX;// * textureScale;
+            particleVertices[i].v = texCordY+texScaleY;// * textureScale;
 
             //sceKernelDcacheWritebackInvalidateRange(particleVertices,4 * sizeof(TexturesPSPVertex));
             sceKernelDcacheWritebackInvalidateAll();
-		}
+        }
 
-		void Particle::Update(CraftWorld* crtf, float dt)
-		{
+        void Particle::Update(CraftWorld* crtf, float dt)
+        {
             if(position.x < 0 || position.x >= crtf->WORLD_SIZE || position.y < 0 || position.y >= crtf->WORLD_HEIGHT || position.z < 0 || position.z >= crtf->WORLD_SIZE)
             {
                 toDestroy = true;
@@ -475,15 +475,15 @@ namespace Aurora
                 toDestroy = true;
             }
 
-		    if(toDestroy == true)
+            if(toDestroy == true)
             {
                 return;
             }
 
             bBox =  BoundingBox(Vector3(position.x-0.33f,position.y-0.33f,position.z-0.33f),Vector3(position.x+0.33f,position.y+0.33f,position.z+0.33f));
 
-		    myLight = crtf->BlockFinalLight(position.x,position.y,position.z);
-		    timeToLive -= dt;
+            myLight = crtf->BlockFinalLight(position.x,position.y,position.z);
+            timeToLive -= dt;
 
             position += velocity*dt;
            // velocity.y += gravity*dt;
@@ -625,10 +625,10 @@ namespace Aurora
                     velocity.z *= -0.9f;
                 }
             }
-		}
+        }
 
-		bool Particle::CheckCollision(CraftWorld* crtf)
-		{
+        bool Particle::CheckCollision(CraftWorld* crtf)
+        {
             if (crtf->BlockSolid(position.x,position.y+horizontalScale*1.5f,position.z) != 0)
             {
                 return 1;
@@ -637,11 +637,11 @@ namespace Aurora
             {
                 return 0;
             }
-		}
+        }
 
-		void Particle::Render(Frustum &camFrustum)
-		{
-		    if(rederMe == true && toDestroy == false && particleVertices != NULL && camFrustum.BoxInFrustum(bBox) == Frustum::Intersects)
+        void Particle::Render(Frustum &camFrustum)
+        {
+            if(rederMe == true && toDestroy == false && particleVertices != NULL && camFrustum.BoxInFrustum(bBox) == Frustum::Intersects)
             {
                 sceGumPushMatrix();
                 sceGuColor(GU_COLOR(color.x*myLight,color.y*myLight,color.z*myLight,1));
@@ -665,7 +665,7 @@ namespace Aurora
                 sceGuColor(0xFFFFFFFF);
                 sceGumPopMatrix();
             }
-		}
-	}
+        }
+    }
 }
 

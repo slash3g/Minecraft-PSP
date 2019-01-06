@@ -11,29 +11,29 @@
 
 namespace Aurora
 {
-	namespace System
-	{
-		class NetworkManager
-		{
-		private:
+    namespace System
+    {
+        class NetworkManager
+        {
+        private:
 
-			static NetworkManager m_NetworkManager;
+            static NetworkManager m_NetworkManager;
 
-			char local_address[32];
-			bool connectionInitialized;
+            char local_address[32];
+            bool connectionInitialized;
 
-		public:
+        public:
 
-			static NetworkManager* Instance();
+            static NetworkManager* Instance();
 
-			void Init();
+            void Init();
 
-			bool InitializeConnection();
-			bool ShutDownConnection();
+            bool InitializeConnection();
+            bool ShutDownConnection();
 
-			bool GetFile(const char *url, const char *filepath);
-		};
-	}
+            bool GetFile(const char *url, const char *filepath);
+        };
+    }
 }
 
 #endif

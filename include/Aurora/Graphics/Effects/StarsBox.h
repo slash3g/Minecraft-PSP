@@ -8,30 +8,30 @@
 
 namespace Aurora
 {
-	namespace Graphics
-	{
-		class StarsBox
-		{
-		public:
-			StarsBox();
-			~StarsBox();
+    namespace Graphics
+    {
+        class StarsBox
+        {
+        public:
+            StarsBox();
+            ~StarsBox();
 
             void Build();
-			void Update();
-			void Render(float alpha);
+            void Update();
+            void Render(float alpha);
 
-		private:
+        private:
 
-			TexturesPSPVertex *boxVertices;
-			TexturesPSPVertex *boxVertices2;
-			TexturesPSPVertex *boxVertices3;
-			TexturesPSPVertex *boxVertices4;
-			TexturesPSPVertex *boxVertices5;
-			TexturesPSPVertex *boxVertices6;
+            TexturesPSPVertex *boxVertices;
+            TexturesPSPVertex *boxVertices2;
+            TexturesPSPVertex *boxVertices3;
+            TexturesPSPVertex *boxVertices4;
+            TexturesPSPVertex *boxVertices5;
+            TexturesPSPVertex *boxVertices6;
 
-			float size;
-		};
-	}
+            float size;
+        };
+    }
 }
 
 #endif

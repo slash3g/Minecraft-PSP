@@ -140,37 +140,37 @@ void WorldGenerator::initRandompMap(int worldSize, int worldHeight, int chunkSiz
             std::string filename = "map.png";
 
             u32* vram32;
-			u16* vram16;
-			int bufferwidth;
-			int pixelformat;
-			int unknown = 0;
-			int i, x, y;
-			png_structp png_ptr;
-			png_infop info_ptr;
-			FILE* fp;
-			u8* line;
+            u16* vram16;
+            int bufferwidth;
+            int pixelformat;
+            int unknown = 0;
+            int i, x, y;
+            png_structp png_ptr;
+            png_infop info_ptr;
+            FILE* fp;
+            u8* line;
 
-			fp = fopen(filename.c_str(), "wb");
-			if (!fp) return;
-			png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-			if (!png_ptr) return;
-			info_ptr = png_create_info_struct(png_ptr);
-			if (!info_ptr)
-			{
-					png_destroy_write_struct(&png_ptr, (png_infopp)NULL);
-					fclose(fp);
-					return;
-			}
-			png_init_io(png_ptr, fp);
-			png_set_IHDR(png_ptr, info_ptr, WORLD_SIZE, WORLD_SIZE,8, PNG_COLOR_TYPE_RGB, PNG_INTERLACE_NONE,PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-			png_write_info(png_ptr, info_ptr);
-			line = (u8*) malloc(WORLD_SIZE * 3);
-			vram16 = (u16*) vram32;
-			for (y = 0; y < WORLD_SIZE; y++)
-			{
-					for (i = 0, x = 0; x < WORLD_SIZE; x++)
-					{
-					    float Height  = data[x + y*WORLD_SIZE]* 128/12 + middleHeight;
+            fp = fopen(filename.c_str(), "wb");
+            if (!fp) return;
+            png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+            if (!png_ptr) return;
+            info_ptr = png_create_info_struct(png_ptr);
+            if (!info_ptr)
+            {
+                    png_destroy_write_struct(&png_ptr, (png_infopp)NULL);
+                    fclose(fp);
+                    return;
+            }
+            png_init_io(png_ptr, fp);
+            png_set_IHDR(png_ptr, info_ptr, WORLD_SIZE, WORLD_SIZE,8, PNG_COLOR_TYPE_RGB, PNG_INTERLACE_NONE,PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+            png_write_info(png_ptr, info_ptr);
+            line = (u8*) malloc(WORLD_SIZE * 3);
+            vram16 = (u16*) vram32;
+            for (y = 0; y < WORLD_SIZE; y++)
+            {
+                    for (i = 0, x = 0; x < WORLD_SIZE; x++)
+                    {
+                        float Height  = data[x + y*WORLD_SIZE]* 128/12 + middleHeight;
 
                         u32 color = 0;
                         u8 r = 0, g = 0, b = 0;
@@ -183,13 +183,13 @@ void WorldGenerator::initRandompMap(int worldSize, int worldHeight, int chunkSiz
                         line[i++] = r;
                         line[i++] = g;
                         line[i++] = b;
-					}
-					png_write_row(png_ptr, line);
-			}
-			free(line);
-			png_write_end(png_ptr, info_ptr);
-			png_destroy_write_struct(&png_ptr, (png_infopp)NULL);
-			fclose(fp);
+                    }
+                    png_write_row(png_ptr, line);
+            }
+            free(line);
+            png_write_end(png_ptr, info_ptr);
+            png_destroy_write_struct(&png_ptr, (png_infopp)NULL);
+            fclose(fp);
         } */
 
         /*for (int start_z = 0; start_z < WORLD_SIZE/3; start_z++)
@@ -1015,27 +1015,27 @@ void WorldGenerator::initRandompMap(int worldSize, int worldHeight, int chunkSiz
 
 float WorldGenerator::InterpolateBiomeNoise(int wx, int wz)
 {
-	float q1, q2, q3, q4, xinterp, yinterp, r1, r2, r3;
-	int minx, maxx, minz, maxz;
+    float q1, q2, q3, q4, xinterp, yinterp, r1, r2, r3;
+    int minx, maxx, minz, maxz;
 
-	minx = floor(wx/8.0f);
-	maxx = ceil(wx/8.0f);
+    minx = floor(wx/8.0f);
+    maxx = ceil(wx/8.0f);
 
-	minz = floor(wz/8.0f);
-	maxz = ceil(wz/8.0f);
+    minz = floor(wz/8.0f);
+    maxz = ceil(wz/8.0f);
 
-	q1 = (GetValue2D3(minx,minz,1,0.1f,1.0f)+1.0f)/2.0f;
-	q2 = (GetValue2D3(maxx,minz,1,0.1f,1.0f)+1.0f)/2.0f;
-	q3 = (GetValue2D3(minx,maxz,1,0.1f,1.0f)+1.0f)/2.0f;
-	q4 = (GetValue2D3(maxx,maxz,1,0.1f,1.0f)+1.0f)/2.0f;
+    q1 = (GetValue2D3(minx,minz,1,0.1f,1.0f)+1.0f)/2.0f;
+    q2 = (GetValue2D3(maxx,minz,1,0.1f,1.0f)+1.0f)/2.0f;
+    q3 = (GetValue2D3(minx,maxz,1,0.1f,1.0f)+1.0f)/2.0f;
+    q4 = (GetValue2D3(maxx,maxz,1,0.1f,1.0f)+1.0f)/2.0f;
 
-	xinterp = (wx/8.0f - minx);
-	yinterp = (wz/8.0f - minz);
+    xinterp = (wx/8.0f - minx);
+    yinterp = (wz/8.0f - minz);
 
-	r1 = func1.Linear(q1,q2,xinterp);
-	r2 = func1.Linear(q3,q4,xinterp);
+    r1 = func1.Linear(q1,q2,xinterp);
+    r2 = func1.Linear(q3,q4,xinterp);
 
-	r3 = func1.Linear(r1,r2,yinterp);
+    r3 = func1.Linear(r1,r2,yinterp);
 
     if(r3 > 1)
     {
@@ -1047,33 +1047,33 @@ float WorldGenerator::InterpolateBiomeNoise(int wx, int wz)
         r3 = 0.0f;
     }
 
-	return r3;
+    return r3;
 }
 
 float WorldGenerator::InterpolateMoistureNoise(int wx, int wz)
 {
-	float q1, q2, q3, q4, xinterp, yinterp, r1, r2, r3;
-	int minx, maxx, minz, maxz;
+    float q1, q2, q3, q4, xinterp, yinterp, r1, r2, r3;
+    int minx, maxx, minz, maxz;
 
-	minx = floor(wx/6.0f);
-	maxx = ceil(wx/6.0f);
+    minx = floor(wx/6.0f);
+    maxx = ceil(wx/6.0f);
 
-	minz = floor(wz/6.0f);
-	maxz = ceil(wz/6.0f);
+    minz = floor(wz/6.0f);
+    maxz = ceil(wz/6.0f);
 
     q1 = (GetValue2D2(minx,minz,1,0.1f,1.0f)*2)+0.3f;
-	q2 = (GetValue2D2(maxx,minz,1,0.1f,1.0f)*2)+0.3f;
-	q3 = (GetValue2D2(minx,maxz,1,0.1f,1.0f)*2)+0.3f;
-	q4 = (GetValue2D2(maxx,maxz,1,0.1f,1.0f)*2)+0.3f;
+    q2 = (GetValue2D2(maxx,minz,1,0.1f,1.0f)*2)+0.3f;
+    q3 = (GetValue2D2(minx,maxz,1,0.1f,1.0f)*2)+0.3f;
+    q4 = (GetValue2D2(maxx,maxz,1,0.1f,1.0f)*2)+0.3f;
 
 
-	xinterp = (wx/6.0f - minx);
-	yinterp = (wz/6.0f - minz);
+    xinterp = (wx/6.0f - minx);
+    yinterp = (wz/6.0f - minz);
 
-	r1 = func1.Linear(q1,q2,xinterp);
-	r2 = func1.Linear(q3,q4,xinterp);
+    r1 = func1.Linear(q1,q2,xinterp);
+    r2 = func1.Linear(q3,q4,xinterp);
 
-	r3 = func1.Linear(r1,r2,yinterp);
+    r3 = func1.Linear(r1,r2,yinterp);
 
     if(r3 > 1)
     {
@@ -1085,165 +1085,165 @@ float WorldGenerator::InterpolateMoistureNoise(int wx, int wz)
         r3 = 0.0f;
     }
 
-	return r3;
+    return r3;
 }
 
 float WorldGenerator::InterpolateElevationNoise(int wx, int wz)
 {
-	float q1, q2, q3, q4, xinterp, yinterp, r1, r2, r3;
-	int minx, maxx, minz, maxz;
+    float q1, q2, q3, q4, xinterp, yinterp, r1, r2, r3;
+    int minx, maxx, minz, maxz;
 
-	minx = floor(wx/4.0f);
-	maxx = ceil(wx/4.0f);
+    minx = floor(wx/4.0f);
+    maxx = ceil(wx/4.0f);
 
-	minz = floor(wz/4.0f);
-	maxz = ceil(wz/4.0f);
+    minz = floor(wz/4.0f);
+    maxz = ceil(wz/4.0f);
 
-	q1 = GetValue2D(minx,minz,1,0.1f,1.0f);
-	q2 = GetValue2D(maxx,minz,1,0.1f,1.0f);
-	q3 = GetValue2D(minx,maxz,1,0.1f,1.0f);
-	q4 = GetValue2D(maxx,maxz,1,0.1f,1.0f);
+    q1 = GetValue2D(minx,minz,1,0.1f,1.0f);
+    q2 = GetValue2D(maxx,minz,1,0.1f,1.0f);
+    q3 = GetValue2D(minx,maxz,1,0.1f,1.0f);
+    q4 = GetValue2D(maxx,maxz,1,0.1f,1.0f);
 
-	xinterp = (wx/4.0f - minx);
-	yinterp = (wz/4.0f - minz);
+    xinterp = (wx/4.0f - minx);
+    yinterp = (wz/4.0f - minz);
 
-	r1 = func1.Linear(q1,q2,xinterp);
-	r2 = func1.Linear(q3,q4,xinterp);
+    r1 = func1.Linear(q1,q2,xinterp);
+    r2 = func1.Linear(q3,q4,xinterp);
 
-	r3 = func1.Linear(r1,r2,yinterp);
+    r3 = func1.Linear(r1,r2,yinterp);
 
-	return r3;
+    return r3;
 }
 
 float WorldGenerator::InterpolateRoughnessNoise(int wx, int wz)
 {
-	float q1, q2, q3, q4, xinterp, yinterp, r1, r2, r3;
-	int minx, maxx, minz, maxz;
+    float q1, q2, q3, q4, xinterp, yinterp, r1, r2, r3;
+    int minx, maxx, minz, maxz;
 
-	minx = floor(wx/2.0f);
-	maxx = ceil(wx/2.0f);
+    minx = floor(wx/2.0f);
+    maxx = ceil(wx/2.0f);
 
-	minz = floor(wz/2.0f);
-	maxz = ceil(wz/2.0f);
+    minz = floor(wz/2.0f);
+    maxz = ceil(wz/2.0f);
 
-	q1 = GetValue2D(minx,minz,3,0.1f,1.0f);
-	q2 = GetValue2D(maxx,minz,3,0.1f,1.0f);
-	q3 = GetValue2D(minx,maxz,3,0.1f,1.0f);
-	q4 = GetValue2D(maxx,maxz,3,0.1f,1.0f);
+    q1 = GetValue2D(minx,minz,3,0.1f,1.0f);
+    q2 = GetValue2D(maxx,minz,3,0.1f,1.0f);
+    q3 = GetValue2D(minx,maxz,3,0.1f,1.0f);
+    q4 = GetValue2D(maxx,maxz,3,0.1f,1.0f);
 
-	xinterp = (wx/2.0f - minx);
-	yinterp = (wz/2.0f - minz);
+    xinterp = (wx/2.0f - minx);
+    yinterp = (wz/2.0f - minz);
 
-	r1 = func1.Linear(q1,q2,xinterp);
-	r2 = func1.Linear(q3,q4,xinterp);
+    r1 = func1.Linear(q1,q2,xinterp);
+    r2 = func1.Linear(q3,q4,xinterp);
 
-	r3 = func1.Linear(r1,r2,yinterp);
+    r3 = func1.Linear(r1,r2,yinterp);
 
-	return r3;
+    return r3;
 }
 
 void WorldGenerator::SetSeed(int seed)
 {
-	func1.setSeed(seed);
-	func2.setSeed(seed+500);
-	func3.setSeed(seed+1000);
+    func1.setSeed(seed);
+    func2.setSeed(seed+500);
+    func3.setSeed(seed+1000);
 }
 
 float WorldGenerator::GetValue3D(int wx, int wy, int wz, int octaves, float startFrequency, float startAmplitude)
 {
-	float DIVISOR = 1.0f / 16.0f;
+    float DIVISOR = 1.0f / 16.0f;
 
-	float x = wx * DIVISOR;
-	float y = wy * DIVISOR;
-	float z = wz * DIVISOR;
+    float x = wx * DIVISOR;
+    float y = wy * DIVISOR;
+    float z = wz * DIVISOR;
 
-	float frequency = startFrequency;
-	float amplitude = startAmplitude;
+    float frequency = startFrequency;
+    float amplitude = startAmplitude;
 
-	float sum = 0.0f;
+    float sum = 0.0f;
 
-	for (int octave = 0; octave < octaves; octave++)
-	{
-		float noise = func1.sdnoise3(x * frequency, y * frequency, z * frequency,0,0,0);
+    for (int octave = 0; octave < octaves; octave++)
+    {
+        float noise = func1.sdnoise3(x * frequency, y * frequency, z * frequency,0,0,0);
 
-		sum += amplitude * noise;
-		frequency *= 2;
-		amplitude *= 0.5;
-	}
+        sum += amplitude * noise;
+        frequency *= 2;
+        amplitude *= 0.5;
+    }
 
-	return sum;
+    return sum;
 }
 
 float WorldGenerator::GetValue2D(int wx, int wz, int octaves, float startFrequency, float startAmplitude)
 {
-	float DIVISOR = 1.0f / 16.0f;
+    float DIVISOR = 1.0f / 16.0f;
 
-	float x = wx * DIVISOR;
-	float z = wz * DIVISOR;
+    float x = wx * DIVISOR;
+    float z = wz * DIVISOR;
 
-	float frequency = startFrequency;
-	float amplitude = startAmplitude;
+    float frequency = startFrequency;
+    float amplitude = startAmplitude;
 
-	float sum = 0.0f;
+    float sum = 0.0f;
 
-	for (int octave = 0; octave < octaves; octave++)
-	{
-		float noise = func1.sdnoise2(x * frequency, z * frequency,0,0);
+    for (int octave = 0; octave < octaves; octave++)
+    {
+        float noise = func1.sdnoise2(x * frequency, z * frequency,0,0);
 
-		sum += amplitude * noise;
-		frequency *= 2;
-		amplitude *= 0.5;
-	}
+        sum += amplitude * noise;
+        frequency *= 2;
+        amplitude *= 0.5;
+    }
 
-	return sum;
+    return sum;
 }
 
 float WorldGenerator::GetValue2D2(int wx, int wz, int octaves, float startFrequency, float startAmplitude)
 {
-	float DIVISOR = 1.0f / 16.0f;
+    float DIVISOR = 1.0f / 16.0f;
 
-	float x = wx * DIVISOR;
-	float z = wz * DIVISOR;
+    float x = wx * DIVISOR;
+    float z = wz * DIVISOR;
 
-	float frequency = startFrequency;
-	float amplitude = startAmplitude;
+    float frequency = startFrequency;
+    float amplitude = startAmplitude;
 
-	float sum = 0.0f;
+    float sum = 0.0f;
 
-	for (int octave = 0; octave < octaves; octave++)
-	{
-		float noise = func2.sdnoise2(x * frequency, z * frequency,0,0);
+    for (int octave = 0; octave < octaves; octave++)
+    {
+        float noise = func2.sdnoise2(x * frequency, z * frequency,0,0);
 
-		sum += amplitude * noise;
-		frequency *= 2;
-		amplitude *= 0.5;
-	}
+        sum += amplitude * noise;
+        frequency *= 2;
+        amplitude *= 0.5;
+    }
 
-	return sum;
+    return sum;
 }
 
 float WorldGenerator::GetValue2D3(int wx, int wz, int octaves, float startFrequency, float startAmplitude)
 {
-	float DIVISOR = 1.0f / 16.0f;
+    float DIVISOR = 1.0f / 16.0f;
 
-	float x = wx * DIVISOR;
-	float z = wz * DIVISOR;
+    float x = wx * DIVISOR;
+    float z = wz * DIVISOR;
 
-	float frequency = startFrequency;
-	float amplitude = startAmplitude;
+    float frequency = startFrequency;
+    float amplitude = startAmplitude;
 
-	float sum = 0.0f;
+    float sum = 0.0f;
 
-	for (int octave = 0; octave < octaves; octave++)
-	{
-		float noise = func3.sdnoise2(x * frequency, z * frequency,0,0);
+    for (int octave = 0; octave < octaves; octave++)
+    {
+        float noise = func3.sdnoise2(x * frequency, z * frequency,0,0);
 
-		sum += amplitude * noise;
-		frequency *= 2;
-		amplitude *= 0.5;
-	}
+        sum += amplitude * noise;
+        frequency *= 2;
+        amplitude *= 0.5;
+    }
 
-	return sum;
+    return sum;
 }
 
 

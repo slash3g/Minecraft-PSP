@@ -38,10 +38,10 @@ extern "C" {
  */
 typedef struct
 {
-	unsigned int numvertices;
-	unsigned int drawflag;
-	void *vertices;
-		
+    unsigned int numvertices;
+    unsigned int drawflag;
+    void *vertices;
+        
 } pgeObj;
 
 /**

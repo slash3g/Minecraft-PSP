@@ -10,36 +10,36 @@
 
 namespace Aurora
 {
-	namespace Graphics
-	{
-		class Destroyer
-		{
-		public:
-			Destroyer();
-			~Destroyer();
+    namespace Graphics
+    {
+        class Destroyer
+        {
+        public:
+            Destroyer();
+            ~Destroyer();
 
-			void Update(float stad, CraftWorld* crft, int blockId);
-			void Render(float stad);
+            void Update(float stad, CraftWorld* crft, int blockId);
+            void Render(float stad);
 
-		private:
+        private:
 
-			TexturesPSPVertex *boxVertices;
-			TexturesPSPVertex *boxVertices2;
-			TexturesPSPVertex *boxVertices3;
-			TexturesPSPVertex *boxVertices4;
-			TexturesPSPVertex *boxVertices5;
-			TexturesPSPVertex *boxVertices6;
+            TexturesPSPVertex *boxVertices;
+            TexturesPSPVertex *boxVertices2;
+            TexturesPSPVertex *boxVertices3;
+            TexturesPSPVertex *boxVertices4;
+            TexturesPSPVertex *boxVertices5;
+            TexturesPSPVertex *boxVertices6;
 
-			SimplePSPVertex2 *boxVertices11;
-			SimplePSPVertex2 *boxVertices12;
-			SimplePSPVertex2 *boxVertices13;
-			SimplePSPVertex2 *boxVertices14;
-			SimplePSPVertex2 *boxVertices15;
-			SimplePSPVertex2 *boxVertices16;
+            SimplePSPVertex2 *boxVertices11;
+            SimplePSPVertex2 *boxVertices12;
+            SimplePSPVertex2 *boxVertices13;
+            SimplePSPVertex2 *boxVertices14;
+            SimplePSPVertex2 *boxVertices15;
+            SimplePSPVertex2 *boxVertices16;
 
-			float size;
-		};
-	}
+            float size;
+        };
+    }
 }
 
 #endif

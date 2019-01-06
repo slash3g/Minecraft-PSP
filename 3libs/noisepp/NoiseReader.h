@@ -39,24 +39,24 @@ namespace utils
 /// Class for reading a pipeline from a stream or file.
 class Reader
 {
-	private:
-		InStream &mStream;
+    private:
+        InStream &mStream;
 
-		unsigned short mModuleCount;
+        unsigned short mModuleCount;
 
-		typedef std::vector<Module*> ModuleVector;
-		ModuleVector mModules;
+        typedef std::vector<Module*> ModuleVector;
+        ModuleVector mModules;
 
-		void readModule ();
-		void readModuleRel (Module *module);
-	public:
-		/// Constructor.
-		/// @param stream A reference to the stream to read from.
-		Reader (InStream &stream);
-		/// Destructor.
-		~Reader ();
-		/// Returns a pointer to the module with the specified ID or NULL if it does not exist.
-		Module *getModule (unsigned short id=0);
+        void readModule ();
+        void readModuleRel (Module *module);
+    public:
+        /// Constructor.
+        /// @param stream A reference to the stream to read from.
+        Reader (InStream &stream);
+        /// Destructor.
+        ~Reader ();
+        /// Returns a pointer to the module with the specified ID or NULL if it does not exist.
+        Module *getModule (unsigned short id=0);
 };
 
 };

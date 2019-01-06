@@ -22,13 +22,13 @@ GrassBlock::GrassBlock():BaseBlock()
 
     solid = true;
     editable = true;
-	transparent = false;
-	allowLight = false;
+    transparent = false;
+    allowLight = false;
 
-	soundType = 0;
-	loot = 2;
-	material = 3;
-	update = 1;
+    soundType = 0;
+    loot = 2;
+    material = 3;
+    update = 1;
 
     name = "Grass Block";
 }
@@ -56,16 +56,16 @@ DirtBlock::DirtBlock():BaseBlock()
     forPlane_y = 0;
 
     solid = true;
-	editable = true;
-	transparent = false;
-	allowLight = false;
+    editable = true;
+    transparent = false;
+    allowLight = false;
 
-	soundType = 1;
-	loot = 2;
-	material = 3;
-	update = 1;
+    soundType = 1;
+    loot = 2;
+    material = 3;
+    update = 1;
 
-	name = "Dirt";
+    name = "Dirt";
 }
 
 block_t DirtBlock::getID(){ return 2;}
@@ -92,17 +92,17 @@ RockBlock::RockBlock():BaseBlock()
     forPlane_y = 0;
 
     solid = true;
-	editable = true;
-	transparent = false;
-	allowLight = false;
+    editable = true;
+    transparent = false;
+    allowLight = false;
 
-	soundType = 2;
-	loot = 36;
-	material = 2;
-	update = 0;
-	refraction = 3;
+    soundType = 2;
+    loot = 36;
+    material = 2;
+    update = 0;
+    refraction = 3;
 
-	name = "Stone";
+    name = "Stone";
 }
 
 block_t RockBlock::getID(){ return 3;}
@@ -128,8 +128,8 @@ WaterBlock::WaterBlock():BaseBlock()
     forPlane_x = 14;
     forPlane_y = 15;
 
-	editable = false;
-	transparent = true;
+    editable = false;
+    transparent = true;
     solid = false;
 
     soundType = -1;
@@ -162,16 +162,16 @@ GoldBlock::GoldBlock():BaseBlock()
     forPlane_x = 0;
     forPlane_y = 2;
 
-	editable = true;
-	transparent = false;
+    editable = true;
+    transparent = false;
     solid = true;
 
-	loot = 5;
-	material = 7;
+    loot = 5;
+    material = 7;
     soundType = 2;
-	furnItem = 280;
+    furnItem = 280;
 
-	name = "Gold Ore";
+    name = "Gold Ore";
 }
 
 block_t GoldBlock::getID(){ return 5;}
@@ -195,16 +195,16 @@ LadderBlock::LadderBlock():BaseBlock()
 
     forPlane_x = 3;
     forPlane_y = 5;
-	editable = true;
-	transparent = true;
-	soundType = 3;
+    editable = true;
+    transparent = true;
+    soundType = 3;
 
-	loot = 6;
-	material = 1;
-	solid = true;
-	allowLight = true;
+    loot = 6;
+    material = 1;
+    solid = true;
+    allowLight = true;
 
-	name = "Ladder Block";
+    name = "Ladder Block";
 }
 block_t LadderBlock::getID(){ return 6;}
 
@@ -229,19 +229,19 @@ SandBlock::SandBlock():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 1;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 5;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 5;
 
-	loot = 7;
-	material = 3;
-	update = 1;
-	solid = true;
+    loot = 7;
+    material = 3;
+    update = 1;
+    solid = true;
 
-	furnItem = 40;
+    furnItem = 40;
 
-	name = "Sand";
+    name = "Sand";
 }
 block_t SandBlock::getID(){ return 7;}
 
@@ -266,18 +266,18 @@ WoodBlock::WoodBlock():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 1;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 3;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 3;
 
-	loot = 8;
-	material = 1;
-	solid = true;
+    loot = 8;
+    material = 1;
+    solid = true;
 
-	furnItem = 277;
+    furnItem = 277;
 
-	name = "Oak Wood";
+    name = "Oak Wood";
 }
 block_t WoodBlock::getID(){ return 8;}
 
@@ -301,18 +301,18 @@ LeavesBlock::LeavesBlock():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 3;
 
-	editable = true;
-	allowLight = true;
-	transparent = false;
-	soundType = 0;
-	blockModel = 5;
+    editable = true;
+    allowLight = true;
+    transparent = false;
+    soundType = 0;
+    blockModel = 5;
 
-	loot = 9;
-	material = 4;
-	solid = true;
-	refraction = 1;
+    loot = 9;
+    material = 4;
+    solid = true;
+    refraction = 1;
 
-	name = "Oak Leaves";
+    name = "Oak Leaves";
 }
 block_t LeavesBlock::getID(){ return 9;}
 
@@ -337,17 +337,17 @@ BlackWoolBlock::BlackWoolBlock():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 7;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 10;
-	material = 4;
-	solid = true;
+    loot = 10;
+    material = 4;
+    solid = true;
 
-	name = "Black Wool";
+    name = "Black Wool";
 }
 block_t BlackWoolBlock::getID(){ return 10;}
 
@@ -372,16 +372,16 @@ GrayWoolBlock::GrayWoolBlock():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 7;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 11;
-	solid = true;
+    loot = 11;
+    solid = true;
 
-	name = "Gray Wool";
+    name = "Gray Wool";
 }
 block_t GrayWoolBlock::getID(){ return 11;}
 
@@ -406,16 +406,16 @@ RedWoolBlock::RedWoolBlock():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 12;
-	solid = true;
+    loot = 12;
+    solid = true;
 
-	name = "Red Wool";
+    name = "Red Wool";
 }
 block_t RedWoolBlock::getID(){ return 12;}
 
@@ -440,16 +440,16 @@ PinkWoolBlock::PinkWoolBlock():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 13;
-	solid = true;
+    loot = 13;
+    solid = true;
 
-	name = "Pink Wool";
+    name = "Pink Wool";
 }
 block_t PinkWoolBlock::getID(){ return 13;}
 
@@ -474,16 +474,16 @@ DarkGreenWoolBlock::DarkGreenWoolBlock():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 9;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 14;
-	solid = true;
+    loot = 14;
+    solid = true;
 
-	name = "Green Wool";
+    name = "Green Wool";
 }
 block_t DarkGreenWoolBlock::getID(){ return 14;}
 
@@ -508,16 +508,16 @@ GreenWoolBlock::GreenWoolBlock():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 9;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 15;
-	solid = true;
+    loot = 15;
+    solid = true;
 
-	name = "Lime Wool";
+    name = "Lime Wool";
 }
 block_t GreenWoolBlock::getID(){ return 15;}
 
@@ -543,16 +543,16 @@ BrownWoolBlock::BrownWoolBlock():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 10;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 16;
-	solid = true;
+    loot = 16;
+    solid = true;
 
-	name = "Brown Wool";
+    name = "Brown Wool";
 }
 block_t BrownWoolBlock::getID(){ return 16;}
 
@@ -577,16 +577,16 @@ YellowWoolBlock::YellowWoolBlock():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 10;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 17;
-	solid = true;
+    loot = 17;
+    solid = true;
 
-	name = "Yellow Wool";
+    name = "Yellow Wool";
 }
 block_t YellowWoolBlock::getID(){ return 17;}
 
@@ -610,16 +610,16 @@ BlueWoolBlock::BlueWoolBlock():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 11;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 18;
-	solid = true;
+    loot = 18;
+    solid = true;
 
-	name = "Blue Wool";
+    name = "Blue Wool";
 }
 block_t BlueWoolBlock::getID(){ return 18;}
 
@@ -643,16 +643,16 @@ LightBlueWoolBlock::LightBlueWoolBlock():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 11;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 19;
-	solid = true;
+    loot = 19;
+    solid = true;
 
-	name = "Light Blue Wool";
+    name = "Light Blue Wool";
 }
 block_t LightBlueWoolBlock::getID(){ return 19;}
 
@@ -676,16 +676,16 @@ VioletWoolBlock::VioletWoolBlock():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 12;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 20;
-	solid = true;
+    loot = 20;
+    solid = true;
 
-	name = "Purple Wool";
+    name = "Purple Wool";
 }
 block_t VioletWoolBlock::getID(){ return 20;}
 
@@ -709,15 +709,15 @@ PastelWoolBlock::PastelWoolBlock():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 12;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
-	loot = 21;
-	solid = true;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
+    loot = 21;
+    solid = true;
 
-	name = "Magneta Wool";
+    name = "Magneta Wool";
 }
 block_t PastelWoolBlock::getID(){ return 21;}
 
@@ -741,16 +741,16 @@ OrangeWoolBlock::OrangeWoolBlock():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 13;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 22;
-	solid = true;
+    loot = 22;
+    solid = true;
 
-	name = "Orange Wool";
+    name = "Orange Wool";
 }
 block_t OrangeWoolBlock::getID(){ return 22;}
 
@@ -774,16 +774,16 @@ LightGrayWoolBlock::LightGrayWoolBlock():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 14;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 23;
-	solid = true;
+    loot = 23;
+    solid = true;
 
-	name = "Light Gray Wool";
+    name = "Light Gray Wool";
 }
 block_t LightGrayWoolBlock::getID(){ return 23;}
 
@@ -807,16 +807,16 @@ WhiteWoolBlock::WhiteWoolBlock():BaseBlock()
     forPlane_x = 0;
     forPlane_y = 4;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
-	material = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
+    material = 1;
 
-	loot = 24;
-	solid = true;
+    loot = 24;
+    solid = true;
 
-	name = "Wool";
+    name = "Wool";
 }
 block_t WhiteWoolBlock::getID(){ return 24;}
 
@@ -840,16 +840,16 @@ CactusBlock::CactusBlock():BaseBlock()
     forPlane_x = 6;
     forPlane_y = 4;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 5;
-	soundType = 3;
+    soundType = 3;
 
-	loot = 25;
-	material = 1;
-	update = 1;
-	solid = true;
-	refraction = 1;
+    loot = 25;
+    material = 1;
+    update = 1;
+    solid = true;
+    refraction = 1;
     allowLight = true;
     furnItem = 373;
 
@@ -879,16 +879,16 @@ SandStone::SandStone():BaseBlock()
     forPlane_x = 0;
     forPlane_y = 12;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 2;
 
-	loot = 26;
-	solid = true;
-	material = 2;
+    loot = 26;
+    solid = true;
+    material = 2;
 
-	name = "Sandstone";
+    name = "Sandstone";
 }
 block_t SandStone::getID(){ return 26;}
 
@@ -912,16 +912,16 @@ BrickBlock::BrickBlock():BaseBlock()
     forPlane_x = 7;
     forPlane_y = 0;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 2;
 
-	loot = 27;
-	material = 9;
-	solid = true;
+    loot = 27;
+    material = 9;
+    solid = true;
 
-	name = "Bricks";
+    name = "Bricks";
 }
 block_t BrickBlock::getID(){ return 27;}
 
@@ -945,15 +945,15 @@ CageBlock::CageBlock():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 4;
 
-	editable = true;
-	transparent = true;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = true;
+    allowLight = false;
+    soundType = 2;
 
-	loot = 28;
-	material = 10;
-	solid = true;
-	refraction = 1;
+    loot = 28;
+    material = 10;
+    solid = true;
+    refraction = 1;
     allowLight = true;
 
     name = "Spawner";
@@ -980,16 +980,16 @@ SnowSoil::SnowSoil():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 4;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 6;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 6;
 
-	loot = 2;
-	material = 3;
-	solid = true;
+    loot = 2;
+    material = 3;
+    solid = true;
 
-	name = "Snow Soil";
+    name = "Snow Soil";
 }
 block_t SnowSoil::getID(){ return 29;}
 
@@ -1013,16 +1013,16 @@ DarkWoodBlock::DarkWoodBlock():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 7;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 3;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 3;
 
-	loot = 30;
-	material = 1;
-	solid = true;
+    loot = 30;
+    material = 1;
+    solid = true;
 
-	name = "Spruce Wood";
+    name = "Spruce Wood";
 }
 block_t DarkWoodBlock::getID(){ return 30;}
 
@@ -1046,18 +1046,18 @@ WhiteWoodBlock::WhiteWoodBlock():BaseBlock()
     forPlane_x = 5;
     forPlane_y = 7;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 3;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 3;
 
-	loot = 31;
-	material = 1;
-	solid = true;
+    loot = 31;
+    material = 1;
+    solid = true;
 
-	furnItem = 277;
+    furnItem = 277;
 
-	name = "Birch Wood";
+    name = "Birch Wood";
 }
 block_t WhiteWoodBlock::getID(){ return 31;}
 
@@ -1081,17 +1081,17 @@ IceBlock::IceBlock():BaseBlock()
     forPlane_x = 3;
     forPlane_y = 4;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 2;
     material = 3;
 
-	loot = -1;
-	solid = true;
-	refraction = 1;
+    loot = -1;
+    solid = true;
+    refraction = 1;
 
-	name = "Ice";
+    name = "Ice";
 }
 block_t IceBlock::getID(){ return 32;}
 
@@ -1115,8 +1115,8 @@ CaneBlock::CaneBlock():BaseBlock()
     forPlane_x = 9;
     forPlane_y = 4;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 3;
     allowLight = true;
 
@@ -1151,10 +1151,10 @@ OakPlanks::OakPlanks():BaseBlock() // planks
     forPlane_x = 4;
     forPlane_y = 0;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 3;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 3;
 
     loot = 34;
     material = 1;
@@ -1184,10 +1184,10 @@ ShelfBlock::ShelfBlock():BaseBlock()
     forPlane_x = 3;
     forPlane_y = 2;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 3;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 3;
 
     loot = 35;
     solid = true;
@@ -1216,10 +1216,10 @@ CobbleStone::CobbleStone():BaseBlock()
     forPlane_x = 0;
     forPlane_y = 1;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 2;
 
     loot = 36;
     material = 2;
@@ -1251,17 +1251,17 @@ SpruceLeaves::SpruceLeaves():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 8;
 
-	editable = true;
-	allowLight = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 0;
-	blockModel = 5;
+    editable = true;
+    allowLight = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 0;
+    blockModel = 5;
 
-	loot = 37;
-	material = 4;
-	solid = true;
-	refraction = 1;
+    loot = 37;
+    material = 4;
+    solid = true;
+    refraction = 1;
 
     name = "Spruce Leaves";
 }
@@ -1287,17 +1287,17 @@ BirchLeaves::BirchLeaves():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 6;
 
-	editable = true;
-	allowLight = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 0;
-	blockModel = 5;
+    editable = true;
+    allowLight = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 0;
+    blockModel = 5;
 
-	loot = 38;
-	material = 4;
-	solid = true;
-	refraction = 1;
+    loot = 38;
+    material = 4;
+    solid = true;
+    refraction = 1;
 
     name = "Birch Leaves";
 }
@@ -1323,10 +1323,10 @@ Sponge::Sponge():BaseBlock()
     forPlane_x = 0;
     forPlane_y = 3;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 1;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 1;
 
     loot = 38;
     solid = true;
@@ -1355,10 +1355,10 @@ GlassBlock::GlassBlock():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 3;
 
-	editable = true;
-	transparent = true;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = true;
+    allowLight = false;
+    soundType = 2;
 
     loot = -1;
     solid = true;
@@ -1388,10 +1388,10 @@ IronOre::IronOre():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 2;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 2;
 
     loot = 41;
     material = 7;
@@ -1423,18 +1423,18 @@ CoalOre::CoalOre():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 2;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 2;
 
-	loot = 277;
-	material = 7;
-	solid = true;
+    loot = 277;
+    material = 7;
+    solid = true;
 
-	furnItem = 277;
+    furnItem = 277;
 
-	name = "Coal Ore";
+    name = "Coal Ore";
 }
 block_t CoalOre::getID(){ return 42;}
 
@@ -1458,18 +1458,18 @@ DiamondOre::DiamondOre():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 3;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 2;
 
-	loot = 279;
-	material = 7;
-	solid = true;
+    loot = 279;
+    material = 7;
+    solid = true;
 
-	furnItem = 279;
+    furnItem = 279;
 
-	name = "Diamond Ore";
+    name = "Diamond Ore";
 }
 block_t DiamondOre::getID(){ return 43;}
 
@@ -1493,16 +1493,16 @@ RedstoneOre::RedstoneOre():BaseBlock()
     forPlane_x = 3;
     forPlane_y = 3;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 2;
 
-	loot = 353;
-	material = 7;
-	solid = true;
+    loot = 353;
+    material = 7;
+    solid = true;
 
-	furnItem = 353;
+    furnItem = 353;
 
     name = "Redstone Ore";
 }
@@ -1528,16 +1528,16 @@ LapisOre::LapisOre():BaseBlock()
     forPlane_x = 0;
     forPlane_y = 10;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 2;
 
-	loot = 318;
-	material = 7;
-	solid = true;
+    loot = 318;
+    material = 7;
+    solid = true;
 
-	name = "Lapis Lazuli Ore";
+    name = "Lapis Lazuli Ore";
 }
 block_t LapisOre::getID(){ return 45;}
 
@@ -1561,16 +1561,16 @@ Obsidian::Obsidian():BaseBlock()
     forPlane_x = 5;
     forPlane_y = 2;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 2;
 
-	loot = 46;
-	material = 5;
-	solid = true;
+    loot = 46;
+    material = 5;
+    solid = true;
 
-	name = "Obsidian";
+    name = "Obsidian";
 }
 block_t Obsidian::getID(){ return 46;}
 
@@ -1594,13 +1594,13 @@ SnowBlock::SnowBlock():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 4;
 
-	editable = true;
-	transparent = false;
-	soundType = 6;
+    editable = true;
+    transparent = false;
+    soundType = 6;
 
-	loot = 47;
-	material = 3;
-	solid = true;
+    loot = 47;
+    material = 3;
+    solid = true;
 
     name = "Snow Block";
 }
@@ -1626,10 +1626,10 @@ Torch::Torch():BaseBlock()
     forPlane_x = 0;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
-	soundType = 2;
-	lightSource = true;
+    editable = true;
+    transparent = true;
+    soundType = 2;
+    lightSource = true;
     blockModel = 5;
     allowLight = true;
 
@@ -1662,9 +1662,9 @@ Door1::Door1():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 6;
 
-	editable = true;
-	transparent = true;
-	soundType = 2;
+    editable = true;
+    transparent = true;
+    soundType = 2;
     blockModel = 5;
 
     loot = 306;
@@ -1696,9 +1696,9 @@ Door2::Door2():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 6;
 
-	editable = true;
-	transparent = true;
-	soundType = 2;
+    editable = true;
+    transparent = true;
+    soundType = 2;
     blockModel = 5;
 
     loot = 306;
@@ -1728,9 +1728,9 @@ Door3::Door3():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 6;
 
-	editable = true;
-	transparent = true;
-	soundType = 2;
+    editable = true;
+    transparent = true;
+    soundType = 2;
     blockModel = 5;
 
     loot = 306;
@@ -1761,9 +1761,9 @@ Door4::Door4():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 6;
 
-	editable = true;
-	transparent = true;
-	soundType = 2;
+    editable = true;
+    transparent = true;
+    soundType = 2;
     blockModel = 5;
 
     loot = 306;
@@ -1793,9 +1793,9 @@ Door5::Door5():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 6;
 
-	editable = true;
-	transparent = true;
-	soundType = 2;
+    editable = true;
+    transparent = true;
+    soundType = 2;
     blockModel = 5;
 
     loot = 306;
@@ -1825,9 +1825,9 @@ Door6::Door6():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 6;
 
-	editable = true;
-	transparent = true;
-	soundType = 2;
+    editable = true;
+    transparent = true;
+    soundType = 2;
     blockModel = 5;
 
     loot = 306;
@@ -1857,9 +1857,9 @@ Door7::Door7():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 6;
 
-	editable = true;
-	transparent = true;
-	soundType = 2;
+    editable = true;
+    transparent = true;
+    soundType = 2;
     blockModel = 5;
 
     loot = 306;
@@ -1889,9 +1889,9 @@ Door8::Door8():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 6;
 
-	editable = true;
-	transparent = true;
-	soundType = 2;
+    editable = true;
+    transparent = true;
+    soundType = 2;
     blockModel = 5;
 
     loot = 306;
@@ -1921,9 +1921,9 @@ Door9::Door9():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 6;
 
-	editable = true;
-	transparent = true;
-	soundType = 2;
+    editable = true;
+    transparent = true;
+    soundType = 2;
     blockModel = 5;
 
     loot = 306;
@@ -1954,9 +1954,9 @@ Door10::Door10():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 6;
 
-	editable = true;
-	transparent = true;
-	soundType = 2;
+    editable = true;
+    transparent = true;
+    soundType = 2;
     blockModel = 5;
 
     loot = 306;
@@ -1987,20 +1987,20 @@ WoodenFence::WoodenFence():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 0;
 
-	editable = true;
-	transparent = false;
+    editable = true;
+    transparent = false;
     allowLight = true;
-	solid = true;
+    solid = true;
 
     blockModel = 2;
-	loot = 59;
-	material = 8;
-	refraction = 2;
-	soundType = 3;
+    loot = 59;
+    material = 8;
+    refraction = 2;
+    soundType = 3;
 
-	name = "Oak Fence";
+    name = "Oak Fence";
 
-	collideBox = BoundingBox(Vector3(-0.125f,-0.5f,-0.125f),Vector3(0.125f,0.5,0.125f));
+    collideBox = BoundingBox(Vector3(-0.125f,-0.5f,-0.125f),Vector3(0.125f,0.5,0.125f));
 }
 block_t WoodenFence::getID(){ return 59;}
 
@@ -2160,9 +2160,9 @@ Diamond::Diamond():BaseBlock()
     forPlane_x = 8;
     forPlane_y = 1;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
+    editable = true;
+    transparent = false;
+    allowLight = false;
 
     loot = 64;
     material = 10;
@@ -2192,9 +2192,9 @@ Gold::Gold():BaseBlock()
     forPlane_x = 7;
     forPlane_y = 1;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
+    editable = true;
+    transparent = false;
+    allowLight = false;
 
     loot = 65;
     material = 10;
@@ -2225,10 +2225,10 @@ Iron::Iron():BaseBlock()
     forPlane_x = 6;
     forPlane_y = 1;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 2;
 
     loot = 66;
     material = 10;
@@ -2592,8 +2592,8 @@ Mooshroom1::Mooshroom1():BaseBlock()
     forPlane_x = 12;
     forPlane_y = 1;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 3;
 
     loot = 300;
@@ -2625,8 +2625,8 @@ Mooshroom2::Mooshroom2():BaseBlock()
     forPlane_x = 13;
     forPlane_y = 1;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 3;
 
     loot = 301;
@@ -3079,10 +3079,10 @@ DoubleSlab::DoubleSlab():BaseBlock()
     forPlane_x = 5;
     forPlane_y = 0;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 2;
 
     loot = 85;
     material = 2;
@@ -3112,10 +3112,10 @@ MossyCobblestone::MossyCobblestone():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 2;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 2;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 2;
 
     loot = 36;
     material = 2;
@@ -3190,13 +3190,13 @@ ChestBlock1::ChestBlock1():BaseBlock()
 
     loot = 96;
     material = 8;
-	refraction = 2;
-	blockModel = 5;
-	soundType = 3;
+    refraction = 2;
+    blockModel = 5;
+    soundType = 3;
 
-	collideBox = BoundingBox(Vector3(-0.4375f,-0.5f,-0.4375f),Vector3(0.4375f,0.375f,0.4375f));
+    collideBox = BoundingBox(Vector3(-0.4375f,-0.5f,-0.4375f),Vector3(0.4375f,0.375f,0.4375f));
 
-	name = "Chest";
+    name = "Chest";
 }
 block_t ChestBlock1::getID(){ return 94;}
 
@@ -3696,16 +3696,16 @@ Spawner::Spawner():BaseBlock()
     forPlane_y = 4;
 
     solid = true;
-	editable = true;
-	transparent = true;
-	allowLight = true;
+    editable = true;
+    transparent = true;
+    allowLight = true;
 
-	soundType = 2;
-	loot = -1;
-	material = 5;
-	update = 0;
+    soundType = 2;
+    loot = -1;
+    material = 5;
+    update = 0;
 
-	name = "Monster Spawner";
+    name = "Monster Spawner";
 }
 block_t Spawner::getID(){ return 109;}
 
@@ -3789,16 +3789,16 @@ Lava::Lava():BaseBlock()
     forPlane_y = 15;
 
     editable = false;
-	transparent = false;
-	lightSource = true;
+    transparent = false;
+    lightSource = true;
     allowLight = true;
     solid = false;
     animated = true;
 
     blockModel = 5;
-	soundType = 2;
+    soundType = 2;
 
-	name = "Lava Block";
+    name = "Lava Block";
 }
 block_t Lava::getID(){ return 112;}
 
@@ -3857,12 +3857,12 @@ GlassPanel::GlassPanel():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 3;
 
-	editable = true;
-	transparent = true;
-	solid = true;
+    editable = true;
+    transparent = true;
+    solid = true;
     allowLight = true;
 
-	soundType = 2;
+    soundType = 2;
     loot = 349;
     blockModel = 10;
 
@@ -3890,12 +3890,12 @@ IronBars::IronBars():BaseBlock()
     forPlane_x = 5;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
-	solid = true;
+    editable = true;
+    transparent = true;
+    solid = true;
     allowLight = true;
 
-	soundType = 2;
+    soundType = 2;
     loot = 350;
     blockModel = 10;
     material = 10;
@@ -3924,8 +3924,8 @@ TallGrass::TallGrass():BaseBlock()
     forPlane_x = 7;
     forPlane_y = 2;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 3;
 
     solid = false;
@@ -3956,8 +3956,8 @@ Fern::Fern():BaseBlock()
     forPlane_x = 8;
     forPlane_y = 3;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 3;
 
     solid = false;
@@ -3988,8 +3988,8 @@ DrySapling::DrySapling():BaseBlock()
     forPlane_x = 7;
     forPlane_y = 3;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 3;
 
     solid = false;
@@ -4020,8 +4020,8 @@ Flower1::Flower1():BaseBlock()
     forPlane_x = 12;
     forPlane_y = 0;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 3;
 
     loot = 294;
@@ -4053,8 +4053,8 @@ Flower2::Flower2():BaseBlock()
     forPlane_x = 13;
     forPlane_y = 0;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 3;
 
     loot = 295;
@@ -4508,8 +4508,8 @@ WheatBlock1::WheatBlock1():BaseBlock()
     forPlane_x = 8;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -4542,8 +4542,8 @@ WheatBlock2::WheatBlock2():BaseBlock()
     forPlane_x = 9;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -4576,8 +4576,8 @@ WheatBlock3::WheatBlock3():BaseBlock()
     forPlane_x = 13;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -4610,8 +4610,8 @@ WheatBlock4::WheatBlock4():BaseBlock()
     forPlane_x = 12;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -4644,8 +4644,8 @@ WheatBlock5::WheatBlock5():BaseBlock()
     forPlane_x = 14;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -4678,8 +4678,8 @@ WheatBlock6::WheatBlock6():BaseBlock()
     forPlane_x = 15;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -4730,16 +4730,16 @@ IronBlock::IronBlock():BaseBlock()
     forPlane_y = 1;
 
     transparent = false;
-	editable = true;
+    editable = true;
 
-	soundType = 2;
-	solid = true;
-	allowLight = false;
-	material = 6;
+    soundType = 2;
+    solid = true;
+    allowLight = false;
+    material = 6;
 
-	loot = 142;
+    loot = 142;
 
-	name = "Bedrock";
+    name = "Bedrock";
 }
 block_t IronBlock::getID(){ return 142;}
 
@@ -4899,12 +4899,12 @@ TrapdoorOpen1::TrapdoorOpen1():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
-	allowLight = true;
-	solid = false;
+    editable = true;
+    transparent = true;
+    allowLight = true;
+    solid = false;
 
-	soundType = 2;
+    soundType = 2;
     blockModel = 5;
     material = 8;
 
@@ -4936,12 +4936,12 @@ TrapdoorOpen2::TrapdoorOpen2():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
-	allowLight = true;
-	solid = false;
+    editable = true;
+    transparent = true;
+    allowLight = true;
+    solid = false;
 
-	soundType = 2;
+    soundType = 2;
     blockModel = 5;
     material = 8;
 
@@ -4973,12 +4973,12 @@ TrapdoorOpen3::TrapdoorOpen3():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
-	allowLight = true;
-	solid = false;
+    editable = true;
+    transparent = true;
+    allowLight = true;
+    solid = false;
 
-	soundType = 2;
+    soundType = 2;
     blockModel = 5;
     material = 8;
 
@@ -5010,12 +5010,12 @@ TrapdoorOpen4::TrapdoorOpen4():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
-	allowLight = true;
-	solid = false;
+    editable = true;
+    transparent = true;
+    allowLight = true;
+    solid = false;
 
-	soundType = 2;
+    soundType = 2;
     blockModel = 5;
     material = 8;
 
@@ -5047,12 +5047,12 @@ TrapdoorClosed1::TrapdoorClosed1():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
-	allowLight = true;
-	solid = true;
+    editable = true;
+    transparent = true;
+    allowLight = true;
+    solid = true;
 
-	soundType = 2;
+    soundType = 2;
     blockModel = 5;
     material = 8;
 
@@ -5084,12 +5084,12 @@ TrapdoorClosed2::TrapdoorClosed2():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
-	allowLight = true;
-	solid = true;
+    editable = true;
+    transparent = true;
+    allowLight = true;
+    solid = true;
 
-	soundType = 2;
+    soundType = 2;
     blockModel = 5;
     material = 8;
 
@@ -5121,12 +5121,12 @@ TrapdoorClosed3::TrapdoorClosed3():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
-	allowLight = true;
-	solid = true;
+    editable = true;
+    transparent = true;
+    allowLight = true;
+    solid = true;
 
-	soundType = 2;
+    soundType = 2;
     blockModel = 5;
     material = 8;
 
@@ -5158,12 +5158,12 @@ TrapdoorClosed4::TrapdoorClosed4():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 5;
 
-	editable = true;
-	transparent = true;
-	allowLight = true;
-	solid = true;
+    editable = true;
+    transparent = true;
+    allowLight = true;
+    solid = true;
 
-	soundType = 2;
+    soundType = 2;
     blockModel = 5;
     material = 8;
 
@@ -5195,10 +5195,10 @@ BirchPlanks::BirchPlanks():BaseBlock() // planks
     forPlane_x = 9;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 3;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 3;
 
     loot = 155;
     material = 1;
@@ -5228,10 +5228,10 @@ SprucePlanks::SprucePlanks():BaseBlock() // planks
     forPlane_x = 8;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 3;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 3;
 
     loot = 156;
     material = 1;
@@ -5333,20 +5333,20 @@ BirchFence::BirchFence():BaseBlock()
     forPlane_x = 9;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = false;
+    editable = true;
+    transparent = false;
     allowLight = true;
-	solid = true;
+    solid = true;
 
     blockModel = 2;
-	loot = 159;
-	material = 8;
-	refraction = 2;
-	soundType = 3;
+    loot = 159;
+    material = 8;
+    refraction = 2;
+    soundType = 3;
 
-	name = "Birch Fence";
+    name = "Birch Fence";
 
-	collideBox = BoundingBox(Vector3(-0.125f,-0.5f,-0.125f),Vector3(0.125f,0.5,0.125f));
+    collideBox = BoundingBox(Vector3(-0.125f,-0.5f,-0.125f),Vector3(0.125f,0.5,0.125f));
 }
 block_t BirchFence::getID(){ return 159;}
 
@@ -5370,20 +5370,20 @@ SpruceFence::SpruceFence():BaseBlock()
     forPlane_x = 8;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = false;
+    editable = true;
+    transparent = false;
     allowLight = true;
-	solid = true;
+    solid = true;
 
     blockModel = 2;
-	loot = 160;
-	material = 8;
-	refraction = 2;
-	soundType = 3;
+    loot = 160;
+    material = 8;
+    refraction = 2;
+    soundType = 3;
 
-	name = "Spruce Fence";
+    name = "Spruce Fence";
 
-	collideBox = BoundingBox(Vector3(-0.125f,-0.5f,-0.125f),Vector3(0.125f,0.5,0.125f));
+    collideBox = BoundingBox(Vector3(-0.125f,-0.5f,-0.125f),Vector3(0.125f,0.5,0.125f));
 }
 block_t SpruceFence::getID(){ return 160;}
 
@@ -5679,8 +5679,8 @@ WaterBlock1::WaterBlock1():BaseBlock()
     forPlane_x = 14;
     forPlane_y = 15;
 
-	editable = false;
-	transparent = true;
+    editable = false;
+    transparent = true;
     solid = false;
 
     soundType = -1;
@@ -5713,8 +5713,8 @@ WaterBlock2::WaterBlock2():BaseBlock()
     forPlane_x = 14;
     forPlane_y = 15;
 
-	editable = false;
-	transparent = true;
+    editable = false;
+    transparent = true;
     solid = false;
 
     soundType = -1;
@@ -5747,8 +5747,8 @@ WaterBlock3::WaterBlock3():BaseBlock()
     forPlane_x = 14;
     forPlane_y = 15;
 
-	editable = false;
-	transparent = true;
+    editable = false;
+    transparent = true;
     solid = false;
 
     soundType = -1;
@@ -5781,8 +5781,8 @@ WaterBlock4::WaterBlock4():BaseBlock()
     forPlane_x = 14;
     forPlane_y = 15;
 
-	editable = false;
-	transparent = true;
+    editable = false;
+    transparent = true;
     solid = false;
 
     soundType = -1;
@@ -5815,18 +5815,18 @@ ItemFrame1::ItemFrame1():BaseBlock()
     forPlane_x = 9;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = true;
-	allowLight = true;
-	solid = false;
+    editable = true;
+    transparent = true;
+    allowLight = true;
+    solid = false;
 
-	soundType = 3;
-	blockModel = 5;
-	material = 1;
+    soundType = 3;
+    blockModel = 5;
+    material = 1;
 
-	name = "Item Frame";
+    name = "Item Frame";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.375f,-0.375f),Vector3(-0.375f,0.375f,0.375f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.375f,-0.375f),Vector3(-0.375f,0.375f,0.375f));
 }
 block_t ItemFrame1::getID(){ return 173;}
 
@@ -5850,18 +5850,18 @@ ItemFrame2::ItemFrame2():BaseBlock()
     forPlane_x = 9;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = true;
-	allowLight = true;
-	solid = false;
+    editable = true;
+    transparent = true;
+    allowLight = true;
+    solid = false;
 
-	soundType = 3;
-	blockModel = 5;
-	material = 1;
+    soundType = 3;
+    blockModel = 5;
+    material = 1;
 
-	name = "Item Frame";
+    name = "Item Frame";
 
-	collideBox = BoundingBox(Vector3(0.375f,-0.375f,-0.375f),Vector3(0.5f,0.375f,0.375f));
+    collideBox = BoundingBox(Vector3(0.375f,-0.375f,-0.375f),Vector3(0.5f,0.375f,0.375f));
 }
 block_t ItemFrame2::getID(){ return 174;}
 
@@ -5885,18 +5885,18 @@ ItemFrame3::ItemFrame3():BaseBlock()
     forPlane_x = 9;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = true;
-	allowLight = true;
-	solid = false;
+    editable = true;
+    transparent = true;
+    allowLight = true;
+    solid = false;
 
-	soundType = 3;
-	blockModel = 5;
-	material = 1;
+    soundType = 3;
+    blockModel = 5;
+    material = 1;
 
-	name = "Item Frame";
+    name = "Item Frame";
 
-	collideBox = BoundingBox(Vector3(-0.375f,-0.375f,-0.5f),Vector3(0.375f,0.375f,-0.375f));
+    collideBox = BoundingBox(Vector3(-0.375f,-0.375f,-0.5f),Vector3(0.375f,0.375f,-0.375f));
 }
 block_t ItemFrame3::getID(){ return 175;}
 
@@ -5920,18 +5920,18 @@ ItemFrame4::ItemFrame4():BaseBlock()
     forPlane_x = 9;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = true;
-	allowLight = true;
-	solid = false;
+    editable = true;
+    transparent = true;
+    allowLight = true;
+    solid = false;
 
-	soundType = 3;
-	blockModel = 5;
-	material = 1;
+    soundType = 3;
+    blockModel = 5;
+    material = 1;
 
-	name = "Item Frame";
+    name = "Item Frame";
 
-	collideBox = BoundingBox(Vector3(-0.375f,-0.375f,0.375f),Vector3(0.375f,0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.375f,-0.375f,0.375f),Vector3(0.375f,0.375f,0.5f));
 }
 block_t ItemFrame4::getID(){ return 176;}
 
@@ -6105,8 +6105,8 @@ PotatoPlant1::PotatoPlant1():BaseBlock()
     forPlane_x = 10;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -6139,8 +6139,8 @@ PotatoPlant2::PotatoPlant2():BaseBlock()
     forPlane_x = 11;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -6173,8 +6173,8 @@ PotatoPlant3::PotatoPlant3():BaseBlock()
     forPlane_x = 12;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -6207,8 +6207,8 @@ PotatoPlant4::PotatoPlant4():BaseBlock()
     forPlane_x = 13;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -6241,8 +6241,8 @@ CarrotPlant1::CarrotPlant1():BaseBlock()
     forPlane_x = 10;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -6275,8 +6275,8 @@ CarrotPlant2::CarrotPlant2():BaseBlock()
     forPlane_x = 11;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -6309,8 +6309,8 @@ CarrotPlant3::CarrotPlant3():BaseBlock()
     forPlane_x = 12;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -6343,8 +6343,8 @@ CarrotPlant4::CarrotPlant4():BaseBlock()
     forPlane_x = 14;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = true;
+    editable = true;
+    transparent = true;
     blockModel = 4;
     soundType = 0;
 
@@ -6377,9 +6377,9 @@ BedBlock1::BedBlock1():BaseBlock()
     forPlane_x = 6;
     forPlane_y = 9;
 
-	editable = true;
-	transparent = true;
-	soundType = 3;
+    editable = true;
+    transparent = true;
+    soundType = 3;
     blockModel = 1;
 
     loot = 361;
@@ -6411,9 +6411,9 @@ BedBlock2::BedBlock2():BaseBlock()
     forPlane_x = 6;
     forPlane_y = 10;
 
-	editable = true;
-	transparent = true;
-	soundType = 3;
+    editable = true;
+    transparent = true;
+    soundType = 3;
     blockModel = 1;
 
     loot = 361;
@@ -6445,9 +6445,9 @@ BedBlock3::BedBlock3():BaseBlock()
     forPlane_x = 8;
     forPlane_y = 9;
 
-	editable = true;
-	transparent = true;
-	soundType = 3;
+    editable = true;
+    transparent = true;
+    soundType = 3;
     blockModel = 1;
 
     loot = 361;
@@ -6479,9 +6479,9 @@ BedBlock4::BedBlock4():BaseBlock()
     forPlane_x = 5;
     forPlane_y = 9;
 
-	editable = true;
-	transparent = true;
-	soundType = 3;
+    editable = true;
+    transparent = true;
+    soundType = 3;
     blockModel = 1;
 
     loot = 361;
@@ -6513,9 +6513,9 @@ BedBlock5::BedBlock5():BaseBlock()
     forPlane_x = 7;
     forPlane_y = 9;
 
-	editable = true;
-	transparent = true;
-	soundType = 3;
+    editable = true;
+    transparent = true;
+    soundType = 3;
     blockModel = 1;
 
     loot = 361;
@@ -6547,9 +6547,9 @@ BedBlock6::BedBlock6():BaseBlock()
     forPlane_x = 7;
     forPlane_y = 10;
 
-	editable = true;
-	transparent = true;
-	soundType = 3;
+    editable = true;
+    transparent = true;
+    soundType = 3;
     blockModel = 1;
 
     loot = 361;
@@ -6581,9 +6581,9 @@ BedBlock7::BedBlock7():BaseBlock()
     forPlane_x = 8;
     forPlane_y = 9;
 
-	editable = true;
-	transparent = true;
-	soundType = 3;
+    editable = true;
+    transparent = true;
+    soundType = 3;
     blockModel = 1;
 
     loot = 361;
@@ -6615,9 +6615,9 @@ BedBlock8::BedBlock8():BaseBlock()
     forPlane_x = 5;
     forPlane_y = 9;
 
-	editable = true;
-	transparent = true;
-	soundType = 3;
+    editable = true;
+    transparent = true;
+    soundType = 3;
     blockModel = 1;
 
     loot = 361;
@@ -6650,21 +6650,21 @@ BlackWoolCarpet::BlackWoolCarpet():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 7;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 198;
-	material = 4;
-	solid = false;
+    loot = 198;
+    material = 4;
+    solid = false;
 
-	name = "Black Carpet";
+    name = "Black Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t BlackWoolCarpet::getID(){ return 198;}
 
@@ -6689,20 +6689,20 @@ GrayWoolCarpet::GrayWoolCarpet():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 7;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 199;
-	solid = false;
+    loot = 199;
+    solid = false;
 
-	name = "Gray Carpet";
+    name = "Gray Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t GrayWoolCarpet::getID(){ return 199;}
 
@@ -6727,20 +6727,20 @@ RedWoolCarpet::RedWoolCarpet():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 200;
-	solid = false;
+    loot = 200;
+    solid = false;
 
-	name = "Red Carpet";
+    name = "Red Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t RedWoolCarpet::getID(){ return 200;}
 
@@ -6765,20 +6765,20 @@ PinkWoolCarpet::PinkWoolCarpet():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 8;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 201;
-	solid = false;
+    loot = 201;
+    solid = false;
 
-	name = "Pink Carpet";
+    name = "Pink Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t PinkWoolCarpet::getID(){ return 201;}
 
@@ -6803,20 +6803,20 @@ DarkGreenWoolCarpet::DarkGreenWoolCarpet():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 9;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 202;
-	solid = false;
+    loot = 202;
+    solid = false;
 
-	name = "Green Carpet";
+    name = "Green Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t DarkGreenWoolCarpet::getID(){ return 202;}
 
@@ -6841,20 +6841,20 @@ GreenWoolCarpet::GreenWoolCarpet():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 9;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 203;
-	solid = false;
+    loot = 203;
+    solid = false;
 
-	name = "Lime Carpet";
+    name = "Lime Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t GreenWoolCarpet::getID(){ return 203;}
 
@@ -6879,20 +6879,20 @@ BrownWoolCarpet::BrownWoolCarpet():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 10;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 204;
-	solid = false;
+    loot = 204;
+    solid = false;
 
-	name = "Brown Carpet";
+    name = "Brown Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t BrownWoolCarpet::getID(){ return 204;}
 
@@ -6917,20 +6917,20 @@ YellowWoolCarpet::YellowWoolCarpet():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 10;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 205;
-	solid = false;
+    loot = 205;
+    solid = false;
 
-	name = "Yellow Carpet";
+    name = "Yellow Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t YellowWoolCarpet::getID(){ return 205;}
 
@@ -6955,20 +6955,20 @@ BlueWoolCarpet::BlueWoolCarpet():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 11;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 206;
-	solid = false;
+    loot = 206;
+    solid = false;
 
-	name = "Blue Carpet";
+    name = "Blue Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t BlueWoolCarpet::getID(){ return 206;}
 
@@ -6993,20 +6993,20 @@ LightBlueWoolCarpet::LightBlueWoolCarpet():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 11;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 207;
-	solid = false;
+    loot = 207;
+    solid = false;
 
-	name = "Light Blue Carpet";
+    name = "Light Blue Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t LightBlueWoolCarpet::getID(){ return 207;}
 
@@ -7031,20 +7031,20 @@ VioletWoolCarpet::VioletWoolCarpet():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 12;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 208;
-	solid = false;
+    loot = 208;
+    solid = false;
 
-	name = "Purple Carpet";
+    name = "Purple Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t VioletWoolCarpet::getID(){ return 208;}
 
@@ -7069,20 +7069,20 @@ PastelWoolCarpet::PastelWoolCarpet():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 12;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
     loot = 209;
-	solid = false;
+    solid = false;
 
-	name = "Magneta Carpet";
+    name = "Magneta Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t PastelWoolCarpet::getID(){ return 209;}
 
@@ -7107,20 +7107,20 @@ OrangeWoolCarpet::OrangeWoolCarpet():BaseBlock()
     forPlane_x = 2;
     forPlane_y = 13;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 210;
-	solid = false;
+    loot = 210;
+    solid = false;
 
-	name = "Orange Carpet";
+    name = "Orange Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t OrangeWoolCarpet::getID(){ return 210;}
 
@@ -7145,20 +7145,20 @@ LightGrayWoolCarpet::LightGrayWoolCarpet():BaseBlock()
     forPlane_x = 1;
     forPlane_y = 14;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 211;
-	solid = false;
+    loot = 211;
+    solid = false;
 
-	name = "Light Gray Carpet";
+    name = "Light Gray Carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t LightGrayWoolCarpet::getID(){ return 211;}
 
@@ -7183,20 +7183,20 @@ WhiteWoolCarpet::WhiteWoolCarpet():BaseBlock()
     forPlane_x = 0;
     forPlane_y = 4;
 
-	editable = true;
-	transparent = false;
-	allowLight = true;
-	soundType = 6;
-	material = 1;
-	blockModel = 5;
-	refraction = 2;
+    editable = true;
+    transparent = false;
+    allowLight = true;
+    soundType = 6;
+    material = 1;
+    blockModel = 5;
+    refraction = 2;
 
-	loot = 212;
-	solid = false;
+    loot = 212;
+    solid = false;
 
-	name = "White carpet";
+    name = "White carpet";
 
-	collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
+    collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,-0.375f,0.5f));
 }
 block_t WhiteWoolCarpet::getID(){ return 212;}
 
@@ -7220,16 +7220,16 @@ HayBale::HayBale():BaseBlock()
     forPlane_x = 4;
     forPlane_y = 11;
 
-	editable = true;
-	transparent = false;
-	allowLight = false;
-	soundType = 5;
+    editable = true;
+    transparent = false;
+    allowLight = false;
+    soundType = 5;
 
-	loot = 7;
-	material = 3;
-	solid = true;
+    loot = 7;
+    material = 3;
+    solid = true;
 
-	name = "Hay Bale";
+    name = "Hay Bale";
 }
 block_t HayBale::getID(){ return 213;}
 

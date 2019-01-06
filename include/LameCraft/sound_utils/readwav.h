@@ -35,9 +35,9 @@ int get_next_wav_sample(WAVE_SRC *wav);
 void close_wave_src(WAVE_SRC *wav);
 
 int osl_fgetc(VIRTUAL_FILE *f)		{
-	char c;
-	VirtualFileRead(&c, 1, 1, f);
-	return c;
+    char c;
+    VirtualFileRead(&c, 1, 1, f);
+    return c;
 }
 
 unsigned int fgetu16(VIRTUAL_FILE *fp)
@@ -179,10 +179,10 @@ int get_next_wav_sample(WAVE_SRC *wav)
   for(i = 0; i < wav->fmt.bits_sample && wav->chunk_left > 0; i += 8)
   {
     int c;
-	if (wav->stream)
-		c=*wav->streambuffer++;
-	else
-		c=*wav->data++;
+    if (wav->stream)
+        c=*wav->streambuffer++;
+    else
+        c=*wav->data++;
 
     cur_sample >>= 8;
     cur_sample |= (c & 0xff) << 8;

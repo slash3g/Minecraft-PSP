@@ -42,79 +42,79 @@ extern "C" {
 
 #define ARGB(a, r, g, b)		((a << 24) | (r << 16) | (g << 8) | b)
 #define RGBA(r, g, b, a)		((a << 24) | (b << 16) | (g << 8) | r)
-	
+    
 typedef struct
 {
-	float	x, y, z;
-	
+    float	x, y, z;
+    
 } pgeVertV;
 
 typedef struct
 {
-	float	nx, ny, nz;
-	float	x, y, z;
-	
+    float	nx, ny, nz;
+    float	x, y, z;
+    
 } pgeVertNV;
 
 typedef struct
 {
-	unsigned int	color;
-	float			x, y, z;
-	
+    unsigned int	color;
+    float			x, y, z;
+    
 } pgeVertCV;
 
 typedef struct
 {
-	unsigned int	color;
-	float			nx, ny, nz;
-	float			x, y, z;
-	
+    unsigned int	color;
+    float			nx, ny, nz;
+    float			x, y, z;
+    
 } pgeVertCNV;
 
 typedef struct
 {
-	float	u, v;
-	float	x, y, z;
-	
+    float	u, v;
+    float	x, y, z;
+    
 } pgeVertTV;
 
 typedef struct
 {
-	float	u, v;
-	float	nx, ny, nz;
-	float	x, y, z;
-	
+    float	u, v;
+    float	nx, ny, nz;
+    float	x, y, z;
+    
 } pgeVertTNV;
 
 typedef struct
 {
-	float			u, v;
-	unsigned int	color;
-	float			x, y, z;
-	
+    float			u, v;
+    unsigned int	color;
+    float			x, y, z;
+    
 } pgeVertTCV;
 
 typedef struct
 {
-	float			u, v;
-	unsigned int	color;
-	float			nx, ny, nz;
-	float			x, y, z;
-	
+    float			u, v;
+    unsigned int	color;
+    float			nx, ny, nz;
+    float			x, y, z;
+    
 } pgeVertTCNV;
 
 typedef struct
 {
-	float	x, y, w, h;
-	
+    float	x, y, w, h;
+    
 } pgeRect;
 
 typedef struct
 {
-	ScePspFVector3 eye;
-	ScePspFVector3 center;
-	ScePspFVector3 up;
-	
+    ScePspFVector3 eye;
+    ScePspFVector3 center;
+    ScePspFVector3 up;
+    
 } pgeCamera;
 
 /**
@@ -122,14 +122,14 @@ typedef struct
  */
 enum pgeGfxVertexType
 {
-	PGE_VERT_V =	GU_VERTEX_32BITF,
-	PGE_VERT_NV =	GU_NORMAL_32BITF|GU_VERTEX_32BITF,
-	PGE_VERT_CV =	GU_COLOR_8888|GU_VERTEX_32BITF,
-	PGE_VERT_CNV =	GU_COLOR_8888|GU_NORMAL_32BITF|GU_VERTEX_32BITF,
-	PGE_VERT_TV =	GU_TEXTURE_32BITF|GU_VERTEX_32BITF,
-	PGE_VERT_TNV =	GU_TEXTURE_32BITF|GU_NORMAL_32BITF|GU_VERTEX_32BITF,
-	PGE_VERT_TCV =	GU_TEXTURE_32BITF|GU_COLOR_8888|GU_VERTEX_32BITF,
-	PGE_VERT_TCNV =	GU_TEXTURE_32BITF|GU_COLOR_8888|GU_NORMAL_32BITF|GU_VERTEX_32BITF
+    PGE_VERT_V =	GU_VERTEX_32BITF,
+    PGE_VERT_NV =	GU_NORMAL_32BITF|GU_VERTEX_32BITF,
+    PGE_VERT_CV =	GU_COLOR_8888|GU_VERTEX_32BITF,
+    PGE_VERT_CNV =	GU_COLOR_8888|GU_NORMAL_32BITF|GU_VERTEX_32BITF,
+    PGE_VERT_TV =	GU_TEXTURE_32BITF|GU_VERTEX_32BITF,
+    PGE_VERT_TNV =	GU_TEXTURE_32BITF|GU_NORMAL_32BITF|GU_VERTEX_32BITF,
+    PGE_VERT_TCV =	GU_TEXTURE_32BITF|GU_COLOR_8888|GU_VERTEX_32BITF,
+    PGE_VERT_TCNV =	GU_TEXTURE_32BITF|GU_COLOR_8888|GU_NORMAL_32BITF|GU_VERTEX_32BITF
 };
 
 /**
@@ -137,13 +137,13 @@ enum pgeGfxVertexType
  */
 enum pgeGfxPrim
 {
-	PGE_PRIM_POINTS,
-	PGE_PRIM_LINES,
-	PGE_PRIM_LINE_STRIP,
-	PGE_PRIM_TRIANGLES,
-	PGE_PRIM_TRIANGLE_STRIP,
-	PGE_PRIM_TRIANGLE_FAN,
-	PGE_PRIM_SPRITES
+    PGE_PRIM_POINTS,
+    PGE_PRIM_LINES,
+    PGE_PRIM_LINE_STRIP,
+    PGE_PRIM_TRIANGLES,
+    PGE_PRIM_TRIANGLE_STRIP,
+    PGE_PRIM_TRIANGLE_FAN,
+    PGE_PRIM_SPRITES
 };
 
 /**
@@ -151,8 +151,8 @@ enum pgeGfxPrim
  */
 enum pgeBlendMode
 {
-	PGE_BLEND_MODE_TRANSPARENT,
-	PGE_BLEND_MODE_REGULAR
+    PGE_BLEND_MODE_TRANSPARENT,
+    PGE_BLEND_MODE_REGULAR
 };
 
 /**
@@ -160,8 +160,8 @@ enum pgeBlendMode
  */
 enum pgeWaitVsync
 {
-	PGE_NO_WAIT_VSYNC = 0,	/**< Don't wait for vblank. */
-	PGE_WAIT_VSYNC			/**< Wait for vblank. */
+    PGE_NO_WAIT_VSYNC = 0,	/**< Don't wait for vblank. */
+    PGE_WAIT_VSYNC			/**< Wait for vblank. */
 };
 
 #define PGE_GFX_PROJECTION	GU_PROJECTION

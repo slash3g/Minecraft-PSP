@@ -10,34 +10,34 @@
 
 namespace Aurora
 {
-	namespace Graphics
-	{
-		class SnowBall2
-		{
-		public:
-			SnowBall2(float pos2x, float pos2y, float pos2z);
-			~SnowBall2();
+    namespace Graphics
+    {
+        class SnowBall2
+        {
+        public:
+            SnowBall2(float pos2x, float pos2y, float pos2z);
+            ~SnowBall2();
 
-			void SetTexture(int texture);
-			void SetVeloc(float verAngle, float horAngle);
-			void Update(CraftWorld* crtf, float dt);
-			bool CheckCollision(CraftWorld* crtf);
+            void SetTexture(int texture);
+            void SetVeloc(float verAngle, float horAngle);
+            void Update(CraftWorld* crtf, float dt);
+            bool CheckCollision(CraftWorld* crtf);
 
-			void Render();
+            void Render();
 
-			Vector3 position;
-			Vector3 velocity;
+            Vector3 position;
+            Vector3 velocity;
 
-		private:
+        private:
 
-			CraftPSPVertex *ballVertices;
-			int textureNumber;
-			float snowHScale;
-			float snowVScale;
+            CraftPSPVertex *ballVertices;
+            int textureNumber;
+            float snowHScale;
+            float snowVScale;
 
-			float startSpeed;
-		};
-	}
+            float startSpeed;
+        };
+    }
 }
 
 #endif

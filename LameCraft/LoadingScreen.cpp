@@ -26,48 +26,48 @@ int LoadingScreen::stateName = 0;
 
 LoadingScreen::LoadingScreen()
 {
-	// the loadingscreen is loaded as a thread
-	thid_ = sceKernelCreateThread("LoadingThread", RunLoadingScreen, 0x18, 0x10000, THREAD_ATTR_VFPU|THREAD_ATTR_USER, NULL);
-	// start the thread
-	sceKernelStartThread(thid_, 0, 0);
+    // the loadingscreen is loaded as a thread
+    thid_ = sceKernelCreateThread("LoadingThread", RunLoadingScreen, 0x18, 0x10000, THREAD_ATTR_VFPU|THREAD_ATTR_USER, NULL);
+    // start the thread
+    sceKernelStartThread(thid_, 0, 0);
 }
 
 
 void LoadingScreen::KillLoadingScreen()
 {
-	// shut down the loading screen again.
-	sceKernelTerminateDeleteThread(thid_);
-	// free the mem space of the images
-	delete backSprite;
-	delete loadSprite;
-	delete subLoadSprite;
+    // shut down the loading screen again.
+    sceKernelTerminateDeleteThread(thid_);
+    // free the mem space of the images
+    delete backSprite;
+    delete loadSprite;
+    delete subLoadSprite;
 }
 
 
 int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
 {
-	// load up the images
-	backSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Dirt),0,0,32,32);
-	backSprite->Scale(2,2);
+    // load up the images
+    backSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Dirt),0,0,32,32);
+    backSprite->Scale(2,2);
 
     loadSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Load),0,0,16,8);
-	loadSprite->Scale(1,0.5f);
+    loadSprite->Scale(1,0.5f);
 
     subLoadSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Load),0,8,16,8);
-	subLoadSprite->Scale(1,0.5f);
+    subLoadSprite->Scale(1,0.5f);
 
 
     int tip = rand() % 6;
-	float loadingProcess = 0.0f;
+    float loadingProcess = 0.0f;
 
-	// start the render loop
-	while(1)
-	{
-		RenderManager::InstancePtr()->StartFrame(0.466,0.72,1);
+    // start the render loop
+    while(1)
+    {
+        RenderManager::InstancePtr()->StartFrame(0.466,0.72,1);
 
-		sceGuDisable(GU_DEPTH_TEST);
-		sceGuEnable(GU_BLEND);
-		sceGuColor(GU_COLOR(1,1,1,1.0f));
+        sceGuDisable(GU_DEPTH_TEST);
+        sceGuEnable(GU_BLEND);
+        sceGuColor(GU_COLOR(1,1,1,1.0f));
 
         for(int x = 0; x < 8; x++)
         {
@@ -108,10 +108,10 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
             loadSprite->Draw();
         }
 
-		sceGuDisable(GU_BLEND);
-		sceGuEnable(GU_DEPTH_TEST);
+        sceGuDisable(GU_BLEND);
+        sceGuEnable(GU_DEPTH_TEST);
 
-		//draw subtitles on buttons
+        //draw subtitles on buttons
         RenderManager::InstancePtr()->SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200|0x00000000);
 
         if(RenderManager::InstancePtr()->GetFontLanguage() == ENGLISH)
@@ -240,8 +240,8 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
         }
 
         RenderManager::InstancePtr()->SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200|0x00000000);
-		RenderManager::InstancePtr()->EndFrame();
-	}
-	return 0;
+        RenderManager::InstancePtr()->EndFrame();
+    }
+    return 0;
 }
 

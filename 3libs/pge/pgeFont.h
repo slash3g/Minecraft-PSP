@@ -45,15 +45,15 @@ extern "C" {
  */
 typedef struct Glyph
 {
-	unsigned short x;
-	unsigned short y;
-	unsigned char width;
-	unsigned char height;
-	char left;
-	char top;
-	char advance;
-	unsigned char unused;
-	
+    unsigned short x;
+    unsigned short y;
+    unsigned char width;
+    unsigned char height;
+    char left;
+    char top;
+    char advance;
+    unsigned char unused;
+    
 } Glyph;
 
 /**
@@ -61,22 +61,22 @@ typedef struct Glyph
  */
 typedef struct
 {
-	unsigned int texSize;				/**<  Texture size (power2) */
-	unsigned int texHeight;				/**<  Texture height (power2) */
-	unsigned char *texture;				/**<  The bitmap data */
-	int texturememid;					/**<  The uid of the bitmap data */
-	enum pgeMemoryLocation location;	/**<  Either in RAM or VRAM */
-	unsigned int map[256];				/**<  Character map */
-	Glyph glyph[256];					/**<  Character glyphs */
-	int fontHeight;
-	int memid;
-	
+    unsigned int texSize;				/**<  Texture size (power2) */
+    unsigned int texHeight;				/**<  Texture height (power2) */
+    unsigned char *texture;				/**<  The bitmap data */
+    int texturememid;					/**<  The uid of the bitmap data */
+    enum pgeMemoryLocation location;	/**<  Either in RAM or VRAM */
+    unsigned int map[256];				/**<  Character map */
+    Glyph glyph[256];					/**<  Character glyphs */
+    int fontHeight;
+    int memid;
+    
 } pgeFont;
 
 enum pgeFontSizeType
 {
-	PGE_FONT_SIZE_PIXELS = 0,
-	PGE_FONT_SIZE_POINTS
+    PGE_FONT_SIZE_PIXELS = 0,
+    PGE_FONT_SIZE_POINTS
 };
 
 /**

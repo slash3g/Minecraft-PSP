@@ -8,7 +8,7 @@
 #include <LameCraft/CraftWorld2.h>
 #include <LameCraft/LameFunctions.h>
 #include <Aurora/Math/BoundingBox.h>
-#include <Lamecraft/TextureHelper.h>
+#include <LameCraft/TextureHelper.h>
 
 class CraftWorld;
 

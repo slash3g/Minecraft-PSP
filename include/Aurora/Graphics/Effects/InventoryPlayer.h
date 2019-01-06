@@ -4,8 +4,8 @@
 #include <Aurora/Math/Vector3.h>
 #include <Aurora/Graphics/Vertex.h>
 #include <pspmath.h>
-#include <Lamecraft/CraftWorld2.h>
-#include <Lamecraft/TextureHelper.h>
+#include <LameCraft/CraftWorld2.h>
+#include <LameCraft/TextureHelper.h>
 
 namespace Aurora
 {

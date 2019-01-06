@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "InputHelper.h"
 
 InputHelper::InputHelper()

@@ -8,7 +8,7 @@
 #include <psptypes.h>
 #include <Aurora/Graphics/Vertex.h>
 #include <Aurora/Math/BoundingBox.h>
-#include <Lamecraft/TextureHelper.h>
+#include <LameCraft/TextureHelper.h>
 
 class CraftWorld;
 

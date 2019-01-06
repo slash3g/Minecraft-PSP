@@ -1,4 +1,4 @@
-#include "BaseEntity.h"
+#include "LameCraft/BaseEntity.h"
 
 
 BaseEntity::BaseEntity()

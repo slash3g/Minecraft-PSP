@@ -1,4 +1,4 @@
-#include "DirectionBlock.h"
+#include "LameCraft/DirectionBlock.h"
 
 
 DirectionBlock::DirectionBlock(int x, int y, int z, char dir)

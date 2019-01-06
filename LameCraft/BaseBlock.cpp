@@ -1,5 +1,5 @@
-#include "BaseBlock.h"
-#include "CraftWorld2.h"
+#include "LameCraft/BaseBlock.h"
+#include "LameCraft/CraftWorld2.h"
 
 BaseBlock::BaseBlock()
 {

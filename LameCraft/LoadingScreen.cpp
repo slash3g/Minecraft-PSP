@@ -1,5 +1,5 @@
-#include "LoadingScreen.h"
-#include "TextureHelper.h"
+#include "LameCraft/LoadingScreen.h"
+#include "LameCraft/TextureHelper.h"
 #include <pspthreadman.h>
 #include <pspgu.h>
 #include <pspgum.h>

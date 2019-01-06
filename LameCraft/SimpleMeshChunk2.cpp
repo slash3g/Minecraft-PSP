@@ -1,4 +1,4 @@
-#include "SimpleMeshChunk2.h"
+#include "LameCraft/SimpleMeshChunk2.h"
 #include <Aurora/Graphics/RenderManager.h>
 
 template <typename T>

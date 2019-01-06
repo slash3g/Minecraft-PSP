@@ -1,4 +1,4 @@
-#include "BlockEntity.h"
+#include "LameCraft/BlockEntity.h"
 
 BlockEntity::BlockEntity(int create_x, int create_y,  int create_z)
 {

@@ -1,4 +1,4 @@
-#include "ChunkDataProvider.h"
+#include "LameCraft/ChunkDataProvider.h"
 
 #include <pspthreadman.h>
 #include <pspgu.h>

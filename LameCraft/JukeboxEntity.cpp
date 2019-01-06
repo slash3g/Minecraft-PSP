@@ -1,4 +1,4 @@
-#include "JukeboxEntity.h"
+#include "LameCraft/JukeboxEntity.h"
 
 JukeboxEntity::JukeboxEntity(int create_x, int create_y, int create_z, int create_record) : BlockEntity(create_x, create_y, create_z)
 {

@@ -22,7 +22,7 @@
 
 #include <stdio.h>
 #include <stdint.h>
-#include "mersenne-twister.h"
+#include "LameCraft/mersenne-twister.h"
 
 #ifndef UINT32_MAX
 	#define UINT32_MAX        4294967295U

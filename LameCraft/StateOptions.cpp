@@ -1,6 +1,6 @@
-#include "StateOptions.h"
-#include "InputHelper.h"
-#include "TextureHelper.h"
+#include "LameCraft/StateOptions.h"
+#include "LameCraft/InputHelper.h"
+#include "LameCraft/TextureHelper.h"
 
 // font vars
 #define default_size 0.5

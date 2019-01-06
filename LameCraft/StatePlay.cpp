@@ -1,8 +1,8 @@
-#include "StatePlay.h"
-#include "TextureHelper.h"
+#include "LameCraft/StatePlay.h"
+#include "LameCraft/TextureHelper.h"
 
-#include "WorldGenerator.h"
-#include "LoadingScreen.h"
+#include "LameCraft/WorldGenerator.h"
+#include "LameCraft/LoadingScreen.h"
 
 #define PI 3.14159265f
 #define DEG_TO_RAD (PI / 180.0f)

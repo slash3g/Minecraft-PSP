@@ -1,10 +1,10 @@
-#include "StateMenu.h"
-#include "StateOptions.h"
-#include "StatePlay.h"
-#include "StatePlayCreative.h"
-#include "LoadingScreen.h"
-#include "InputHelper.h"
-#include "TextureHelper.h"
+#include "LameCraft/StateMenu.h"
+#include "LameCraft/StateOptions.h"
+#include "LameCraft/StatePlay.h"
+#include "LameCraft/StatePlayCreative.h"
+#include "LameCraft/LoadingScreen.h"
+#include "LameCraft/InputHelper.h"
+#include "LameCraft/TextureHelper.h"
 #include <Aurora/System/NetworkManager.h>
 #include <zlib.h>
 #include <dirent.h>

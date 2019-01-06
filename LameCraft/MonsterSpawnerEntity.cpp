@@ -1,4 +1,4 @@
-#include "MonsterSpawnerEntity.h"
+#include "LameCraft/MonsterSpawnerEntity.h"
 
 MonsterSpawnerEntity::MonsterSpawnerEntity(int create_x, int create_y, int create_z, std::string create_mobToSpawn) : BlockEntity(create_x, create_y, create_z)
 {

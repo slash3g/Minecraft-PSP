@@ -1,6 +1,6 @@
-#include "WorldGenerator.h"
-#include "CraftWorld2.h"
-#include "LoadingScreen.h"
+#include "LameCraft/WorldGenerator.h"
+#include "LameCraft/CraftWorld2.h"
+#include "LameCraft/LoadingScreen.h"
 
 #include <Aurora/Utils/Logger.h>
 

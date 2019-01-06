@@ -1,5 +1,5 @@
-#include "LameMob.h"
-#include "CraftWorld2.h"
+#include "LameCraft/LameMob.h"
+#include "LameCraft/CraftWorld2.h"
 #include <Aurora/Graphics/TextureManager.h>
 
 #define DEG_TO_RAD (PI / 180.0f)

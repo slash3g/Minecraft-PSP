@@ -1,4 +1,4 @@
-#include "SplashScreen.h"
+#include "LameCraft/SplashScreen.h"
 
 SplashScreen::SplashScreen(const char* filename,int startW,int startH,int endW,int endH,float splashTime)
 {

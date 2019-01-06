@@ -1,4 +1,4 @@
-#include "Cow2.h"
+#include "LameCraft/Cow2.h"
 #include <Aurora/Graphics/TextureManager.h>
 
 #define PI 3.14159f

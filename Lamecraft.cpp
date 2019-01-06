@@ -18,7 +18,7 @@ using namespace Aurora::Utils;
 using namespace Aurora::System;
 using namespace Aurora;
 
-PSP_MODULE_INFO("Tutorial1", 0, 1, 1);
+PSP_MODULE_INFO("MineCraftPSP", 0, 1, 1);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_VFPU|THREAD_ATTR_USER);
 PSP_HEAP_SIZE_KB(-1024);
 

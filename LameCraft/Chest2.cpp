@@ -1,4 +1,4 @@
-#include "Chest2.h"
+#include "LameCraft/Chest2.h"
 
 
 Chest::Chest(int x, int y,  int z)

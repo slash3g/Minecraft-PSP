@@ -4,7 +4,7 @@
 extern "C"
 {
     #include "sound_utils/pgeWav.h"
-    #include "sound_utils/oslib.h"
+    #include <oslib/oslib.h>
 }
 
 #include <string.h>

@@ -1,4 +1,4 @@
-#include "TextureHelper.h"
+#include "LameCraft/TextureHelper.h"
 #include <Aurora/Graphics/RenderManager.h>
 
 TextureHelper::TextureHelper()

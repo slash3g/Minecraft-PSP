@@ -1,4 +1,4 @@
-#include "SoundManager.h"
+#include "LameCraft/SoundManager.h"
 
 using namespace Aurora;
 

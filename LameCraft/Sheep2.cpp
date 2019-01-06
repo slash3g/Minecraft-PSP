@@ -1,4 +1,4 @@
-#include "Sheep2.h"
+#include "LameCraft/Sheep2.h"
 #include <Aurora/Graphics/TextureManager.h>
 
 #define PI 3.14159f

@@ -1,4 +1,4 @@
-#include "SimplexNoise.h"
+#include "LameCraft/SimplexNoise.h"
 //#include "mersenne-twister.h"
 
 unsigned char perm[512]= {151,160,137,91,90,15,

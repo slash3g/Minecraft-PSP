@@ -1,4 +1,4 @@
-#include "Furnace2.h"
+#include "LameCraft/Furnace2.h"
 
 
 Furnace::Furnace(int x, int y, int z)

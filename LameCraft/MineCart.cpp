@@ -1,4 +1,4 @@
-#include "LameMob.h"
+#include "LameCraft/LameMob.h"
 
 LameMob::LameMob(float x, float y, float z)
 {

@@ -1,4 +1,4 @@
-#include "NoteBlockEntity.h"
+#include "LameCraft/NoteBlockEntity.h"
 
 NoteBlockEntity::NoteBlockEntity(int create_x, int create_y, int create_z, int create_note) : BlockEntity(create_x, create_y, create_z)
 {

@@ -1,7 +1,7 @@
-#include "CraftWorld2.h"
+#include "LameCraft/CraftWorld2.h"
 #include <Aurora/Graphics/RenderManager.h>
 #include <Aurora/Utils/Logger.h>
-#include "TextureHelper.h"
+#include "LameCraft/TextureHelper.h"
 
 
 #include <string.h>

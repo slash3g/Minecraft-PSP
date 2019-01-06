@@ -1,4 +1,4 @@
-#include "LamePlayer.h"
+#include "LameCraft/LamePlayer.h"
 
 LamePlayer::LamePlayer()
 {

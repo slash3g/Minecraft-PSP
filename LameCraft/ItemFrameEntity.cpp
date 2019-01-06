@@ -1,5 +1,5 @@
-#include "ItemFrameEntity.h"
-#include "CraftWorld2.h"
+#include "LameCraft/ItemFrameEntity.h"
+#include "LameCraft/CraftWorld2.h"
 
 #define PIXEL 1.0f / 16.0f
 #define PI 3.14159f

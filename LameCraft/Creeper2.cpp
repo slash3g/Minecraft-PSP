@@ -1,4 +1,4 @@
-#include "Creeper2.h"
+#include "LameCraft/Creeper2.h"
 #include <Aurora/Graphics/TextureManager.h>
 
 #define PI 3.14159f
@@ -6,7 +6,7 @@
 #define PIXEL 1.0f / 16.0f
 #define GRAVITY -6.8f
 #define JUMPVELOCITY 4.6f
-#include "CraftWorld2.h"
+#include "LameCraft/CraftWorld2.h"
 
 /// SIMPLE TRIGONOMETRY
 

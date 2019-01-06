@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "InputHelper.h"
+#include "LameCraft/InputHelper.h"
 
 InputHelper::InputHelper()
 {
